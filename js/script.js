@@ -48,16 +48,17 @@ class Magicien extends Personnage {
             return this.div.innerHTML += "Vous êtes fous, vous êtes en train de vous taper !<br>";
         }
 
-        if(personnage.vie == false) {
-            //return this.div.innerHTML += "Vous ne pouvez pas attaquer un mort !";
-            console.log(personnage.vie);
+        if(personnage.vie == true) {
+            personnage.sante -= this.arme._degats;
+            personnage.verifierSante();
+            this.evoluer();
+
+            return this.div.innerHTML += this.pseudo + " attaque " + personnage.pseudo + " en lançant une attaque avec une " + this.arme._type + " qui fait " + this.arme._degats + " dégâts.<br>";
         }
-
-        personnage.sante -= this.arme._degats;
-        personnage.verifierSante();
-        this.evoluer();
-
-        return this.div.innerHTML += this.pseudo + " attaque " + personnage.pseudo + " en lançant une attaque avec une " + this.arme._type + " qui fait " + this.arme._degats + " dégâts.<br>";
+        else {
+            //return this.div.innerHTML += "Vous ne pouvez pas attaquer un mort !";
+            console.log(this.vie);
+        }         
     }
 
     coupSpecial(personnage) {
@@ -65,16 +66,17 @@ class Magicien extends Personnage {
             return this.div.innerHTML += "Vous êtes fous, vous êtes en train de vous taper !<br>";
         }
 
-        if(personnage.vie == false) {
-            //return this.div.innerHTML += "Vous ne pouvez pas attaquer un mort !";
+        if(personnage.vie == true) {
+            personnage.sante -= this.arme._degats * 5;
+            personnage.verifierSante();
+            this.evoluer();
+
+            return this.div.innerHTML += this.pseudo + " attaque avec son coup spécial puissance des arcanes " +  personnage.pseudo + " " + this.arme._degats + " * 5 dégâts.<br>";
+        }
+        else {
+             //return this.div.innerHTML += "Vous ne pouvez pas attaquer un mort !";
             console.log(personnage.vie);
         }
-
-        personnage.sante -= this.arme._degats * 5;
-        personnage.verifierSante();
-        this.evoluer();
-
-        return this.div.innerHTML += this.pseudo + " attaque avec son coup spécial puissance des arcanes " +  personnage.pseudo + " " + this.arme._degats + " * 5 dégâts.<br>";
     }
 }
 
@@ -90,16 +92,17 @@ class Guerrier extends Personnage {
             return this.div.innerHTML += "Vous êtes fous, vous êtes en train de vous taper !<br>";
         }
 
-        if(personnage.vie == false) {
+        if(personnage.vie == true) {
+            personnage.sante -= this.arme._degats;
+            personnage.verifierSante();
+            this.evoluer();
+
+            return this.div.innerHTML += this.pseudo + " attaque " + personnage.pseudo + " avec son " + this.arme._type + " qui fait " + this.arme._degats + " dégâts.<br>";
+        }
+        else {
             //return this.div.innerHTML += "Vous ne pouvez pas attaquer un mort !";
             console.log(personnage.vie);
         }
-
-        personnage.sante -= this.arme._degats;
-        personnage.verifierSante();
-        this.evoluer();
-
-        return this.div.innerHTML += this.pseudo + " attaque " + personnage.pseudo + " avec son " + this.arme._type + " qui fait " + this.arme._degats + " dégâts.<br>";
     }
 
     coupSpecial(personnage) {
@@ -107,16 +110,17 @@ class Guerrier extends Personnage {
             return this.div.innerHTML += "Vous êtes fous, vous êtes en train de vous taper !<br>";
         }
 
-        if(personnage.vie == false) {
-            //return this.div.innerHTML += "Vous ne pouvez pas attaquer un mort !";
+        if(personnage.vie == true) {
+            personnage.sante -= this.arme._degats * 5;
+            personnage.verifierSante();
+            this.evoluer();
+
+            return this.div.innerHTML += this.pseudo + " attaque avec son coup spécial " + this.arme._type + " de guerre " +  personnage.pseudo + " " + this.arme._degats + " * 5 dégâts.<br>";
+        } 
+        else {
+             //return this.div.innerHTML += "Vous ne pouvez pas attaquer un mort !";
             console.log(personnage.vie);
-        }
-
-        personnage.sante -= this.arme._degats * 5;
-        personnage.verifierSante();
-        this.evoluer();
-
-        return this.div.innerHTML += this.pseudo + " attaque avec son coup spécial " + this.arme._type + " de guerre " +  personnage.pseudo + " " + this.arme._degats + " * 5 dégâts.<br>";
+        }       
     }
 }
 
@@ -214,3 +218,4 @@ perso1.coupSpecial(perso1);
 perso1.coupSpecial(perso2);
 
 perso2.informations;
+console.log(perso2.vie);
