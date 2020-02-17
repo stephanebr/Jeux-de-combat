@@ -2,7 +2,7 @@ class Personnage {
 
     div = document.querySelector('#texte');
 
-    constructor(pseudo, classe, sante, niveau) {
+    constructor(pseudo, classe, sante, niveau, vie) {
         this.pseudo     = pseudo;
         this.classe     = classe;
         this.sante      = sante;
@@ -26,6 +26,7 @@ class Personnage {
     verifierSante() {
         if(this.sante <= 0) {
             this.sante = 0;
+            this.vie = false;
             return this.div.innerHTML += this.gagner() + this.mourir();
         }
     }
@@ -44,7 +45,12 @@ class Magicien extends Personnage {
 
     attaquer(personnage) {
         if(personnage == this) {
-            return this.div.innerHTML += "Vous êtes fous, vous vous tapez !<br>";
+            return this.div.innerHTML += "Vous êtes fous, vous êtes en train de vous taper !<br>";
+        }
+
+        if(personnage.vie == false) {
+            //return this.div.innerHTML += "Vous ne pouvez pas attaquer un mort !";
+            console.log(personnage.vie);
         }
 
         personnage.sante -= this.arme._degats;
@@ -56,7 +62,12 @@ class Magicien extends Personnage {
 
     coupSpecial(personnage) {
         if(personnage == this) {
-            return this.div.innerHTML += "Vous êtes fous, vous vous tapez !<br>";
+            return this.div.innerHTML += "Vous êtes fous, vous êtes en train de vous taper !<br>";
+        }
+
+        if(personnage.vie == false) {
+            //return this.div.innerHTML += "Vous ne pouvez pas attaquer un mort !";
+            console.log(personnage.vie);
         }
 
         personnage.sante -= this.arme._degats * 5;
@@ -76,7 +87,12 @@ class Guerrier extends Personnage {
 
     attaquer(personnage) {
         if(personnage == this) {
-            return this.div.innerHTML += "Vous êtes fous, vous vous tapez !<br>";
+            return this.div.innerHTML += "Vous êtes fous, vous êtes en train de vous taper !<br>";
+        }
+
+        if(personnage.vie == false) {
+            //return this.div.innerHTML += "Vous ne pouvez pas attaquer un mort !";
+            console.log(personnage.vie);
         }
 
         personnage.sante -= this.arme._degats;
@@ -88,7 +104,12 @@ class Guerrier extends Personnage {
 
     coupSpecial(personnage) {
         if(personnage == this) {
-            return this.div.innerHTML += "Vous êtes fous, vous vous tapez !<br>";
+            return this.div.innerHTML += "Vous êtes fous, vous êtes en train de vous taper !<br>";
+        }
+
+        if(personnage.vie == false) {
+            //return this.div.innerHTML += "Vous ne pouvez pas attaquer un mort !";
+            console.log(personnage.vie);
         }
 
         personnage.sante -= this.arme._degats * 5;
@@ -192,10 +213,4 @@ perso2.informations;
 perso1.coupSpecial(perso1);
 perso1.coupSpecial(perso2);
 
-
-
-
-
-
-
-
+perso2.informations;
