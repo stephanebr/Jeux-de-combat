@@ -12,27 +12,78 @@ class Personnage {
 
     evoluer() {
         this.niveau++;
-        return this.div.innerHTML += this.pseudo + " passe au niveau " + this.niveau + " !<br>";
+        this.div.innerHTML += this.pseudo + " passe au niveau " + this.niveau + " !<br>";
     }
 
     gagner() {
-        return this.pseudo + " Bravo, vous avez gagné !<br>";
+        this.div.innerHTML += this.pseudo + " Bravo, vous avez gagné !<br>";
     }
 
     mourir() {
-        return this.pseudo + " Vous avez perdu, vous êtes mort !<br>";
+        this.div.innerHTML += this.pseudo + " Vous avez perdu, vous êtes mort !<br>";
+    }
+
+    html(message) {
+        //to do
+    }
+
+    attaquer(personnage, force = 1) {
+        if(personnage == this) {
+            this.div.innerHTML += "Vous êtes fous, vous êtes en train de vous taper !<br>";
+        }
+
+        if(personnage.vie === true) {
+            personnage.sante -= this.arme._degats * force;
+            personnage.verifierSante();
+            console.log(personnage.vie)
+            this.evoluer();
+            if(force == 1) {
+                this.div.innerHTML += this.pseudo + " attaque " + personnage.pseudo + " avec son " + this.arme._type + " qui fait " + this.arme._degats + " dégâts.<br>";
+            }
+            else {
+                this.div.innerHTML += this.pseudo + " attaque avec son coup spécial " + this.arme._type + " de guerre " +  personnage.pseudo + " " + this.arme._degats + " * 5 dégâts.<br>";
+            }
+            console.log(personnage.vie);
+            if(personnage.vie === false) {
+                this.gagner();
+            }
+        }
+        else {
+            console.log("aaa.vie");
+            this.div.innerHTML += "Vous ne pouvez pas attaquer un mort !";
+        }
+    }
+
+    coupSpecial(personnage) {
+        this.attaquer(personnage, 100);
+        /*if(personnage == this) {
+            return this.div.innerHTML += "Vous êtes fous, vous êtes en train de vous taper !<br>";
+        }
+
+        if(personnage.vie === true) {
+            personnage.sante -= this.arme._degats * 5;
+            personnage.verifierSante();
+            console.log(personnage.vie)
+            this.evoluer();
+
+            return this.div.innerHTML += this.pseudo + " attaque avec son coup spécial " + this.arme._type + " de guerre " +  personnage.pseudo + " " + this.arme._degats + " * 5 dégâts.<br>";
+        } 
+        else {
+             return this.div.innerHTML += "Vous ne pouvez pas attaquer un mort !";
+            console.log("aaa");
+        }    */   
     }
 
     verifierSante() {
         if(this.sante <= 0) {
             this.sante = 0;
             this.vie = false;
-            return this.div.innerHTML += this.gagner() + this.mourir();
+            this.div.innerHTML += this.mourir();
         }
     }
 
     get informations() {
-        return this.div.innerHTML += this.pseudo + " " + this.classe + " a " + this.sante + " points de vie et au niveau de " + this.niveau + ".<br>";
+        this.div.innerHTML += this.pseudo + " " + this.classe + " a " + this.sante + " points de vie et au niveau de " + this.niveau + ".<br>";
     }
 }
 
@@ -43,41 +94,7 @@ class Magicien extends Personnage {
         this.arme = arme;
     }
 
-    attaquer(personnage) {
-        if(personnage == this) {
-            return this.div.innerHTML += "Vous êtes fous, vous êtes en train de vous taper !<br>";
-        }
-
-        if(personnage.vie == true) {
-            personnage.sante -= this.arme._degats;
-            personnage.verifierSante();
-            this.evoluer();
-
-            return this.div.innerHTML += this.pseudo + " attaque " + personnage.pseudo + " en lançant une attaque avec une " + this.arme._type + " qui fait " + this.arme._degats + " dégâts.<br>";
-        }
-        else {
-            //return this.div.innerHTML += "Vous ne pouvez pas attaquer un mort !";
-            console.log(this.vie);
-        }         
-    }
-
-    coupSpecial(personnage) {
-        if(personnage == this) {
-            return this.div.innerHTML += "Vous êtes fous, vous êtes en train de vous taper !<br>";
-        }
-
-        if(personnage.vie == true) {
-            personnage.sante -= this.arme._degats * 5;
-            personnage.verifierSante();
-            this.evoluer();
-
-            return this.div.innerHTML += this.pseudo + " attaque avec son coup spécial puissance des arcanes " +  personnage.pseudo + " " + this.arme._degats + " * 5 dégâts.<br>";
-        }
-        else {
-             //return this.div.innerHTML += "Vous ne pouvez pas attaquer un mort !";
-            console.log(personnage.vie);
-        }
-    }
+    
 }
 
 
@@ -85,42 +102,6 @@ class Guerrier extends Personnage {
     constructor(pseudo, arme) {
         super(pseudo, "guerrier", 350);
         this.arme = arme;
-    }
-
-    attaquer(personnage) {
-        if(personnage == this) {
-            return this.div.innerHTML += "Vous êtes fous, vous êtes en train de vous taper !<br>";
-        }
-
-        if(personnage.vie == true) {
-            personnage.sante -= this.arme._degats;
-            personnage.verifierSante();
-            this.evoluer();
-
-            return this.div.innerHTML += this.pseudo + " attaque " + personnage.pseudo + " avec son " + this.arme._type + " qui fait " + this.arme._degats + " dégâts.<br>";
-        }
-        else {
-            //return this.div.innerHTML += "Vous ne pouvez pas attaquer un mort !";
-            console.log(personnage.vie);
-        }
-    }
-
-    coupSpecial(personnage) {
-        if(personnage == this) {
-            return this.div.innerHTML += "Vous êtes fous, vous êtes en train de vous taper !<br>";
-        }
-
-        if(personnage.vie == true) {
-            personnage.sante -= this.arme._degats * 5;
-            personnage.verifierSante();
-            this.evoluer();
-
-            return this.div.innerHTML += this.pseudo + " attaque avec son coup spécial " + this.arme._type + " de guerre " +  personnage.pseudo + " " + this.arme._degats + " * 5 dégâts.<br>";
-        } 
-        else {
-             //return this.div.innerHTML += "Vous ne pouvez pas attaquer un mort !";
-            console.log(personnage.vie);
-        }       
     }
 }
 
@@ -195,7 +176,9 @@ let perso2 = new Magicien('Sebastien', new BaguetteMagique());
 perso2.informations;
 
 perso1.coupSpecial(perso2);
+perso1.coupSpecial(perso2);
 
+/*
 perso2.informations;
 
 perso1.coupSpecial(perso2);
@@ -217,5 +200,4 @@ perso2.informations;
 perso1.coupSpecial(perso1);
 perso1.coupSpecial(perso2);
 
-perso2.informations;
-console.log(perso2.vie);
+perso2.informations;*/
