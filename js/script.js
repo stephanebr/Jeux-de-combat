@@ -1,13 +1,72 @@
+class Plateau {
+
+    constructor(colonnes, lignes, obstacles) {
+        this.colonnes     = colonnes;
+        this.lignes       = lignes;
+        this.obstacles    = obstacles;
+    }
+
+
+}
+
 class Personnage {
 
     div = document.querySelector('#texte');
+    _pseudo;
+    _classe;
+    _sante;
+    _niveau;
+    _vie;
 
     constructor(pseudo, classe, sante, niveau, vie) {
-        this.pseudo     = pseudo;
-        this.classe     = classe;
-        this.sante      = sante;
-        this.niveau     = 1;
-        this.vie        = true;
+        this._pseudo     = pseudo;
+        this._classe     = classe;
+        this._sante      = sante;
+        this._niveau     = 1;
+        this._vie        = true;
+    }
+
+    /**
+     * GETTERS ET SETTERS
+     */
+    get pseudo() {
+        return this._pseudo;
+    }
+
+    get classe() {
+        return this._classe;
+    }
+
+    get sante() {
+        return this._sante;
+    }
+
+    get niveau() {
+        return this._niveau;
+    }
+
+    get vie() {
+        return this._vie;
+    }
+
+    set pseudo(pseudo) {
+        this._pseudo = pseudo;
+    }
+
+    set classe(classe) {
+        this._classe = classe;
+    }
+
+    set sante(sante) {
+        this._sante = sante;
+    }
+
+    set niveau(niveau) {
+        this._niveau = niveau;
+    }
+
+    set vie(vie) {
+        this._vie = vie;
     }
 
     attaquer(personnage, force = 1) {
