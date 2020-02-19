@@ -19,22 +19,27 @@ class Personnage {
             personnage.sante -= this.arme._degats * force;
             personnage.verifierSante();
             console.log(personnage.vie)
-            this.evoluer();
+
             if(force == 1) {
-                this.html(this.pseudo + " attaque " + personnage.pseudo + " avec son " + this.arme._type + " qui fait " + this.arme._degats + " dégâts.<br>");
+                this.html(this.pseudo + " attaque " + personnage.pseudo + " avec son " + this.arme._type + " qui fait " + this.arme._degats + " dégâts.<br>" + personnage.pseudo + " vous perdez " + this.arme._degats + " points de vie.<br>");
+                this.evoluer();
+                personnage.informations();
             }
-            else {
-                this.html(this.pseudo + " attaque avec son coup spécial " + this.arme._type + " de guerre " +  personnage.pseudo + " " + this.arme._degats + " * 5 dégâts.<br>");
-            }
+            
+            this.html(this.pseudo + " attaque avec son coup spécial " + this.arme._type + " de guerre " +  personnage.pseudo + " " + force + " dégâts.<br>" + personnage.pseudo + " vous perdez " + force + " points de vie.<br>");
+            this.evoluer();
+            personnage.informations();
             console.log(personnage.vie);
+
             if(personnage.vie === false) {
+                personnage.mourir();
                 this.gagner();
+                return;
             }
         }
-        else {
-            console.log("aaa.vie");
-            this.html("Vous ne pouvez pas attaquer un mort !");
-        }
+        
+        console.log("aaa.vie");
+        this.html("Vous ne pouvez pas attaquer un mort !<br>");
     }
 
     coupSpecial(personnage) {
@@ -55,7 +60,7 @@ class Personnage {
     }
 
     informations() {
-         this.html(this.pseudo + " " + this.classe + " a " + this.sante + " points de vie et au niveau de " + this.niveau + ".<br>");
+         this.html(this.pseudo + " " + this.classe + " a " + this.sante + " points de vie et est au niveau " + this.niveau + ".<br>");
     }
 
     mourir() {
@@ -66,7 +71,6 @@ class Personnage {
         if(this.sante <= 0) {
             this.sante = 0;
             this.vie = false;
-            this.html(this.mourir());
         }
     }
 }
@@ -157,5 +161,3 @@ let perso2 = new Magicien('Sebastien', new BaguetteMagique());
 
 perso1.coupSpecial(perso2);
 perso1.coupSpecial(perso2);
-
-perso2.html();
