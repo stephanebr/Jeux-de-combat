@@ -45,6 +45,7 @@ class Plateau {
         tbl.setAttribute("border", "2");
         tbl.setAttribute("width", "800");
         tbl.setAttribute("height", "500");
+        tbl.style.textAlign = "center";
     }
 }
 
