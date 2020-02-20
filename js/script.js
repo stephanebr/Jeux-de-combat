@@ -1,17 +1,55 @@
+function html(message) {
+    div = document.querySelector('#texte');
+    this.div.innerHTML += message;
+}
+
 class Plateau {
 
-    constructor(colonnes, lignes, obstacles) {
+    /*constructor(lignes, colonnes, obstacles) {
+        this.lignes       = creer(lignes);
         this.colonnes     = colonnes;
-        this.lignes       = lignes;
         this.obstacles    = obstacles;
+    }*/
+
+    creer() {
+        let body = document.getElementsByTagName("body")[0];
+        
+        // creates a <table> element and a <tbody> element
+        let tbl = document.createElement("table");
+        let tblBody = document.createElement("tbody");
+        
+        // creating all cells
+        for (let i = 0; i < 10; i++) {
+            // creates a table row
+            let row = document.createElement("tr");
+        
+            for (let j = 0; j < 10; j++) {
+            // Create a <td> element and a text node, make the text
+            // node the contents of the <td>, and put the <td> at
+            // the end of the table row
+            let cell = document.createElement("td");
+            let cellText = document.createTextNode(i + " " + j);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            }
+        
+            // add the row to the end of the table body
+            tblBody.appendChild(row);
+        }
+        
+        // put the <tbody> in the <table>
+        tbl.appendChild(tblBody);
+        // appends <table> into <body>
+        body.appendChild(tbl);
+        // sets the border attribute of tbl to 2;
+        tbl.setAttribute("border", "2");
+        tbl.setAttribute("width", "800");
+        tbl.setAttribute("height", "500");
     }
-
-
 }
 
 class Personnage {
 
-    div = document.querySelector('#texte');
     _pseudo;
     _classe;
     _sante;
@@ -71,7 +109,7 @@ class Personnage {
 
     attaquer(personnage, force = 1) {
         if(personnage == this) {
-            this.message += "Vous êtes fous, vous êtes en train de vous taper !<br>";
+            html("Vous êtes fous, vous êtes en train de vous taper !<br>");
         }
 
         if(personnage.vie === true) {
@@ -80,12 +118,12 @@ class Personnage {
             console.log(personnage.vie)
 
             if(force == 1) {
-                this.html(this.pseudo + " attaque " + personnage.pseudo + " avec son " + this.arme._type + " qui fait " + this.arme._degats + " dégâts.<br>" + personnage.pseudo + " vous perdez " + this.arme._degats + " points de vie.<br>");
+                html(this.pseudo + " attaque " + personnage.pseudo + " avec son " + this.arme._type + " qui fait " + this.arme._degats + " dégâts.<br>" + personnage.pseudo + " vous perdez " + this.arme._degats + " points de vie.<br>");
                 this.evoluer();
                 personnage.informations();
             }
             
-            this.html(this.pseudo + " attaque avec son coup spécial " + this.arme._type + " de guerre " +  personnage.pseudo + " " + force + " dégâts.<br>" + personnage.pseudo + " vous perdez " + force + " points de vie.<br>");
+            html(this.pseudo + " attaque avec son coup spécial " + this.arme._type + " de guerre " +  personnage.pseudo + " " + force + " dégâts.<br>" + personnage.pseudo + " vous perdez " + force + " points de vie.<br>");
             this.evoluer();
             personnage.informations();
             console.log(personnage.vie);
@@ -98,7 +136,7 @@ class Personnage {
         }
         
         console.log("aaa.vie");
-        this.html("Vous ne pouvez pas attaquer un mort !<br>");
+        html("Vous ne pouvez pas attaquer un mort !<br>");
     }
 
     coupSpecial(personnage) {
@@ -107,23 +145,19 @@ class Personnage {
 
     evoluer() {
         this.niveau++;
-        this.html(this.pseudo + " passe au niveau " + this.niveau + " !<br>");
+        html(this.pseudo + " passe au niveau " + this.niveau + " !<br>");
     }
 
     gagner() {
-        this.html(this.pseudo + " Bravo, vous avez gagné !<br>");
-    }
-
-    html(message) {
-        this.div.innerHTML += message;
+        html(this.pseudo + " Bravo, vous avez gagné !<br>");
     }
 
     informations() {
-         this.html(this.pseudo + " " + this.classe + " a " + this.sante + " points de vie et est au niveau " + this.niveau + ".<br>");
+         html(this.pseudo + " " + this.classe + " a " + this.sante + " points de vie et est au niveau " + this.niveau + ".<br>");
     }
 
     mourir() {
-        this.html(this.pseudo + " Vous avez perdu, vous êtes mort !<br>");
+        html(this.pseudo + " Vous avez perdu, vous êtes mort !<br>");
     }    
 
     verifierSante() {
@@ -220,3 +254,6 @@ let perso2 = new Magicien('Sebastien', new BaguetteMagique());
 
 perso1.coupSpecial(perso2);
 perso1.coupSpecial(perso2);
+
+let plateau = new Plateau();
+plateau.creer();
