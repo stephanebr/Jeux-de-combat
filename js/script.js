@@ -28,6 +28,7 @@ class Plateau {
             // node the contents of the <td>, and put the <td> at
             // the end of the table row
             let cell = document.createElement("td");
+            cell.setAttribute("id", "" + i + j);
             let cellText = document.createTextNode(i + " " + j);
             cell.appendChild(cellText);
             row.appendChild(cell);
@@ -36,6 +37,8 @@ class Plateau {
             // add the row to the end of the table body
             tblBody.appendChild(row);
         }
+
+
         
         // put the <tbody> in the <table>
         tbl.appendChild(tblBody);
@@ -54,15 +57,11 @@ class Personnage {
     _pseudo;
     _classe;
     _sante;
-    _niveau;
-    _vie;
 
-    constructor(pseudo, classe, sante, niveau, vie) {
+    constructor(pseudo, classe, sante) {
         this._pseudo     = pseudo;
         this._classe     = classe;
         this._sante      = sante;
-        this._niveau     = 1;
-        this._vie        = true;
     }
 
     /**
@@ -80,12 +79,11 @@ class Personnage {
         return this._sante;
     }
 
-    get niveau() {
-        return this._niveau;
-    }
-
     get vie() {
-        return this._vie;
+        if(this.sante <= 0) {
+            return false;
+        }
+        return true;
     }
 
     set pseudo(pseudo) {
@@ -97,56 +95,42 @@ class Personnage {
     }
 
     set sante(sante) {
+        if(sante < 0) {
+            sante = 0;
+        }
         this._sante = sante;
     }
 
-    set niveau(niveau) {
-        this._niveau = niveau;
-    }
-
-    set vie(vie) {
-        this._vie = vie;
-    }
 
     attaquer(personnage, force = 1) {
         if(personnage == this) {
             html("Vous êtes fous, vous êtes en train de vous taper !<br>");
         }
 
-        if(personnage.vie === true) {
-            personnage.sante -= this.arme._degats * force;
-            personnage.verifierSante();
-            console.log(personnage.vie)
+        if(!personnage.vie) {
+            html("Vous ne pouvez pas attaquer un mort !<br>");
+            return;
+        }
+        personnage.sante -= this.arme.degats * force;
 
-            if(force == 1) {
-                html(this.pseudo + " attaque " + personnage.pseudo + " avec son " + this.arme._type + " qui fait " + this.arme._degats + " dégâts.<br>" + personnage.pseudo + " vous perdez " + this.arme._degats + " points de vie.<br>");
-                this.evoluer();
-                personnage.informations();
-            }
-            
-            html(this.pseudo + " attaque avec son coup spécial " + this.arme._type + " de guerre " +  personnage.pseudo + " " + force + " dégâts.<br>" + personnage.pseudo + " vous perdez " + force + " points de vie.<br>");
-            this.evoluer();
+        if(force == 1) {
+            html(this.pseudo + " attaque " + personnage.pseudo + " avec son " + this.arme.type + " qui fait " + this.arme.degats + " dégâts.<br>" + personnage.pseudo + " vous perdez " + this.arme.degats + " points de vie.<br>");
             personnage.informations();
-            console.log(personnage.vie);
-
-            if(personnage.vie === false) {
-                personnage.mourir();
-                this.gagner();
-                return;
-            }
         }
         
-        console.log("aaa.vie");
-        html("Vous ne pouvez pas attaquer un mort !<br>");
+        html(this.pseudo + " attaque avec son coup spécial " + this.arme.type + " de guerre " +  personnage.pseudo + " " + force + " dégâts.<br>" + personnage.pseudo + " vous perdez " + force + " points de vie.<br>");
+        personnage.informations();
+        console.log(personnage.vie);
+
+        if(!personnage.vie) {
+            personnage.mourir();
+            this.gagner();
+            return;
+        }
     }
 
     coupSpecial(personnage) {
         this.attaquer(personnage, 100);
-    }
-
-    evoluer() {
-        this.niveau++;
-        html(this.pseudo + " passe au niveau " + this.niveau + " !<br>");
     }
 
     gagner() {
@@ -154,19 +138,12 @@ class Personnage {
     }
 
     informations() {
-         html(this.pseudo + " " + this.classe + " a " + this.sante + " points de vie et est au niveau " + this.niveau + ".<br>");
+         html(this.pseudo + " " + this.classe + " a " + this.sante + " points de vie.<br>");
     }
 
     mourir() {
         html(this.pseudo + " Vous avez perdu, vous êtes mort !<br>");
     }    
-
-    verifierSante() {
-        if(this.sante <= 0) {
-            this.sante = 0;
-            this.vie = false;
-        }
-    }
 }
 
 
