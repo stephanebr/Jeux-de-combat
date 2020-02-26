@@ -24,8 +24,8 @@ class Plateau {
             // the end of the table row
             let cell = document.createElement("td");
             cell.setAttribute("id", "" + i + j);
-            let cellText = document.createTextNode(i + " " + j);
-            cell.appendChild(cellText);
+            //let cellText = document.createTextNode(i + " " + j);
+            //cell.appendChild(cellText);
             row.appendChild(cell);
             }
         
