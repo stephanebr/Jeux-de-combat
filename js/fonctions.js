@@ -1,6 +1,6 @@
 function html(message) {
-    div = document.querySelector('#texte');
-    this.div.innerHTML += message;
+    let div = document.querySelector('#texte');
+    div.innerHTML += message;
 }
 
 export { html };

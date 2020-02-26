@@ -1,5 +1,5 @@
-import { Hache, Epe, Glaive, BaguetteMagique } from './Arme';
-import { html } from '../fonctions';
+import { Hache, Epe, Glaive, BaguetteMagique } from './Arme.js';
+import { html } from '../fonctions.js';
 
 class Personnage {
 
