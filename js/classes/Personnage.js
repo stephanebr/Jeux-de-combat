@@ -69,7 +69,6 @@ class Personnage {
         
         html(`${this.pseudo} attaque avec son coup spécial ${this.arme.type} de guerre ${personnage.pseudo} ${force} dégâts.<br> ${personnage.pseudo} vous perdez ${force} points de vie.<br>`);
         personnage.informations();
-        console.log(personnage.vie);
 
         if(!personnage.vie) {
             personnage.mourir();

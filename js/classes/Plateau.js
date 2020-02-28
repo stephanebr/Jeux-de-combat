@@ -12,6 +12,7 @@ class Plateau {
         // creates a <table> element and a <tbody> element
         let tbl = document.createElement("table");
         let tblBody = document.createElement("tbody");
+        let resultat1 = 0;
         
         // creating all cells
         for (let i = 0; i < 10; i++) {
@@ -19,15 +20,16 @@ class Plateau {
             let row = document.createElement("tr");
         
             for (let j = 0; j < 10; j++) {
-            // Create a <td> element and a text node, make the text
-            // node the contents of the <td>, and put the <td> at
-            // the end of the table row
-            var cell = document.createElement("td");
-            var resultat = cell.setAttribute("id", "" + i + j);
-            //let cellText = document.createTextNode(i + " " + j);
-            //cell.appendChild(cellText);
-            row.appendChild(cell);
+                // Create a <td> element and a text node, make the text
+                // node the contents of the <td>, and put the <td> at
+                // the end of the table row
+                var cell = document.createElement("td");
+                var resultat = cell.setAttribute("id", "" + i + j);
+                //let cellText = document.createTextNode(i + " " + j);
+                //cell.appendChild(cellText);
+                row.appendChild(cell);
             }
+
         
             // add the row to the end of the table body
             tblBody.appendChild(row);
@@ -41,17 +43,24 @@ class Plateau {
         tbl.setAttribute("border", "2");
         tbl.setAttribute("width", "800");
         tbl.setAttribute("height", "500");
-        tbl.style.textAlign = "center";
+        tbl.style.margin = "auto 400px";
 
-        let resultat1 = Math.floor(Math.random(cell) * 100 - 1);
+        
+        for(let i = 0; i < 10; i++) {
+            resultat1 = (Math.floor(Math.random() * 100));
+            console.log(resultat1);
 
-        console.log(`id ${resultat1}`);
+            if(resultat1 <= 9) {
+                resultat1 = "0" + resultat1;
+                console.log(`id= ${resultat1}`);
+            }
 
-        let obs = document.getElementById(resultat1);
+            let obs = document.getElementById(resultat1);
 
-        console.log(`id ${obs}`);
+            console.log(obs);
 
-        obs.style.backgroundColor = "red";
+            obs.style.backgroundImage = "url('./images/obstacle-1.png')";            
+        }
     }
 }
 
