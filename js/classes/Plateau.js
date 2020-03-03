@@ -1,11 +1,5 @@
 class Plateau {
 
-    /*constructor(lignes, colonnes, obstacles) {
-        this.lignes       = creer(lignes);
-        this.colonnes     = colonnes;
-        this.obstacles    = obstacles;
-    }*/
-
     creer() {
         let body = document.getElementsByTagName("body")[0];
         
@@ -21,11 +15,12 @@ class Plateau {
         
             for (let j = 0; j < 10; j++) {
                 // Création des éléments <td>
-                var cellules = document.createElement("td");
-                /* Création des id dynamiquements aux cellules en récupérant la somme de i + j et
+                let cellules = document.createElement("td");
+                /* Création des id dynamiquements aux cellules en récupérant la concaténation de i + j et
                 *  stock le resultat dans une propriété resultat
                 */ 
-                var resultat = cellules.setAttribute("id", "" + i + j);
+                cellules.setAttribute("id", "" + i + j);
+                cellules.classList.add("cellule-plateau");
                 ligne.appendChild(cellules);
             }
 
@@ -40,7 +35,7 @@ class Plateau {
         body.appendChild(tbl);
         // Définitiion des attributs
         tbl.setAttribute("border", "2");
-        tbl.setAttribute("width", "800");
+        tbl.setAttribute("width", "500");
         tbl.setAttribute("height", "500");
         tbl.style.margin = "auto 400px";
 
@@ -55,10 +50,7 @@ class Plateau {
             }
 
             let obs = document.getElementById(resultat1);
-
-            console.log(obs);
-
-            obs.style.backgroundImage = "url('./images/obstacle-1.png')";            
+            obs.classList.add("cellule-obstacle");       
         }
     }
 }

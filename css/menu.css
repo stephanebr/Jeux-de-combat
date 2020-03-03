@@ -1,30 +1,79 @@
 body {
+    background:#323a22;
+    color: aliceblue;
+    font-family: MedievalSharp; font-style: normal; font-variant: normal;
+}
+
+#titre {
+    margin: 5% 0;
+    text-align: center;
+}
+
+a {
     color: aliceblue;
 }
 
-h1, li { 
-    font-family: MedievalSharp; font-size: 24px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 26.4px; 
-} 
+a:hover {
+    text-decoration: none;;
+}
+
+h1 {
+    font: 700 5.5em/26.4px MedievalSharp;
+    text-shadow: 2px 2px 20px #007bff;
+    animation-name: example;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes example {
+    0%   {text-shadow:2px 2px 20px black;}
+    25%  {text-shadow:2px 2px 20px yellow;}
+    50%  {text-shadow:2px 2px 20px blue;}
+    100% {text-shadow:2px 2px 20px green;}
+  }
 
 h3 { 
-    font-family: MedievalSharp; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 15.4px; 
+     font: 700 3em/15.4px MedievalSharp; 
+}
+
+li { 
+    font: 700 24px/26.4px MedievalSharp;
 } 
 
 p { 
-    font-family: MedievalSharp; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 20px; 
+     font: 400 14px/20px MedievalSharp; 
 } 
 
 blockquote { 
-    font-family: MedievalSharp; font-size: 21px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 30px; 
+     font: 400 21px/30px MedievalSharp; 
 } 
 
 pre { 
-    font-family: MedievalSharp; font-size: 13px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 18.5714px;
+     font: 400 13px/18.5714px MedievalSharp;
 }
 
 #menu {
     width: 100%;
-    height: 400px;
-    background: no-repeat center url(../images/fond-menu.gif);
+    max-width: 1200px;
+    height: 800px;
+    margin: 0 10%;
+    background: no-repeat url(../images/fond-menu.gif);
+    background-size: contain;
     text-align: center;
+}
+
+ul {
+    position: relative;
+    top: 30%;
+    list-style: none;
+}
+
+.cellule-obstacle {
+    background: no-repeat center url('../images/obstacle-1.png');     
+    background-size: cover;
+}
+
+.cellule-plateau {
+    max-width: 50px;
+    min-width: 50px;
 }
