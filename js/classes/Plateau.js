@@ -1,17 +1,16 @@
 class Plateau {
 
-    creer() {
+    creer(nbObstacles) {
         let body = document.getElementsByTagName("body")[0];
         
         // Création de l'élément <table> et d'un élément <tbody>
         let tbl = document.createElement("table");
         let tblBody = document.createElement("tbody");
-        let resultat1 = 0;
         
         // Création de toutes les cellules du tableau
         for (let i = 0; i < 10; i++) {
             // Création des lignes du tableau
-            let ligne = document.createElement("tr");
+            let lignes = document.createElement("tr");
         
             for (let j = 0; j < 10; j++) {
                 // Création des éléments <td>
@@ -21,12 +20,11 @@ class Plateau {
                 */ 
                 cellules.setAttribute("id", "" + i + j);
                 cellules.classList.add("cellule-plateau");
-                ligne.appendChild(cellules);
+                lignes.appendChild(cellules);
             }
 
-        
             // Ajoute la ligne à la fin du tableau
-            tblBody.appendChild(ligne);
+            tblBody.appendChild(lignes);
         }
         
         // Mettre le <tbody> dans <table>
@@ -39,18 +37,36 @@ class Plateau {
         tbl.setAttribute("height", "500");
         tbl.style.margin = "auto 400px";
 
-        
-        for(let i = 0; i < 10; i++) {
-            resultat1 = (Math.floor(Math.random() * 100));
-            console.log(resultat1);
+        this.genererObstacle(nbObstacles);
+    }
 
-            if(resultat1 <= 9) {
-                resultat1 = "0" + resultat1;
-                console.log(`id= ${resultat1}`);
+    genererObstacle(nbObstacles) {
+        let nbs = [];
+        let obstacle = "";
+
+        for(let i = 0; i < nbObstacles; i++) {
+            let nb = (Math.floor(Math.random() * 100));
+            nbs.push(nb);
+            console.log(nb);
+            console.log(`Tab ${nbs}`);
+
+            if(nb <= 9) {
+                nb = "0" + nb;
+                console.log(`id= ${nb}`);
             }
 
-            let obs = document.getElementById(resultat1);
-            obs.classList.add("cellule-obstacle");       
+            /*if (nbs.includes(nb)) {
+                this.genererObstacle(nbObstacles - 1); //Récursivité
+                console.log(`Test NB = ${nb}`);
+            }*/
+
+            if(nbs == nb) {
+                console.log(`Test NB = ${nb}`);
+                return this.genererObstacle(nbObstacles - 1);
+            }
+
+            obstacle = document.getElementById(nb);
+            obstacle.classList.add("cellule-obstacle");       
         }
     }
 }

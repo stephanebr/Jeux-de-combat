@@ -95,19 +95,20 @@ class Personnage {
 }
 
 
-class Magicien extends Personnage {
+class RoiJaeden extends Personnage {
     constructor(pseudo, arme) {
-        super(pseudo, "magicien", 170);
-        this.arme = arme;
+        super(pseudo, "Roi Orc", 100);
+        this.arme  = arme;
+        this.image = ""
     }    
 }
 
 
-class Guerrier extends Personnage {
+class RoiLich extends Personnage {
     constructor(pseudo, arme) {
-        super(pseudo, "guerrier", 350);
+        super(pseudo, "Roi Lich", 100);
         this.arme = arme;
     }
 }
 
-export { Personnage, Magicien, Guerrier };
+export { Personnage, RoiJaeden, RoiLich };
