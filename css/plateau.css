@@ -1,0 +1,19 @@
+.cellule-obstacle {
+    background: no-repeat center url('../images/obstacle-1.png');     
+    background-size: cover;
+}
+
+.cellule-plateau {
+    max-width: 50px;
+    min-width: 50px;
+}
+
+.cellule-personnage-1 {
+    background: no-repeat center url('../images/kil-jaeden-1.png');     
+    background-size: cover;
+}
+
+.cellule-personnage-2 {
+    background: no-repeat center url('../images/roi-lich-1.png');     
+    background-size: cover;
+}

@@ -10,3 +10,4 @@ perso1.coupSpecial(perso2);
 
 let plateau = new Plateau();
 plateau.creer(10);
+plateau.placerPersonnage();

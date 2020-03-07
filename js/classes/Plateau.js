@@ -41,33 +41,71 @@ class Plateau {
     }
 
     genererObstacle(nbObstacles) {
-        let nbs = [];
         let obstacle = "";
 
         for(let i = 0; i < nbObstacles; i++) {
-            let nb = (Math.floor(Math.random() * 100));
-            nbs.push(nb);
-            console.log(nb);
-            console.log(`Tab ${nbs}`);
+            let nb = Math.floor(Math.random() * 100);
 
             if(nb <= 9) {
                 nb = "0" + nb;
                 console.log(`id= ${nb}`);
             }
 
-            /*if (nbs.includes(nb)) {
-                this.genererObstacle(nbObstacles - 1); //Récursivité
-                console.log(`Test NB = ${nb}`);
-            }*/
+            obstacle = document.getElementById(nb);
+            obstacle.classList.add("cellule-obstacle");
+            
+            if (document.getElementsByClassName("cellule-obstacle")) {
+                console.log(`Cellule deja prise = ${nb}`);
+                nb++;                
+            }
+        }
+    }
 
-            if(nbs == nb) {
-                console.log(`Test NB = ${nb}`);
-                return this.genererObstacle(nbObstacles - 1);
+    nombreAleatoire(nombre) {
+        return Math.floor(Math.random() * nombre);
+    }
+
+    placerPersonnage() {
+        let nb1               = 0;
+        let nb2               = 0;
+        let idPersonnage1     = "";
+        let idPersonnage2     = "";
+        let idObstacle        = document.getElementById("cellule-obstacle");
+
+        nb1 = this.nombreAleatoire(5);
+        console.log(`id personnage 1 : ${nb1}`);
+
+        nb2 = this.nombreAleatoire(5);
+        console.log(`id personnage 2 : ${nb2}`);
+
+        while((nb2 <= nb1) || (idObstacle)) {
+            if(nb2 <= 96) {
+                nb2 += 4;
             }
 
-            obstacle = document.getElementById(nb);
-            obstacle.classList.add("cellule-obstacle");       
+            if(nb1 >= 4) {
+                nb1 -= 4;
+            }
+             
+            console.log(`ajoute 4 à personnage 2 : ${nb2}`);
+            console.log(`retire 4 à personnage 1 : ${nb1}`);
         }
+
+        if(nb1 <= 9) {
+            nb1 = "0" + nb1;
+            console.log(`id perso 1 = ${nb1}`);
+        }
+
+        if(nb2 <= 9) {
+            nb2 = "0" + nb2;
+            console.log(`id perso 2 = ${nb2}`);
+        }
+
+        idPersonnage1 = document.getElementById(nb1);
+        idPersonnage1.classList.add("cellule-personnage-1");
+
+        idPersonnage2 = document.getElementById(nb2);
+        idPersonnage2.classList.add("cellule-personnage-2");  
     }
 }
 

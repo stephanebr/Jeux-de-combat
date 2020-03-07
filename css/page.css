@@ -1,0 +1,53 @@
+body {
+    background:#323a22;
+    color: aliceblue;
+    font-family: MedievalSharp; font-style: normal; font-variant: normal;
+}
+
+#titre {
+    margin: 5% 0;
+    text-align: center;
+}
+
+a {
+    color: aliceblue;
+}
+
+a:hover {
+    text-decoration: none;;
+}
+
+h1 {
+    font: 700 5.5em/26.4px MedievalSharp;
+    text-shadow: 2px 2px 20px #007bff;
+    animation-name: example;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes example {
+    0%   {text-shadow:2px 2px 20px black;}
+    25%  {text-shadow:2px 2px 20px yellow;}
+    50%  {text-shadow:2px 2px 20px blue;}
+    100% {text-shadow:2px 2px 20px green;}
+  }
+
+h3 { 
+     font: 700 3em/15.4px MedievalSharp; 
+}
+
+li { 
+    font: 700 24px/26.4px MedievalSharp;
+} 
+
+p { 
+     font: 400 14px/20px MedievalSharp; 
+} 
+
+blockquote { 
+     font: 400 21px/30px MedievalSharp; 
+} 
+
+pre { 
+     font: 400 13px/18.5714px MedievalSharp;
+}

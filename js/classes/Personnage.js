@@ -97,9 +97,8 @@ class Personnage {
 
 class RoiJaeden extends Personnage {
     constructor(pseudo, arme) {
-        super(pseudo, "Roi Orc", 100);
+        super(pseudo, "Roi Jaeden", 100);
         this.arme  = arme;
-        this.image = ""
     }    
 }
 
