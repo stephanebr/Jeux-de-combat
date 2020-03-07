@@ -44,7 +44,7 @@ class Plateau {
         let obstacle = "";
 
         for(let i = 0; i < nbObstacles; i++) {
-            let nb = Math.floor(Math.random() * 100);
+            let nb = this.nombreAleatoire(100);
 
             if(nb <= 9) {
                 nb = "0" + nb;
