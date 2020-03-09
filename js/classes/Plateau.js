@@ -72,25 +72,24 @@ class Plateau {
         let idPersonnage2     = "";
         let idObstacle        = document.getElementsByClassName("cellule-obstacle");
 
-        nb1 = this.nombreAleatoire(100);
+        nb1 = this.nombreAleatoire(3);
         console.log(`id personnage 1 : ${nb1}`);
-
-        nb2 = this.nombreAleatoire(100);
-        console.log(`id personnage 2 : ${nb2}`);
-
-        while(nb2 == nb1) {
-            nb2 += 4;
-            console.log(`ajoute 4 à personnage 2 : ${nb2}`);
-
-            while(document.getElementsByClassName("cellule-obstacle")) {
-                nb2++;
-                console.log(`ajoute 1 ${nb2}`);
-            }
-        }
 
         if(nb1 <= 9) {
             nb1 = "0" + nb1;
             console.log(`id perso 1 = ${nb1}`);
+        }
+
+        idPersonnage1 = document.getElementById(nb1);
+        idPersonnage1.classList.add("cellule-personnage-1");
+
+        nb2 = this.nombreAleatoire(3);
+        console.log(`id personnage 2 : ${nb2}`);
+
+        while(nb1 == nb2) {
+            console.log(`nombre aleatoire de nb2 ${nb2} ${nb1}`);
+            nb2 = this.nombreAleatoire(3);
+            console.log(`nouvelle valeur nb2 ${nb2}`);
         }
 
         if(nb2 <= 9) {
@@ -98,11 +97,15 @@ class Plateau {
             console.log(`id perso 2 = ${nb2}`);
         }
 
-        idPersonnage1 = document.getElementById(nb1);
-        idPersonnage1.classList.add("cellule-personnage-1");
-
         idPersonnage2 = document.getElementById(nb2);
         idPersonnage2.classList.add("cellule-personnage-2");
+
+        console.log(`test ${nb1}`);
+
+        nb1 += 1;
+
+        console.log(nb1);
+
     }
 }
 
