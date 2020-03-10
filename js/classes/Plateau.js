@@ -61,8 +61,8 @@ class Plateau {
         }
     }
 
-    nombreAleatoire(nombre) {
-        return Math.floor(Math.random() * nombre);
+    nombreAleatoire(max) {
+        return Math.floor(Math.random() * max);
     }
 
     placerPersonnage() {
