@@ -6,11 +6,15 @@ class Personnage {
     _pseudo;
     _classe;
     _sante;
+    _x;
+    _y;
 
-    constructor(pseudo, classe, sante) {
+    constructor(pseudo, classe, sante, x, y) {
         this._pseudo     = pseudo;
         this._classe     = classe;
         this._sante      = sante;
+        this._x          = x;
+        this._y          = y;
     }
 
     /**
@@ -35,6 +39,14 @@ class Personnage {
         return true;
     }
 
+    get x() {
+        return this._x;
+    }
+
+    get y() {
+        return this._y;
+    }
+
     set pseudo(pseudo) {
         this._pseudo = pseudo;
     }
@@ -48,6 +60,14 @@ class Personnage {
             sante = 0;
         }
         this._sante = sante;
+    }
+
+    set x(x) {
+        this._x = x;
+    }
+
+    set y(y) {
+        this._y = y;
     }
 
 
@@ -96,16 +116,16 @@ class Personnage {
 
 
 class RoiJaeden extends Personnage {
-    constructor(pseudo, arme) {
-        super(pseudo, "Roi Jaeden", 100);
+    constructor(pseudo, arme, x, y) {
+        super(pseudo, "Roi Jaeden", 100, x, y);
         this.arme  = arme;
     }    
 }
 
 
 class RoiLich extends Personnage {
-    constructor(pseudo, arme) {
-        super(pseudo, "Roi Lich", 100);
+    constructor(pseudo, arme, x, y) {
+        super(pseudo, "Roi Lich", 100, x, y);
         this.arme = arme;
     }
 }

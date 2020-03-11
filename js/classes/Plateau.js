@@ -1,4 +1,56 @@
+import { Coordonnees } from './Coordonnees.js';
+
 class Plateau {
+
+    _casesPleines;
+    _obstacles;
+    _colonnes;
+    _rangees;
+
+    constructor(colonnes, rangees) {
+        this._casesPleines = [];
+        this._obstacles    = [];
+        this._colonnes     = colonnes;
+        this._rangees      = rangees;
+    }
+
+    /**
+     * Getteers
+     */
+    get casesPleines() {
+       return this._casesPleines;
+    }
+
+    get obstacles() {
+        return this._obstacles;
+    }
+
+    get colonnes() {
+        return this._colonnes;
+    }
+
+    get rangees() {
+        return this._rangees;
+    }
+
+    /**
+     * Setters
+     */
+    set casesPleines(casesPlaines) {
+        this._casesPleines = casesPleines;
+    }
+
+    set obstacles(obstacles) {
+        this._obstacles = obstacles;
+    }
+
+    set colonnes(colonnes) {
+        this._colonnes = colonnes;
+    }
+
+    set rangees(rangees) {
+        this._rangees = rangees;
+    }
 
     creer(nbObstacles) {
         let body = document.getElementsByTagName("body")[0];
@@ -65,8 +117,10 @@ class Plateau {
         return Math.floor(Math.random() * max);
     }
 
-    placerPersonnage() {
-        let nb1               = 0;
+    placerPersonnage(personnage) {
+        
+        //console.log("Test placer personnage");
+       /*  let nb1               = 0;
         let nb2               = 0;
         let idPersonnage1     = "";
         let idPersonnage2     = "";
@@ -104,8 +158,23 @@ class Plateau {
 
         nb1 += 1;
 
-        console.log(nb1);
+        console.log(nb1); */
 
+    }
+
+    trouverCaseVide() {
+        const x       = this.nombreAleatoire(this.rangees);
+        const y       = this.nombreAleatoire(this.colonnes);
+        const cellule = new Coordonnees(x, y);
+        
+        for(let cell of this.casesPleines) {
+            if (cell.x === cellule.x && cellule.y === cell.y) {
+                console.log('la case est prise');
+                this.trouverCaseVide();
+            }
+        }
+        
+        return cellule;
     }
 }
 
