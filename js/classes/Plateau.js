@@ -36,7 +36,7 @@ class Plateau {
     /**
      * Setters
      */
-    set casesPleines(casesPlaines) {
+    set casesPleines(casesPleines) {
         this._casesPleines = casesPleines;
     }
 
@@ -63,6 +63,8 @@ class Plateau {
         for (let i = 0; i < 10; i++) {
             // Création des lignes du tableau
             let lignes = document.createElement("tr");
+            lignes.setAttribute("ligne", "" + i);
+            lignes.classList.add("cellule-plateau");
         
             for (let j = 0; j < 10; j++) {
                 // Création des éléments <td>
@@ -93,23 +95,14 @@ class Plateau {
     }
 
     genererObstacle(nbObstacles) {
-        let obstacle = "";
 
         for(let i = 0; i < nbObstacles; i++) {
-            let nb = this.nombreAleatoire(100);
+            let obstacles = this.trouverCaseVide();
 
-            if(nb <= 9) {
-                nb = "0" + nb;
-                console.log(`id= ${nb}`);
-            }
+            console.log(`les obstacles ${obstacles.x}`);
 
-            obstacle = document.getElementById(nb);
-            obstacle.classList.add("cellule-obstacle");
-            
-            if(document.getElementsByClassName("cellule-obstacle")) {
-                console.log(`Cellule deja prise = ${nb}`);
-                nb++;
-            }
+            obstacles = document.getElementById(obstacles.x);
+            obstacles.classList.add("cellule-obstacle");
         }
     }
 
@@ -118,54 +111,33 @@ class Plateau {
     }
 
     placerPersonnage(personnage) {
-        
-        //console.log("Test placer personnage");
-       /*  let nb1               = 0;
-        let nb2               = 0;
-        let idPersonnage1     = "";
-        let idPersonnage2     = "";
-        let idObstacle        = document.getElementsByClassName("cellule-obstacle");
-
-        nb1 = this.nombreAleatoire(3);
-        console.log(`id personnage 1 : ${nb1}`);
-
-        if(nb1 <= 9) {
-            nb1 = "0" + nb1;
-            console.log(`id perso 1 = ${nb1}`);
-        }
-
-        idPersonnage1 = document.getElementById(nb1);
-        idPersonnage1.classList.add("cellule-personnage-1");
-
-        nb2 = this.nombreAleatoire(3);
-        console.log(`id personnage 2 : ${nb2}`);
-
-        while(nb1 == nb2) {
-            console.log(`nombre aleatoire de nb2 ${nb2} ${nb1}`);
-            nb2 = this.nombreAleatoire(3);
-            console.log(`nouvelle valeur nb2 ${nb2}`);
-        }
-
-        if(nb2 <= 9) {
-            nb2 = "0" + nb2;
-            console.log(`id perso 2 = ${nb2}`);
-        }
-
-        idPersonnage2 = document.getElementById(nb2);
-        idPersonnage2.classList.add("cellule-personnage-2");
-
-        console.log(`test ${nb1}`);
-
-        nb1 += 1;
-
-        console.log(nb1); */
-
+        let perso = this.trouverCaseVide();
+        let cellulePersonnage1 = document.getElementById(perso.x);
+        cellulePersonnage1.classList.add("cellule-" + personnage.classe);
     }
 
     trouverCaseVide() {
-        const x       = this.nombreAleatoire(this.rangees);
-        const y       = this.nombreAleatoire(this.colonnes);
+        let x         = this.nombreAleatoire(this.rangees);
+        let y         = this.nombreAleatoire(this.colonnes);
         const cellule = new Coordonnees(x, y);
+
+        /* if(x <= 9) {
+            x = "0" + x;
+            console.log(`id perso 1 = ${x}`);
+        }
+
+        if(y <= 9) {
+            y = "0" + y;
+            console.log(`id perso 1 = ${y}`);
+        } */
+
+        if(cellule.x <= 9) {
+            cellule.x = "0" + cellule.x;
+        }
+
+        if(cellule.y <= 9) {
+            cellule.y = "0" + cellule.y;
+        }
         
         for(let cell of this.casesPleines) {
             if (cell.x === cellule.x && cellule.y === cell.y) {
@@ -174,6 +146,8 @@ class Plateau {
             }
         }
         
+        this.casesPleines.push(cellule);
+
         return cellule;
     }
 }

@@ -117,7 +117,7 @@ class Personnage {
 
 class RoiJaeden extends Personnage {
     constructor(pseudo, arme, x, y) {
-        super(pseudo, "Roi Jaeden", 100, x, y);
+        super(pseudo, "Roi-Jaeden", 100, x, y);
         this.arme  = arme;
     }    
 }
@@ -125,7 +125,7 @@ class RoiJaeden extends Personnage {
 
 class RoiLich extends Personnage {
     constructor(pseudo, arme, x, y) {
-        super(pseudo, "Roi Lich", 100, x, y);
+        super(pseudo, "Roi-Lich", 100, x, y);
         this.arme = arme;
     }
 }

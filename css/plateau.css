@@ -8,12 +8,12 @@
     min-width: 50px;
 }
 
-.cellule-personnage-1 {
+.cellule-Roi-Jaeden {
     background: no-repeat center url('../images/kil-jaeden-1.png');     
     background-size: cover;
 }
 
-.cellule-personnage-2 {
+.cellule-Roi-Lich {
     background: no-repeat center url('../images/roi-lich-1.png');     
     background-size: cover;
 }
