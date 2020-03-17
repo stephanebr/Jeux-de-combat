@@ -119,34 +119,11 @@ class Plateau {
     trouverCaseVide() {
         let x         = this.nombreAleatoire(this.rangees);
         let y         = this.nombreAleatoire(this.colonnes);
-        const cellule = new Coordonnees(x, y);
-
-        /* if(x <= 9) {
-            x = "0" + x;
-            console.log(`id perso 1 = ${x}`);
-        }
-
-        if(y <= 9) {
-            y = "0" + y;
-            console.log(`id perso 1 = ${y}`);
-        } */
-
-        if(cellule.x <= 9) {
-            cellule.x = "0" + cellule.x;
-        }
-
-        if(cellule.y <= 9) {
-            cellule.y = "0" + cellule.y;
-        }
+        const cellule = String(x) + String(y); 
         
-        for(let cell of this.casesPleines) {
-            if (cell.x === cellule.x && cellule.y === cell.y) {
-                console.log('la case est prise');
-                this.trouverCaseVide();
-            }
+        if (this.casesPleines.includes(cellule)) {
+            this.trouverCaseVide();
         }
-        
-        this.casesPleines.push(cellule);
 
         return cellule;
     }
