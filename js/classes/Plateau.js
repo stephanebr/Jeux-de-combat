@@ -52,7 +52,7 @@ class Plateau {
         this._rangees = rangees;
     }
 
-    creer(nbObstacles) {
+    creer() {
         let body = document.getElementsByTagName("body")[0];
         
         // Création de l'élément <table> et d'un élément <tbody>
@@ -90,19 +90,19 @@ class Plateau {
         tbl.setAttribute("width", "500");
         tbl.setAttribute("height", "500");
         tbl.style.margin = "auto 400px";
-
-        this.genererObstacle(nbObstacles);
     }
 
     genererObstacle(nbObstacles) {
 
         for(let i = 0; i < nbObstacles; i++) {
-            let obstacles = this.trouverCaseVide();
+            let obstacle = this.trouverCaseVide();
 
-            console.log(`les obstacles ${obstacles.x}`);
+            this.casesPleines.push(obstacle);
 
-            obstacles = document.getElementById(obstacles.x);
-            obstacles.classList.add("cellule-obstacle");
+            console.log(`les obstacles ${obstacle}`);
+
+            obstacle = document.getElementById(obstacle);
+            obstacle.classList.add("cellule-obstacle");
         }
     }
 
@@ -111,9 +111,11 @@ class Plateau {
     }
 
     placerPersonnage(personnage) {
-        let perso = this.trouverCaseVide();
-        let cellulePersonnage1 = document.getElementById(perso.x);
-        cellulePersonnage1.classList.add("cellule-" + personnage.classe);
+        let idPerso              = this.trouverCaseVide();
+        console.log("perso1 : " + idPerso);
+        this.casesPleines.push(idPerso);
+        let cellulePersonnage = document.getElementById(idPerso);
+        cellulePersonnage.classList.add("cellule-" + personnage.classe);
     }
 
     trouverCaseVide() {
@@ -127,6 +129,27 @@ class Plateau {
 
         return cellule;
     }
+
+    trouverCaseDessus() {
+        let id = document.getElementById(this.casesPleines);
+
+        console.log(id);
+
+        if(id < id - 10) {
+            console.log(id);
+            console.log("il y a un probleme");
+            console.log(this.casesPleines);
+        }
+    }
+
+    /*trouverCaseDessous() {
+        
+        if(cellule + this.colonnes > this.casesPleines) {
+            console.log(cellule);
+            console.log("il y a un probleme");
+            console.log(this.casesPleines);
+        }
+    }*/
 }
 
 export { Plateau };

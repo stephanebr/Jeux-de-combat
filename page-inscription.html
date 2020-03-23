@@ -15,7 +15,20 @@
       <h1>The War Of Kings</h1>
     </header>
     
-    <div id="texte"></div>
-    
+    <form>
+      <div class="form-group row">
+        <label for="perso1" class="col-sm-2 col-form-label">Nom du premier personnage</label>
+        <div class="col-sm-10">
+          <input type="text" id="perso1" placeholder="Saisir votre nom" value="">
+        </div>
+        <label for="perso2" class="col-sm-2 col-form-label">Nom du deuxième personnage</label>
+        <div class="col-sm-10">
+          <input type="text" id="perso2" placeholder="Saisir votre nom" value="">
+        </div>
+      </div>
+      <input type="submit" id="valider" onclick="inscription('perso1'); inscription('perso2');" class="btn btn-primary" value="Valider">
+    </form>
+
+    <script src="js/inscription.js"></script>
 </body>
 </html>
