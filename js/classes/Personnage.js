@@ -6,11 +6,13 @@ class Personnage {
     _pseudo;
     _classe;
     _sante;
+    _degats;
 
-    constructor(pseudo, classe, sante) {
+    constructor(pseudo, classe, sante, degats) {
         this._pseudo     = pseudo;
         this._classe     = classe;
         this._sante      = sante;
+        this._degats     = 10;
     }
 
     /**
@@ -26,6 +28,10 @@ class Personnage {
 
     get sante() {
         return this._sante;
+    }
+
+    get degats() {
+        return this._degats;
     }
 
     get vie() {
@@ -48,6 +54,10 @@ class Personnage {
             sante = 0;
         }
         this._sante = sante;
+    }
+
+    set degats(degats) {
+        this._degats = degats;
     }
 
 
@@ -96,17 +106,15 @@ class Personnage {
 
 
 class RoiJaeden extends Personnage {
-    constructor(pseudo, arme, x, y) {
+    constructor(pseudo) {
         super(pseudo, "Roi-Jaeden", 100);
-        this.arme  = arme;
     }    
 }
 
 
 class RoiLich extends Personnage {
-    constructor(pseudo, arme, x, y) {
+    constructor(pseudo) {
         super(pseudo, "Roi-Lich", 100);
-        this.arme = arme;
     }
 }
 

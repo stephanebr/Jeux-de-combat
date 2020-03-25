@@ -130,26 +130,83 @@ class Plateau {
         return cellule;
     }
 
-    trouverCaseDessus() {
-        let id = document.getElementById(this.casesPleines);
+    trouverCaseUtilisable() {
+        let cellule = this.trouverCaseVide();
 
-        console.log(id);
-
-        if(id < id - 10) {
-            console.log(id);
-            console.log("il y a un probleme");
-            console.log(this.casesPleines);
+        if(this.caseGaucheLibre(cellule)) {
+            return cellule;
         }
+
+        if(this.caseHauteLibre(cellule)) {
+            return cellule;
+        }
+
+        if(this.caseBasLibre(cellule)) {
+            return cellule;
+        }
+
+        if(this.caseDroiteLibre(cellule)) {
+            return cellule;
+        }
+
+        return this.trouverCaseUtilisable();
     }
 
-    /*trouverCaseDessous() {
-        
-        if(cellule + this.colonnes > this.casesPleines) {
-            console.log(cellule);
-            console.log("il y a un probleme");
-            console.log(this.casesPleines);
+    caseHauteLibre(id) {
+        if(id < 10) {
+            return false;
         }
-    }*/
+
+        let celluleHaute = document.getElementById(parseInt(id) - 10).id;
+
+        if(this.casesPleines.includes(celluleHaute)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    caseBasLibre(id) {
+        if(id > 10) {
+            return false;
+        }
+
+        let celluleBasse = document.getElementById(parseInt(id) + 10).id;
+
+        if(this.casesPleines.includes(celluleBasse)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    caseGaucheLibre(id) {
+        if(id == 0) {
+            return false;
+        }
+
+        let celluleGauche = document.getElementById(parseInt(id) - 1).id;
+
+        if(this.casesPleines.includes(celluleGauche)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    caseDroiteLibre(id) {
+        if(id == 99) {
+            return false;
+        }
+
+        let celluleDroite = document.getElementById(parseInt(id) + 1).id;
+
+        if(this.casesPleines.includes(celluleDroite)) {
+            return false;
+        }
+
+        return true;
+    }
 }
 
 export { Plateau };
