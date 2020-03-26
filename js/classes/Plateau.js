@@ -99,8 +99,6 @@ class Plateau {
 
             this.casesPleines.push(obstacle);
 
-            console.log(`les obstacles ${obstacle}`);
-
             obstacle = document.getElementById(obstacle);
             obstacle.classList.add("cellule-obstacle");
         }
@@ -111,11 +109,12 @@ class Plateau {
     }
 
     placerPersonnage(personnage) {
-        let idPerso              = this.trouverCaseVide();
-        console.log("perso1 : " + idPerso);
+        let idPerso = this.trouverCaseVide();
+        
+        this.trouverCaseUtilisable();
         this.casesPleines.push(idPerso);
         let cellulePersonnage = document.getElementById(idPerso);
-        cellulePersonnage.classList.add("cellule-" + personnage.classe);
+        cellulePersonnage.classList.add("cellule-" + personnage.classe);  
     }
 
     trouverCaseVide() {
@@ -124,7 +123,7 @@ class Plateau {
         const cellule = String(x) + String(y); 
         
         if (this.casesPleines.includes(cellule)) {
-            this.trouverCaseVide();
+            return this.trouverCaseVide();
         }
 
         return cellule;
@@ -181,11 +180,14 @@ class Plateau {
     }
 
     caseGaucheLibre(id) {
-        if(id == 0) {
+        if(id == '00') {
             return false;
         }
 
+        console.log('id : ' + id);
+
         let celluleGauche = document.getElementById(parseInt(id) - 1).id;
+        console.log('cellule gauche : ' + celluleGauche);
 
         if(this.casesPleines.includes(celluleGauche)) {
             return false;
