@@ -17,3 +17,22 @@
     background: no-repeat center url('../images/roi-lich-1.png');     
     background-size: cover;
 }
+
+.cellule-Hache {
+    background: no-repeat center url('../images/hache-1.png');     
+    background-size: cover;
+}
+
+.cellule-Glaive {
+    background: no-repeat center url('../images/glaive-1.png');     
+    background-size: cover;
+}
+
+.cellule-Baguette-magique {
+    background: no-repeat center url('../images/baguette_magique-1.png');     
+}
+
+.cellule-Epee {
+    background: no-repeat center url('../images/epee-1.png');     
+    background-size: cover;
+}

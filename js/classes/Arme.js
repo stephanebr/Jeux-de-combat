@@ -43,7 +43,7 @@ class Hache extends Arme {
 
 class Epe extends Arme {
     constructor() {
-        super('Epé', 5);
+        super('Epee', 5);
     }
 }
 
@@ -57,7 +57,7 @@ class Glaive extends Arme {
 
 class BaguetteMagique extends Arme {
     constructor() {
-        super('Baguette magique', 10);
+        super('Baguette-magique', 10);
     }
 }
 

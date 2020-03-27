@@ -1,4 +1,4 @@
-import { Coordonnees } from './Coordonnees.js';
+import { Hache, Epe, Glaive, BaguetteMagique } from './Arme.js';
 
 class Plateau {
 
@@ -111,10 +111,20 @@ class Plateau {
     placerPersonnage(personnage) {
         let idPerso = this.trouverCaseVide();
         
-        this.trouverCaseUtilisable();
         this.casesPleines.push(idPerso);
         let cellulePersonnage = document.getElementById(idPerso);
-        cellulePersonnage.classList.add("cellule-" + personnage.classe);  
+        cellulePersonnage.classList.add("cellule-" + personnage.classe);
+    }
+
+    placerArme() {
+        let armes = [new Hache(), new Glaive(), new BaguetteMagique(), new Epe()];
+
+        for(let i = 0; i < armes.length; i++) {
+            let idArme      = this.trouverCaseVide();
+            this.casesPleines.push(idArme);
+            let celluleArme = document.getElementById(idArme);
+            celluleArme.classList.add("cellule-" + armes[i].type); 
+        }
     }
 
     trouverCaseVide() {
@@ -180,7 +190,7 @@ class Plateau {
     }
 
     caseGaucheLibre(id) {
-        if(id == '00') {
+        if(id == 0) {
             return false;
         }
 
