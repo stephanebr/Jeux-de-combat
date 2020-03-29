@@ -166,7 +166,7 @@ class Plateau {
             return false;
         }
 
-        let celluleHaute = document.getElementById(parseInt(id) - 10).id;
+        let celluleHaute = document.getElementById(parseInt(id - 10)).id;
 
         if(this.casesPleines.includes(celluleHaute)) {
             return false;
@@ -180,7 +180,7 @@ class Plateau {
             return false;
         }
 
-        let celluleBasse = document.getElementById(parseInt(id) + 10).id;
+        let celluleBasse = document.getElementById(parseInt(id + 10)).id;
 
         if(this.casesPleines.includes(celluleBasse)) {
             return false;
@@ -194,9 +194,15 @@ class Plateau {
             return false;
         }
 
-        console.log('id : ' + id);
+        if(id < 10) {
+            let string = '0' + (id - 1);
+            return document.getElementById(string);
+        }   
 
-        let celluleGauche = document.getElementById(parseInt(id) - 1).id;
+        let celluleGauche = document.getElementById(parseInt(id - 1)).id;
+
+        console.log('cellule gauche vide :' + celluleGauche);
+        
         console.log('cellule gauche : ' + celluleGauche);
 
         if(this.casesPleines.includes(celluleGauche)) {
@@ -211,7 +217,12 @@ class Plateau {
             return false;
         }
 
-        let celluleDroite = document.getElementById(parseInt(id) + 1).id;
+        if(id < 10) {
+            let string = '0' + (id + 1);
+            return document.getElementById(string);
+        }
+
+        let celluleDroite = document.getElementById(parseInt(id + 1)).id;
 
         if(this.casesPleines.includes(celluleDroite)) {
             return false;
