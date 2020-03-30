@@ -1,11 +1,17 @@
 import { RoiLich, RoiJaeden } from './classes/Personnage.js';
-import { inscription } from './inscription.js';
+import { nomPerso1, nomPerso2 } from './inscription.js';
 import { Plateau } from './classes/Plateau.js';
 
-console.log(inscription());
+if(nomPerso1 === undefined) {
+    nomPerso1 = "Jaeden";
+}
 
-let jaeden    = new RoiJaeden();
-let lich      = new RoiLich(nomPerso2)
+if(nomPerso2 === undefined) {
+    nomPerso2 = "Lich";
+}
+
+let jaeden    = new RoiJaeden(nomPerso1);
+let lich      = new RoiLich(nomPerso2);
 let plateau   = new Plateau(10, 10);
 
 console.log(jaeden.pseudo + ' ' + lich.pseudo);

@@ -109,8 +109,7 @@ class Plateau {
     }
 
     placerPersonnage(personnage) {
-        let idPerso = this.trouverCaseVide();
-        
+        let idPerso = this.trouverCaseVide();        
         this.casesPleines.push(idPerso);
         let cellulePersonnage = document.getElementById(idPerso);
         cellulePersonnage.classList.add("cellule-" + personnage.classe);
@@ -166,7 +165,11 @@ class Plateau {
             return false;
         }
 
-        let celluleHaute = document.getElementById(parseInt(id - 10)).id;
+        console.log('cellule haute : ' + id);
+
+        let celluleHaute = document.getElementById(id - 10).id;
+
+        console.log('cellule haute : ' + celluleHaute);
 
         if(this.casesPleines.includes(celluleHaute)) {
             return false;
@@ -180,7 +183,11 @@ class Plateau {
             return false;
         }
 
-        let celluleBasse = document.getElementById(parseInt(id + 10)).id;
+        console.log('case basse libre : ' + id);
+
+        let celluleBasse = document.getElementById(id + 10).id;
+
+        console.log('case basse libre : ' + celluleBasse);
 
         if(this.casesPleines.includes(celluleBasse)) {
             return false;
@@ -199,9 +206,9 @@ class Plateau {
             return document.getElementById(string);
         }   
 
-        let celluleGauche = document.getElementById(parseInt(id - 1)).id;
+        console.log('cellule gauche vide :' + id);
 
-        console.log('cellule gauche vide :' + celluleGauche);
+        let celluleGauche = document.getElementById(id - 1).id;
         
         console.log('cellule gauche : ' + celluleGauche);
 
@@ -222,7 +229,11 @@ class Plateau {
             return document.getElementById(string);
         }
 
-        let celluleDroite = document.getElementById(parseInt(id + 1)).id;
+        console.log('cellule droite vide :' + id);
+
+        let celluleDroite = document.getElementById(id + 1).id;
+
+        console.log('cellule droite vide :' + celluleDroite);
 
         if(this.casesPleines.includes(celluleDroite)) {
             return false;
