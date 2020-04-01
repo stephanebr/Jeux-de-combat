@@ -109,9 +109,9 @@ class Plateau {
     }
 
     placerPersonnage(personnage) {
-        let idPerso = this.trouverCaseVide();        
-        this.casesPleines.push(idPerso);
-        let cellulePersonnage = document.getElementById(idPerso);
+        let id = this.trouverCaseUtilisable();        
+        this.casesPleines.push(id);
+        let cellulePersonnage = document.getElementById(id);
         cellulePersonnage.classList.add("cellule-" + personnage.classe);
     }
 
@@ -160,86 +160,88 @@ class Plateau {
         return this.trouverCaseUtilisable();
     }
 
-    caseHauteLibre(id) {
-        if(id < 10) {
-            return false;
+    caseHauteLibre(cellule) {
+        let result = true;
+
+        if(cellule < 10) {
+            result = false;
         }
 
-        console.log('cellule haute : ' + id);
+        let celluleHaute = cellule - 10;
 
-        let celluleHaute = document.getElementById(id - 10).id;
+        if(celluleHaute < 10) {
+            celluleHaute = '0' + celluleHaute + '';
+        }
 
-        console.log('cellule haute : ' + celluleHaute);
+        celluleHaute = celluleHaute.toString();
 
         if(this.casesPleines.includes(celluleHaute)) {
-            return false;
+            result = false;
         }
 
-        return true;
+        return result;
     }
 
-    caseBasLibre(id) {
-        if(id > 10) {
-            return false;
+    caseBasLibre(cellule) {
+        let result = true;
+
+        if(cellule == 89) {
+            result = false;
         }
 
-        console.log('case basse libre : ' + id);
+        let celluleBasse = cellule + 10;
 
-        let celluleBasse = document.getElementById(id + 10).id;
-
-        console.log('case basse libre : ' + celluleBasse);
+        celluleBAsse = celluleBasse.toString();
 
         if(this.casesPleines.includes(celluleBasse)) {
-            return false;
+            result = false;
         }
 
-        return true;
+        return result;
     }
 
-    caseGaucheLibre(id) {
-        if(id == 0) {
-            return false;
-        }
+    caseGaucheLibre(cellule) {
+        let result = true;
 
-        if(id < 10) {
-            let string = '0' + (id - 1);
-            return document.getElementById(string);
+        if(cellule % 10 === 0) { //Si je suis sur la première colonne
+            result = false;
         }   
 
-        console.log('cellule gauche vide :' + id);
+        let celluleGauche = cellule - 1;
 
-        let celluleGauche = document.getElementById(id - 1).id;
-        
-        console.log('cellule gauche : ' + celluleGauche);
+        if(celluleGauche < 10) {
+            celluleGauche = '0' + celluleGauche + '';
+        }
+
+        celluleGauche = celluleGauche.toString();
 
         if(this.casesPleines.includes(celluleGauche)) {
-            return false;
+            result = false;
         }
 
-        return true;
+        return result;
     }
 
-    caseDroiteLibre(id) {
-        if(id == 99) {
-            return false;
+    caseDroiteLibre(cellule) {
+        let result = true;
+        
+        if(cellule == 99) {
+            result = false;
         }
 
-        if(id < 10) {
-            let string = '0' + (id + 1);
-            return document.getElementById(string);
+        let celluleDroite = cellule + 1;
+
+        if(celluleDroite < 10) {
+            celluleDroite = '0' + celluleDroite + '';
         }
 
-        console.log('cellule droite vide :' + id);
-
-        let celluleDroite = document.getElementById(id + 1).id;
-
-        console.log('cellule droite vide :' + celluleDroite);
+        celluleDroite = celluleDroite.toString();
 
         if(this.casesPleines.includes(celluleDroite)) {
-            return false;
+            result = false;
         }
 
-        return true;
+        return result;
     }
 }
 

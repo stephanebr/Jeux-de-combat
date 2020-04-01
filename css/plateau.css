@@ -10,29 +10,33 @@
 
 .cellule-Roi-Jaeden {
     background: no-repeat center url('../images/kil-jaeden-1.png');     
-    background-size: cover;
+    background-color: orchid;
 }
 
 .cellule-Roi-Lich {
     background: no-repeat center url('../images/roi-lich-1.png');     
-    background-size: cover;
+    background-color: lime;
 }
 
 .cellule-Hache {
     background: no-repeat center url('../images/hache-1.png');     
     background-size: cover;
+    background-color: lightblue;
 }
 
 .cellule-Glaive {
     background: no-repeat center url('../images/glaive-1.png');     
     background-size: cover;
+    background-color: lightblue;
 }
 
 .cellule-Baguette-magique {
     background: no-repeat center url('../images/baguette_magique-1.png');     
+    background-color: lightblue;
 }
 
 .cellule-Epee {
     background: no-repeat center url('../images/epee-1.png');     
     background-size: cover;
+    background-color: lightblue;
 }
