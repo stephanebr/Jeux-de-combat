@@ -8,12 +8,12 @@
     min-width: 50px;
 }
 
-.cellule-Roi-Jaeden {
+.cellule-roi-jaeden {
     background: no-repeat center url('../images/kil-jaeden-1.png');     
     background-color: orchid;
 }
 
-.cellule-Roi-Lich {
+.cellule-roi-lich {
     background: no-repeat center url('../images/roi-lich-1.png');     
     background-color: lime;
 }

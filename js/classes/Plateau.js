@@ -191,7 +191,7 @@ class Plateau {
 
         let celluleBasse = cellule + 10;
 
-        celluleBAsse = celluleBasse.toString();
+        celluleBasse = celluleBasse.toString();
 
         if(this.casesPleines.includes(celluleBasse)) {
             result = false;

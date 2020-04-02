@@ -107,14 +107,14 @@ class Personnage {
 
 class RoiJaeden extends Personnage {
     constructor(pseudo) {
-        super(pseudo, "Roi-Jaeden", 100);
+        super(pseudo, "roi-jaeden", 100);
     }    
 }
 
 
 class RoiLich extends Personnage {
     constructor(pseudo) {
-        super(pseudo, "Roi-Lich", 100);
+        super(pseudo, "roi-lich", 100);
     }
 }
 
