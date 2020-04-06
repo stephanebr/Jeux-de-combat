@@ -1,3 +1,5 @@
+let compteur = 0;
+
 function afficherJoueurs() {
     let ids = [];
     let idNom  = document.getElementById('nom');
@@ -42,81 +44,102 @@ function inscription() {
     return noms;
 }
 
-function deplacerDroite() {
+function deplacerDroite(personnage) {
 //Le joueur à le droit de se déplacer de 3 cases max
     $(document).ready(function() {
-        $('#btn-droite').bind('click',function(e){
-            /*let cellule = $('.cellule-roi-jaeden').offset().left;
-            $('.cellule-roi-jaeden').offset({
-                left :  cellule + 50 //Ajoute 50px à la propriété 
-            });*/
+        $('#btn-droite').bind('click',function(e) {
+            let id = $('.cellule-' + personnage.classe).attr('id');
 
-            let id = $('.cellule-roi-jaeden').attr('id');
-            let valeur = parseInt(id) + 1;
-            $(document.getElementById(id)).removeAttr('class');
-            id = document.getElementById(valeur);
-            id.classList.add('cellule-roi-jaeden');
+            if(id == 99) {
+                return false;
+            }
+
+            let nId = parseInt(id) + 1;
+
+            if(nId <= 9) {
+                nId = '0' + nId;
+            }
+
+            $('#' + id).removeClass('cellule-' + personnage.classe);
+            $('#' + nId + '').addClass('cellule-' + personnage.classe);
+            return compteur++;
         });
     });
 }
     
-function deplacerGauche() {
+function deplacerGauche(personnage) {
 //Le joueur à le droite de se déplacer de 3 cases max
     $(document).ready(function() {
-        $('#btn-gauche').bind('click',function(e){
-            /*$('.cellule-roi-jaeden').css('backgroundColor', 'yellow');
-            let cellule = $('.cellule-roi-jaeden').offset().left;
-            $('.cellule-roi-jaeden').offset({
-                left :  cellule - 50 //Retire 50px à la propriété 
-            });*/
+        $('#btn-gauche').bind('click',function(e) {
+            let id = $('.cellule-' + personnage.classe).attr('id');
 
-            let id = $('.cellule-roi-jaeden').attr('id');
-            let valeur = parseInt(id) - 1;
-            $(document.getElementById(id)).removeAttr('class');
-            id = document.getElementById(valeur);
-            id.classList.add('cellule-roi-jaeden');
+            if(id == 0) {
+                return false;
+            }
+
+            let nId = parseInt(id) - 1;
+
+            if(nId <= 9) {
+                nId = '0' + nId;
+            }
+
+            $('#' + id).removeClass('cellule-' + personnage.classe);
+            $('#' + nId + '').addClass('cellule-' + personnage.classe);
+            return compteur++;
         });
     });
 }
 
-function deplacerHaut() {
-//Le joueur à le droite de se déplacer de 3 cases max
-$(document).ready(function() {
-    $('#btn-haut').bind('click',function(e){
-        /*$('.cellule-roi-jaeden').css('backgroundColor', 'yellow');
-        let cellule = $('.cellule-roi-jaeden').offset().top;
-        $('.cellule-roi-jaeden').offset({
-            top :  cellule - 50 //Retire 50px à la propriété 
-        });*/
-
-        let id = $('.cellule-roi-jaeden').attr('id');
-        let valeur = parseInt(id) - 10;
-        $(document.getElementById(id)).removeAttr('class');
-        id = document.getElementById(valeur);
-        id.classList.add('cellule-roi-jaeden');
-    });
-});
-}
-
-function deplacerBas() {
+function deplacerHaut(personnage) {
 //Le joueur à le droite de se déplacer de 3 cases max
     $(document).ready(function() {
-        $('#btn-bas').bind('click',function(e){
-            /*$('.cellule-roi-jaeden').css('backgroundColor', 'yellow');
-            let cellule = $('.cellule-roi-jaeden').offset().top;
-            $('.cellule-roi-jaeden').offset({
-                top :  cellule + 50 //Retire 50px à la propriété 
-            });*/
-            let id = $('.cellule-roi-jaeden').attr('id');
-            let valeur = parseInt(id) + 10;
-            $(document.getElementById(id)).removeAttr('class');
-            id = document.getElementById(valeur);
-            id.classList.add('cellule-roi-jaeden');
+        $('#btn-haut').bind('click',function(e) {
+            let id = $('.cellule-' + personnage.classe).attr('id');
+
+            if(id < 9) {
+                return false;
+            }
+
+            let nId = parseInt(id) - 10;
+
+            if(nId <= 9) {
+                nId = '0' + nId;
+            }
+
+            $('#' + id).removeClass('cellule-' + personnage.classe);
+            $('#' + nId + '').addClass('cellule-' + personnage.classe);
+            return compteur++;
         });
     });
 }
 
-export { afficherJoueurs, deplacerBas, deplacerDroite, deplacerGauche, deplacerHaut, html, inscription };
+function deplacerBas(personnage) {
+//Le joueur à le droite de se déplacer de 3 cases max
+    $(document).ready(function() {
+        $('#btn-bas').bind('click',function(e) {
+            let id = $('.cellule-' + personnage.classe).attr('id');
+
+            if(id == 90) {
+                return false;
+            }
+
+            let nId = parseInt(id) + 10;
+            $('#' + id).removeClass('cellule-' + personnage.classe);
+            $('#' + nId + '').addClass('cellule-' + personnage.classe);
+            return compteur++;
+        });
+    });
+}
+
+function nbDeplacement() {
+    alert(`nb tour : ${compteur}`);
+
+    if(compteur > 3) {
+        alert(`C'est au tour du joueur 2`);
+    }
+}
+
+export { afficherJoueurs, deplacerBas, deplacerDroite, deplacerGauche, deplacerHaut, html, inscription, nbDeplacement, compteur };
 
 
 

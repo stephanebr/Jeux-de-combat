@@ -1,4 +1,4 @@
-import { afficherJoueurs, deplacerDroite, deplacerGauche, deplacerBas, deplacerHaut, inscription } from './fonctions.js';
+import { afficherJoueurs, deplacerDroite, deplacerGauche, deplacerBas, deplacerHaut, inscription, nbDeplacement, compteur } from './fonctions.js';
 import { RoiLich, RoiJaeden } from './classes/Personnage.js';
 import { Plateau } from './classes/Plateau.js';
 
@@ -18,7 +18,10 @@ plateau.placerArme();
 plateau.placerPersonnage(jaeden);
 plateau.placerPersonnage(lich);
 
-deplacerDroite();
-deplacerGauche();
-deplacerHaut();
-deplacerBas();
+deplacerDroite(lich);
+deplacerGauche(lich);
+deplacerHaut(lich);
+deplacerBas(lich);
+
+console.log(compteur);
+
