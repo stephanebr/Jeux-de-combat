@@ -7,12 +7,18 @@ class Personnage {
     _classe;
     _sante;
     _degats;
+    _position;
+    _mouvement;
+    _arme;
 
-    constructor(pseudo, classe, sante, degats) {
+    constructor(pseudo, classe, sante, position, arme) {
         this._pseudo     = pseudo;
         this._classe     = classe;
         this._sante      = sante;
         this._degats     = 10;
+        this._position   = position;
+        this._mouvement  = 0;
+        this._arme       = arme;
     }
 
     /**
@@ -41,6 +47,18 @@ class Personnage {
         return true;
     }
 
+    get position() {
+        return this._position;
+    }
+
+    get mouvement() {
+        return this._mouvement;
+    }
+
+    get arme() {
+        return this._arme;
+    }
+
     set pseudo(pseudo) {
         this._pseudo = pseudo;
     }
@@ -58,6 +76,18 @@ class Personnage {
 
     set degats(degats) {
         this._degats = degats;
+    }
+
+    set position(position) {
+        this._position = position;
+    }
+
+    set mouvement(nbMouvement) {
+        this._mouvement = nbMouvement;
+    }
+
+    set arme(arme) {
+        this._arme = arme;
     }
 
 
@@ -101,7 +131,11 @@ class Personnage {
 
     mourir() {
         html(`${this.pseudo} Vous avez perdu, vous êtes mort !<br>`);
-    }    
+    } 
+    
+    prendre(arme) {
+       this.attaquer(this(arme));
+    }
 }
 
 

@@ -113,6 +113,7 @@ class Plateau {
         this.casesPleines.push(id);
         let cellulePersonnage = document.getElementById(id);
         cellulePersonnage.classList.add("cellule-" + personnage.classe);
+        personnage.position = cellulePersonnage.id;
     }
 
     placerArme() {
@@ -243,6 +244,46 @@ class Plateau {
 
         return result;
     }
+
+    estCeQueLaCaseDeDroiteEstLibre(cellule) {
+        cellule = this.casesPleines;
+
+        let celluleDroite = cellule + 1;
+
+        if(this.casesPleines.includes(celluleDroite)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    estCeQueLaCaseDeDroiteAUneArme() {
+
+    }
+
+    deplacerDroite(personnage) {
+        //Le joueur à le droit de se déplacer de 3 cases max
+            let position = personnage.position;
+
+            console.log(position);
+        
+            if(position == 99) {
+                return false;
+            }
+        
+            let nPosition = parseInt(position) + 1;
+
+            console.log(nPosition);
+        
+            if(nPosition <= 9) {
+                nPosition = '0' + position;
+            }
+        
+            document.getElementById(position).classList.remove('cellule-' + personnage.classe);
+            document.getElementById(nPosition).classList.add('cellule-' + personnage.classe);
+            
+            //return nPosition;
+        }
 }
 
 export { Plateau };

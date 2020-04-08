@@ -44,28 +44,6 @@ function inscription() {
     return noms;
 }
 
-function deplacerDroite(personnage) {
-//Le joueur à le droit de se déplacer de 3 cases max
-    $(document).ready(function() {
-        $('#btn-droite').bind('click',function(e) {
-            let id = $('.cellule-' + personnage.classe).attr('id');
-
-            if(id == 99) {
-                return false;
-            }
-
-            let nId = parseInt(id) + 1;
-
-            if(nId <= 9) {
-                nId = '0' + nId;
-            }
-
-            $('#' + id).removeClass('cellule-' + personnage.classe);
-            $('#' + nId + '').addClass('cellule-' + personnage.classe);
-            return compteur++;
-        });
-    });
-}
     
 function deplacerGauche(personnage) {
 //Le joueur à le droite de se déplacer de 3 cases max
@@ -139,7 +117,7 @@ function nbDeplacement() {
     }
 }
 
-export { afficherJoueurs, deplacerBas, deplacerDroite, deplacerGauche, deplacerHaut, html, inscription, nbDeplacement, compteur };
+export { afficherJoueurs, deplacerBas, deplacerGauche, deplacerHaut, html, inscription, nbDeplacement, compteur };
 
 
 
