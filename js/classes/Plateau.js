@@ -3,15 +3,17 @@ import { Hache, Epe, Glaive, BaguetteMagique } from './Arme.js';
 class Plateau {
 
     _casesPleines;
-    _obstacles;
+    _caseObstacles;
+    _caseArmes;
     _colonnes;
     _rangees;
 
     constructor(colonnes, rangees) {
-        this._casesPleines = [];
-        this._obstacles    = [];
-        this._colonnes     = colonnes;
-        this._rangees      = rangees;
+        this._casesPleines     = [];
+        this._caseObstacles    = [];
+        this._caseArmes        = [];
+        this._colonnes         = colonnes;
+        this._rangees          = rangees;
     }
 
     /**
@@ -21,8 +23,12 @@ class Plateau {
        return this._casesPleines;
     }
 
-    get obstacles() {
-        return this._obstacles;
+    get caseObstacles() {
+        return this._caseObstacles;
+    }
+
+    get caseArmes() {
+        return this._caseArmes;
     }
 
     get colonnes() {
@@ -40,8 +46,12 @@ class Plateau {
         this._casesPleines = casesPleines;
     }
 
-    set obstacles(obstacles) {
-        this._obstacles = obstacles;
+    set caseObstacles(caseObstacles) {
+        this._caseObstacles = caseObstacles;
+    }
+
+    set caseArmes(caseArmes) {
+        this._caseArmes = caseArmes;
     }
 
     set colonnes(colonnes) {
@@ -98,6 +108,7 @@ class Plateau {
             let obstacle = this.trouverCaseVide();
 
             this.casesPleines.push(obstacle);
+            this.caseObstacles.push(obstacle);
 
             obstacle = document.getElementById(obstacle);
             obstacle.classList.add("cellule-obstacle");
@@ -121,7 +132,10 @@ class Plateau {
 
         for(let i = 0; i < armes.length; i++) {
             let idArme      = this.trouverCaseVide();
+
             this.casesPleines.push(idArme);
+            this.caseArmes.push(idArme);
+            
             let celluleArme = document.getElementById(idArme);
             celluleArme.classList.add("cellule-" + armes[i].type);
             celluleArme.classList.add("cellule-arme"); 
@@ -247,23 +261,27 @@ class Plateau {
     }
 
     estCeQueLaCaseDeDroiteEstLibre(cellule) {
-        let celluleDroite = String(cellule);
+        let cell = String(cellule);
     
-        if(this.casesPleines.includes(celluleDroite)) {
+        if(this.caseObstacles.includes(cell)) {
             alert("La case droite n'est pas libre !");
             return false;
         }
+
+        this.estCeQueLaCaseDeDroiteAUneArme(cell);
+        
         return true;
     }
 
     estCeQueLaCaseDeDroiteAUneArme(cellule) {
-        let celluleDroite = String(cellule);
+        let cell = String(cellule);
 
-        if(celluleDroite == document.getElementsByClassName('cellule-arme')) {
+        if(this.caseArmes.includes(cell)) {
             alert("Prendre l'arme !");
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     deplacerDroite(personnage) {
@@ -283,10 +301,64 @@ class Plateau {
         if(this.estCeQueLaCaseDeDroiteEstLibre(nPosition)) {
             document.getElementById(position).classList.remove('cellule-' + personnage.classe);
             document.getElementById(nPosition).classList.add('cellule-' + personnage.classe);
+            personnage.position = document.getElementById(nPosition).id;
         }        
-
-        personnage.position = document.getElementById(nPosition).id;
     }
+
+    deplacerGauche(personnage) {
+        //Le joueur à le droit de se déplacer de 3 cases max
+            let position = personnage.position;
+
+            if(position == '00') {
+                return false;
+            }
+
+            let nPosition = parseInt(position) - 1;
+
+            if(nPosition <= 9) {
+                nPosition = '0' + nPosition;
+            }
+
+            if(this.estCeQueLaCaseDeDroiteEstLibre(nPosition)) {
+                document.getElementById(position).classList.remove('cellule-' + personnage.classe);
+                document.getElementById(nPosition).classList.add('cellule-' + personnage.classe);
+                personnage.position = document.getElementById(nPosition).id;
+        }
+     }
+
+     deplacerHaut(personnage) {
+        //Le joueur à le droit de se déplacer de 3 cases max
+            let position = personnage.position;
+
+            if(position <= 9) {
+                return false;
+            }
+
+            let nPosition = parseInt(position) - 10;
+
+            if(this.estCeQueLaCaseDeDroiteEstLibre(nPosition)) {
+                document.getElementById(position).classList.remove('cellule-' + personnage.classe);
+                document.getElementById(nPosition).classList.add('cellule-' + personnage.classe);
+                personnage.position = document.getElementById(nPosition).id;
+        }
+     }
+
+     deplacerBas(personnage) {
+        //Le joueur à le droit de se déplacer de 3 cases max
+            let position = personnage.position;
+
+            if(position >= 89) {
+                return false;
+            }
+
+            let nPosition = parseInt(position) + 10;
+
+            if(this.estCeQueLaCaseDeDroiteEstLibre(nPosition)) {
+                document.getElementById(position).classList.remove('cellule-' + personnage.classe);
+                document.getElementById(nPosition).classList.add('cellule-' + personnage.classe);
+                personnage.position = document.getElementById(nPosition).id;
+        }
+     }
 }
 
 export { Plateau };

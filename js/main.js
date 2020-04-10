@@ -1,11 +1,11 @@
-import { afficherJoueurs, deplacerGauche, deplacerBas, deplacerHaut, inscription, nbDeplacement, compteur } from './fonctions.js';
+import { afficherJoueurs, inscription, nbDeplacement } from './fonctions.js';
 import { RoiLich, RoiJaeden } from './classes/Personnage.js';
 import { Plateau } from './classes/Plateau.js';
 
-//let noms = inscription();
+let noms = inscription();
 let plateau   = new Plateau(10, 10);
-let jaeden    = new RoiJaeden("J");
-let lich      = new RoiLich("B");
+let jaeden    = new RoiJaeden(noms[0]);
+let lich      = new RoiLich(noms[1]);
 
 // To do le score des joueurs
 let ids = afficherJoueurs();
@@ -20,8 +20,20 @@ plateau.placerPersonnage(lich);
 
 
 $(document).ready(function() {
-    $('#btn-droite').bind('click',function(e) {
+    $('#jaeden-btn-droite').bind('click', function(e) {
         plateau.deplacerDroite(jaeden);
+    });
+
+    $('#jaeden-btn-gauche').bind('click', function(e) {
+        plateau.deplacerGauche(jaeden);
+    });
+
+    $('#jaeden-btn-haut').bind('click', function(e) {
+        plateau.deplacerHaut(jaeden);
+    });
+
+    $('#jaeden-btn-bas').bind('click', function(e) {
+        plateau.deplacerBas(jaeden);
     });
 });
 
