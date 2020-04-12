@@ -2,10 +2,10 @@ import { afficherJoueurs, inscription, nbDeplacement } from './fonctions.js';
 import { RoiLich, RoiJaeden } from './classes/Personnage.js';
 import { Plateau } from './classes/Plateau.js';
 
-let noms = inscription();
+//let noms = inscription();
 let plateau   = new Plateau(10, 10);
-let jaeden    = new RoiJaeden(noms[0]);
-let lich      = new RoiLich(noms[1]);
+let jaeden    = new RoiJaeden('S');
+let lich      = new RoiLich('N');
 
 // To do le score des joueurs
 let ids = afficherJoueurs();
@@ -34,6 +34,22 @@ $(document).ready(function() {
 
     $('#jaeden-btn-bas').bind('click', function(e) {
         plateau.deplacerBas(jaeden);
+    });
+
+    $('#lich-btn-droite').bind('click', function(e) {
+        plateau.deplacerDroite(lich);
+    });
+
+    $('#lich-btn-gauche').bind('click', function(e) {
+        plateau.deplacerGauche(lich);
+    });
+
+    $('#lich-btn-haut').bind('click', function(e) {
+        plateau.deplacerHaut(lich);
+    });
+
+    $('#lich-btn-bas').bind('click', function(e) {
+        plateau.deplacerBas(lich);
     });
 });
 

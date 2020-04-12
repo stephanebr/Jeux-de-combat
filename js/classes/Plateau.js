@@ -1,4 +1,5 @@
 import { Hache, Epe, Glaive, BaguetteMagique } from './Arme.js';
+import { Personnage } from './Personnage.js';
 
 class Plateau {
 
@@ -63,7 +64,7 @@ class Plateau {
     }
 
     creer() {
-        let body = document.getElementsByTagName("body")[0];
+        let plateauDeJeu = document.getElementById('plateau-de-jeu');
         
         // Création de l'élément <table> et d'un élément <tbody>
         let tbl = document.createElement("table");
@@ -93,13 +94,12 @@ class Plateau {
         
         // Mettre le <tbody> dans <table>
         tbl.appendChild(tblBody);
-        // Ajouter <table> dans <body>
-        body.appendChild(tbl);
+        // Ajouter <table> au niveau de l'id plateau-de-jeu
+        plateauDeJeu.appendChild(tbl);
         // Définitiion des attributs
         tbl.setAttribute("border", "2");
         tbl.setAttribute("width", "500");
         tbl.setAttribute("height", "500");
-        tbl.style.margin = "auto 400px";
     }
 
     genererObstacle(nbObstacles) {
@@ -123,7 +123,7 @@ class Plateau {
         let id = this.trouverCaseUtilisable();        
         this.casesPleines.push(id);
         let cellulePersonnage = document.getElementById(id);
-        cellulePersonnage.classList.add("cellule-" + personnage.classe);
+        cellulePersonnage.classList.add('cellule-' + personnage.classe, 'cellule-perso');
         personnage.position = cellulePersonnage.id;
     }
 
@@ -261,9 +261,10 @@ class Plateau {
     }
 
     estCeQueLaCaseDeDroiteEstLibre(cellule) {
-        let cell = String(cellule);
+        let cell       = String(cellule);
+        let idPerso    = document.getElementById(cellule);
     
-        if(this.caseObstacles.includes(cell)) {
+        if(this.caseObstacles.includes(cell) || idPerso.classList.contains('cellule-perso') == true) {
             alert("La case droite n'est pas libre !");
             return false;
         }
@@ -299,8 +300,8 @@ class Plateau {
         }
 
         if(this.estCeQueLaCaseDeDroiteEstLibre(nPosition)) {
-            document.getElementById(position).classList.remove('cellule-' + personnage.classe);
-            document.getElementById(nPosition).classList.add('cellule-' + personnage.classe);
+            document.getElementById(position).classList.remove('cellule-' + personnage.classe, 'cellule-perso');
+            document.getElementById(nPosition).classList.add('cellule-' + personnage.classe, 'cellule-perso');
             personnage.position = document.getElementById(nPosition).id;
         }        
     }
@@ -320,8 +321,8 @@ class Plateau {
             }
 
             if(this.estCeQueLaCaseDeDroiteEstLibre(nPosition)) {
-                document.getElementById(position).classList.remove('cellule-' + personnage.classe);
-                document.getElementById(nPosition).classList.add('cellule-' + personnage.classe);
+                document.getElementById(position).classList.remove('cellule-' + personnage.classe, 'cellule-perso');
+                document.getElementById(nPosition).classList.add('cellule-' + personnage.classe, 'cellule-perso');
                 personnage.position = document.getElementById(nPosition).id;
         }
      }
@@ -336,9 +337,13 @@ class Plateau {
 
             let nPosition = parseInt(position) - 10;
 
+            if(nPosition <= 9) {
+                nPosition = '0' + nPosition;
+            }
+
             if(this.estCeQueLaCaseDeDroiteEstLibre(nPosition)) {
-                document.getElementById(position).classList.remove('cellule-' + personnage.classe);
-                document.getElementById(nPosition).classList.add('cellule-' + personnage.classe);
+                document.getElementById(position).classList.remove('cellule-' + personnage.classe, 'cellule-perso');
+                document.getElementById(nPosition).classList.add('cellule-' + personnage.classe, 'cellule-perso');
                 personnage.position = document.getElementById(nPosition).id;
         }
      }
@@ -354,8 +359,8 @@ class Plateau {
             let nPosition = parseInt(position) + 10;
 
             if(this.estCeQueLaCaseDeDroiteEstLibre(nPosition)) {
-                document.getElementById(position).classList.remove('cellule-' + personnage.classe);
-                document.getElementById(nPosition).classList.add('cellule-' + personnage.classe);
+                document.getElementById(position).classList.remove('cellule-' + personnage.classe, 'cellule-perso');
+                document.getElementById(nPosition).classList.add('cellule-' + personnage.classe, 'cellule-perso');
                 personnage.position = document.getElementById(nPosition).id;
         }
      }
