@@ -51,3 +51,29 @@ blockquote {
 pre { 
      font: 400 13px/18.5714px MedievalSharp;
 }
+
+#armes {
+   
+}
+
+.padding-img {
+    padding-left: 21px;
+    padding-right: 21px;
+}
+
+img#epee {
+    background-color: lightblue;
+}
+
+img#glaive {
+    background-color: purple; 
+}
+
+img#hache {
+    background-color: blue;
+
+}
+
+img#baguette-magique {    
+    background-color: darkgoldenrod;
+}
