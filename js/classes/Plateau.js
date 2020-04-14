@@ -1,5 +1,5 @@
 import { Hache, Epe, Glaive, BaguetteMagique } from './Arme.js';
-import { Personnage } from './Personnage.js';
+import { RoiLich, RoiJaeden } from './Personnage.js';
 
 class Plateau {
 
@@ -260,7 +260,7 @@ class Plateau {
         return result;
     }
 
-    estCeQueLaCaseDeDroiteEstLibre(cellule) {
+    estCeQueLaCaseEstLibre(cellule) {
         let cell       = String(cellule);
         let idPerso    = document.getElementById(cellule);
     
@@ -269,12 +269,12 @@ class Plateau {
             return false;
         }
 
-        this.estCeQueLaCaseDeDroiteAUneArme(cell);
+        this.estCeQueLaCaseAUneArme(cell);
         
         return true;
     }
 
-    estCeQueLaCaseDeDroiteAUneArme(cellule) {
+    estCeQueLaCaseAUneArme(cellule) {
         let cell = String(cellule);
 
         if(this.caseArmes.includes(cell)) {
@@ -299,7 +299,7 @@ class Plateau {
             nPosition = '0' + nPosition;
         }
 
-        if(this.estCeQueLaCaseDeDroiteEstLibre(nPosition)) {
+        if(this.estCeQueLaCaseEstLibre(nPosition)) {
             document.getElementById(position).classList.remove('cellule-' + personnage.classe, 'cellule-perso');
             document.getElementById(nPosition).classList.add('cellule-' + personnage.classe, 'cellule-perso');
             personnage.position = document.getElementById(nPosition).id;
@@ -320,7 +320,7 @@ class Plateau {
                 nPosition = '0' + nPosition;
             }
 
-            if(this.estCeQueLaCaseDeDroiteEstLibre(nPosition)) {
+            if(this.estCeQueLaCaseEstLibre(nPosition)) {
                 document.getElementById(position).classList.remove('cellule-' + personnage.classe, 'cellule-perso');
                 document.getElementById(nPosition).classList.add('cellule-' + personnage.classe, 'cellule-perso');
                 personnage.position = document.getElementById(nPosition).id;
@@ -341,7 +341,7 @@ class Plateau {
                 nPosition = '0' + nPosition;
             }
 
-            if(this.estCeQueLaCaseDeDroiteEstLibre(nPosition)) {
+            if(this.estCeQueLaCaseEstLibre(nPosition)) {
                 document.getElementById(position).classList.remove('cellule-' + personnage.classe, 'cellule-perso');
                 document.getElementById(nPosition).classList.add('cellule-' + personnage.classe, 'cellule-perso');
                 personnage.position = document.getElementById(nPosition).id;
@@ -358,7 +358,7 @@ class Plateau {
 
             let nPosition = parseInt(position) + 10;
 
-            if(this.estCeQueLaCaseDeDroiteEstLibre(nPosition)) {
+            if(this.estCeQueLaCaseEstLibre(nPosition)) {
                 document.getElementById(position).classList.remove('cellule-' + personnage.classe, 'cellule-perso');
                 document.getElementById(nPosition).classList.add('cellule-' + personnage.classe, 'cellule-perso');
                 personnage.position = document.getElementById(nPosition).id;
