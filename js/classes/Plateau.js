@@ -1,5 +1,4 @@
 import { Hache, Epe, Glaive, BaguetteMagique } from './Arme.js';
-import { RoiLich, RoiJaeden } from './Personnage.js';
 
 class Plateau {
 
@@ -15,6 +14,7 @@ class Plateau {
         this._caseArmes        = [];
         this._colonnes         = colonnes;
         this._rangees          = rangees;
+        this.creer();
     }
 
     /**
@@ -140,6 +140,8 @@ class Plateau {
             celluleArme.classList.add("cellule-" + armes[i].type);
             celluleArme.classList.add("cellule-arme"); 
         }
+
+        return armes;
     }
 
     trouverCaseVide() {
@@ -300,70 +302,62 @@ class Plateau {
         }
 
         if(this.estCeQueLaCaseEstLibre(nPosition)) {
-            document.getElementById(position).classList.remove('cellule-' + personnage.classe, 'cellule-perso');
-            document.getElementById(nPosition).classList.add('cellule-' + personnage.classe, 'cellule-perso');
-            personnage.position = document.getElementById(nPosition).id;
+            personnage.positionner(position, nPosition);
         }        
     }
 
     deplacerGauche(personnage) {
-        //Le joueur à le droit de se déplacer de 3 cases max
-            let position = personnage.position;
+    //Le joueur à le droit de se déplacer de 3 cases max
+        let position = personnage.position;
 
-            if(position == '00') {
-                return false;
-            }
-
-            let nPosition = parseInt(position) - 1;
-
-            if(nPosition <= 9) {
-                nPosition = '0' + nPosition;
-            }
-
-            if(this.estCeQueLaCaseEstLibre(nPosition)) {
-                document.getElementById(position).classList.remove('cellule-' + personnage.classe, 'cellule-perso');
-                document.getElementById(nPosition).classList.add('cellule-' + personnage.classe, 'cellule-perso');
-                personnage.position = document.getElementById(nPosition).id;
+        if(position == '00') {
+            return false;
         }
-     }
+
+        let nPosition = parseInt(position) - 1;
+
+        if(nPosition <= 9) {
+            nPosition = '0' + nPosition;
+        }
+
+        if(this.estCeQueLaCaseEstLibre(nPosition)) {
+            personnage.positionner(position, nPosition);
+        }
+    }
 
      deplacerHaut(personnage) {
-        //Le joueur à le droit de se déplacer de 3 cases max
-            let position = personnage.position;
+    //Le joueur à le droit de se déplacer de 3 cases max
+        let position = personnage.position;
 
-            if(position <= 9) {
-                return false;
-            }
-
-            let nPosition = parseInt(position) - 10;
-
-            if(nPosition <= 9) {
-                nPosition = '0' + nPosition;
-            }
-
-            if(this.estCeQueLaCaseEstLibre(nPosition)) {
-                document.getElementById(position).classList.remove('cellule-' + personnage.classe, 'cellule-perso');
-                document.getElementById(nPosition).classList.add('cellule-' + personnage.classe, 'cellule-perso');
-                personnage.position = document.getElementById(nPosition).id;
+        if(position <= 9) {
+            return false;
         }
-     }
+
+        let nPosition = parseInt(position) - 10;
+
+        if(nPosition <= 9) {
+            nPosition = '0' + nPosition;
+        }
+
+        if(this.estCeQueLaCaseEstLibre(nPosition)) {
+            personnage.positionner(position, nPosition);
+        }
+    }
 
      deplacerBas(personnage) {
-        //Le joueur à le droit de se déplacer de 3 cases max
-            let position = personnage.position;
+    //Le joueur à le droit de se déplacer de 3 cases max
+        let position = personnage.position;
 
-            if(position >= 89) {
-                return false;
-            }
-
-            let nPosition = parseInt(position) + 10;
-
-            if(this.estCeQueLaCaseEstLibre(nPosition)) {
-                document.getElementById(position).classList.remove('cellule-' + personnage.classe, 'cellule-perso');
-                document.getElementById(nPosition).classList.add('cellule-' + personnage.classe, 'cellule-perso');
-                personnage.position = document.getElementById(nPosition).id;
+        if(position >= 89) {
+            return false;
         }
-     }
+
+        let nPosition = parseInt(position) + 10;
+
+        if(this.estCeQueLaCaseEstLibre(nPosition)) {
+            personnage.positionner(position, nPosition);
+        }
+    }
 }
 
 export { Plateau };

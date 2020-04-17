@@ -35,7 +35,7 @@ class Arme {
 
 class Hache extends Arme {
     constructor() {
-        super('hache', 7);
+        super('hache', 17);
     }
 
 }
@@ -43,22 +43,28 @@ class Hache extends Arme {
 
 class Epe extends Arme {
     constructor() {
-        super('epee', 5);
+        super('epee', 15);
     }
 }
 
 
 class Glaive extends Arme {
     constructor() {
-        super('glaive', 8);
+        super('glaive', 18);
     }
 }
 
 
 class BaguetteMagique extends Arme {
     constructor() {
-        super('baguette-magique', 10);
+        super('baguette-magique', 20);
     }
 }
 
-export { Hache, Epe, Glaive, BaguetteMagique };
+class Couteau extends Arme {
+    constructor() {
+        super('couteau', 10);
+    }
+}
+
+export { Couteau, Hache, Epe, Glaive, BaguetteMagique };

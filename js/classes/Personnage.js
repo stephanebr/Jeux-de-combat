@@ -1,12 +1,11 @@
-import { Hache, Epe, Glaive, BaguetteMagique } from './Arme.js';
+import { Couteau, Hache, Epe, Glaive, BaguetteMagique } from './Arme.js';
 import { html } from '../fonctions.js';
 
 class Personnage {
 
     _pseudo;
     _classe;
-    _sante;
-    _degats;
+    _sante
     _position;
     _mouvement;
     _arme;
@@ -15,10 +14,9 @@ class Personnage {
         this._pseudo     = pseudo;
         this._classe     = classe;
         this._sante      = sante;
-        this._degats     = 10;
         this._position   = position;
         this._mouvement  = 0;
-        this._arme       = arme;
+        this._arme       = new Couteau();
     }
 
     /**
@@ -34,10 +32,6 @@ class Personnage {
 
     get sante() {
         return this._sante;
-    }
-
-    get degats() {
-        return this._degats;
     }
 
     get vie() {
@@ -74,10 +68,6 @@ class Personnage {
         this._sante = sante;
     }
 
-    set degats(degats) {
-        this._degats = degats;
-    }
-
     set position(position) {
         this._position = position;
     }
@@ -90,8 +80,7 @@ class Personnage {
         this._arme = arme;
     }
 
-
-    attaquer(personnage, force = 1) {
+    attaquer(personnage) {
         if(personnage == this) {
             html("Vous êtes fous, vous êtes en train de vous taper !<br>");
         }
@@ -100,25 +89,22 @@ class Personnage {
             html("Vous ne pouvez pas attaquer un mort !<br>");
             return;
         }
-        personnage.sante -= this.arme.degats * force;
 
-        if(force == 1) {
+        html(`${this.pseudo} attaque ${personnage.pseudo} avec son ${this.arme.type} qui fait ${this.arme.degats} dégâts.<br> ${personnage.pseudo} vous perdez ${this.arme.degats} points de vie.<br>`);
+        personnage.informations();
+
+        personnage.sante -= this.arme.degats;
+
+        if(this.arme) {
             html(`${this.pseudo} attaque ${personnage.pseudo} avec son ${this.arme.type} qui fait ${this.arme.degats} dégâts.<br> ${personnage.pseudo} vous perdez ${this.arme.degats} points de vie.<br>`);
             personnage.informations();
         }
-        
-        html(`${this.pseudo} attaque avec son coup spécial ${this.arme.type} de guerre ${personnage.pseudo} ${force} dégâts.<br> ${personnage.pseudo} vous perdez ${force} points de vie.<br>`);
-        personnage.informations();
 
         if(!personnage.vie) {
             personnage.mourir();
             this.gagner();
             return;
         }
-    }
-
-    coupSpecial(personnage) {
-        this.attaquer(personnage, 100);
     }
 
     gagner() {
@@ -133,6 +119,16 @@ class Personnage {
         html(`${this.pseudo} Vous avez perdu, vous êtes mort !<br>`);
     } 
     
+    positionner(position, nPosition) {
+        document.getElementById(position).classList.remove('cellule-' + this.classe, 'cellule-perso');
+        document.getElementById(nPosition).classList.add('cellule-' + this.classe, 'cellule-perso');
+        this.position = document.getElementById(nPosition).id;
+        this.mouvement++;
+        
+        return this.mouvement;
+        
+    }
+
     prendre(arme) {
        this.attaquer(this(arme));
     }

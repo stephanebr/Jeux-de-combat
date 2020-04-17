@@ -1,22 +1,24 @@
-import { afficherJoueurs, inscription, nbDeplacement } from './fonctions.js';
+import { inscription, nbDeplacement } from './fonctions.js';
 import { RoiLich, RoiJaeden } from './classes/Personnage.js';
-import { Plateau } from './classes/Plateau.js';
+import { Jeu } from './classes/Jeu.js';
 
 //let noms = inscription();
-let plateau   = new Plateau(10, 10);
 let jaeden    = new RoiJaeden('S');
 let lich      = new RoiLich('N');
+let jeu       = new Jeu();
 
 // To do le score des joueurs
-let ids = afficherJoueurs();
-ids[0].innerHTML  = `${jaeden.pseudo} | ${lich.pseudo}`;
-ids[1].innerHTML = `${jaeden.sante} | ${lich.sante}`;
+//let ids           = afficherJoueurs();
 
-plateau.creer();
-plateau.genererObstacle(10);
-plateau.placerArme();
-plateau.placerPersonnage(jaeden);
-plateau.placerPersonnage(lich);
+jeu.score.innerHTML     = `${jaeden.pseudo} | `;
+jeu.score.innerHTML     = `${lich.pseudo}`;
+jeu.score.innerHTML     = `${jaeden.sante} | ${lich.sante}`;
+
+
+
+
+jeu.ajouterJoueur(jaeden);
+jeu.ajouterJoueur(lich);
 
 
 $(document).ready(function() {
