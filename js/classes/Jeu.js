@@ -3,10 +3,14 @@ import { Personnage } from './Personnage.js';
 
 
 class Jeu {
-    _joueurs; // Tableau contenant les joueurs
+    _joueurs = []; // Tableau contenant les joueurs
     _plateau; // Objet contenant le plateau instancié
     _peutJouer; // le nom du joueur qui peut jouer
-    _score; // tableau json contenant le score
+    _score = { // tableau json contenant le score
+                idJaeden: document.getElementById('jaeden'),
+                idLich: document.getElementById('lich'),
+                idScore: document.getElementById('score')
+    }; 
 
     constructor() {
         this._plateau = new Plateau(10, 10);
@@ -30,8 +34,8 @@ class Jeu {
         return this._score;
     }
 
-    set joueurs(joueurs) {
-        this._joueurs = joueurs;
+    set joueurs(joueur) {
+        this._joueurs.push(joueur);
     }
 
     set plateau(plateau) {
@@ -43,17 +47,12 @@ class Jeu {
     }
 
     set score(score) {
-        this_score = score;
-        score =  {
-                    jaeden: document.getElementById('jaeden'),
-                    lich: document.getElementById('lich'),
-                    idScore: document.getElementById('score')
-        };
+        this._score = score;
     }
 
     ajouterJoueur(joueur) {
-        this._joueurs.push(joueur) // On ajoute au tableau
-        this.plateau.placerPersonnage(jouer.name) // On trouve un Id libre pour placer un personnage sur le plateau
+        this.joueurs = joueur; // On ajoute au tableau
+        this.plateau.placerPersonnage(joueur) // On trouve un Id libre pour placer un personnage sur le plateau
         document.getElementById(joueur.position).innerHTML  = joueur.pseudo; // On affiche le personnage
     }
 
