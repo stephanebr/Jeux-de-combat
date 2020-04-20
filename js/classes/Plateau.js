@@ -1,4 +1,4 @@
-import { Hache, Epe, Glaive, BaguetteMagique } from './Arme.js';
+import { Hache, Epee, Glaive, BaguetteMagique } from './Arme.js';
 
 class Plateau {
 
@@ -127,11 +127,10 @@ class Plateau {
         personnage.position = cellulePersonnage.id;
     }
 
-    placerArme() {
-        let armes = [new Hache(), new Glaive(), new BaguetteMagique(), new Epe()];
-
+    placerArme(armes) {
+        armes = [];
         for(let i = 0; i < armes.length; i++) {
-            let idArme      = this.trouverCaseVide();
+            let idArme = this.trouverCaseVide();
 
             this.casesPleines.push(idArme);
             this.caseArmes.push(idArme);

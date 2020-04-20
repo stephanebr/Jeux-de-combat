@@ -1,21 +1,22 @@
 import { Plateau } from './Plateau.js';
-import { Personnage } from './Personnage.js';
+import { RoiJaeden, RoiLich } from './Personnage.js';
+import { Hache, Glaive, BaguetteMagique, Epee } from './Arme.js';
 
 
 class Jeu {
-    _joueurs = []; // Tableau contenant les joueurs
+    _joueurs   = []; // Tableau contenant les joueurs
     _plateau; // Objet contenant le plateau instancié
+    _armes     = [];
     _peutJouer; // le nom du joueur qui peut jouer
-    _score = { // tableau json contenant le score
-                idJaeden: document.getElementById('jaeden'),
-                idLich: document.getElementById('lich'),
-                idScore: document.getElementById('score')
-    }; 
+    _score     = {}; // tableau json contenant le score 
 
     constructor() {
+        this.jaeden   = new RoiJaeden(this.pseudo);
+        this.lich     = new RoiLich(this.pseudo);
+        this.armes = new Hache(), new Glaive(), new BaguetteMagique(), new Epee();
         this._plateau = new Plateau(10, 10);
         this._plateau.genererObstacle(10);
-        this._plateau.placerArme();
+        this._plateau.placerArme(this.armes);        
     }
 
     get joueurs() {
@@ -24,6 +25,10 @@ class Jeu {
 
     get plateau() {
         return this._plateau;
+    }
+
+    get arme() {
+        return this._armes;
     }
 
     get peutJouer() {
@@ -42,6 +47,10 @@ class Jeu {
         this._plateau = plateau;
     }
 
+    set armes(armes) {
+        this._armes.push(armes);
+    }
+
     set peutJouer(peutJouer) {
         this._peutJouer = peutJouer;
     }
@@ -53,7 +62,35 @@ class Jeu {
     ajouterJoueur(joueur) {
         this.joueurs = joueur; // On ajoute au tableau
         this.plateau.placerPersonnage(joueur) // On trouve un Id libre pour placer un personnage sur le plateau
-        document.getElementById(joueur.position).innerHTML  = joueur.pseudo; // On affiche le personnage
+        //document.getElementById(joueur.position).innerHTML  = joueur.pseudo; // On affiche le personnage
+    }
+
+    afficherScore() {
+        const noms  = this.inscription();
+        const score = {
+            idJaeden: document.getElementById('jaeden').innerHTML = noms[0],
+            idLich: document.getElementById('lich').innerHTML     = noms[1],
+            scoreJaeden: document.getElementById('score-jaeden').innerHTML   = `${this.jaeden.sante}`,
+            scoreLich: document.getElementById('score-lich').innerHTML   = `${this.lich.sante}`
+        };
+    }
+
+    inscription() {
+        let noms = [];
+    
+        do {
+            this.jaeden.pseudo = prompt('Veuillez saisir le prénom du premier joueur :');
+        } 
+        while( this.jaeden.pseudo == null || this.jaeden.pseudo == '');
+    
+        do {
+            this.lich.pseudo = prompt('Veuillez saisir le prénom du deuxième joueur :');
+        }
+        while(this.lich.pseudo == null || this.lich.pseudo == '');
+    
+        noms.push(this.jaeden.pseudo, this.lich.pseudo);
+    
+        return noms;
     }
 
 }

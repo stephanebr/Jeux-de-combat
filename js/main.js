@@ -1,57 +1,42 @@
-import { inscription, nbDeplacement } from './fonctions.js';
-import { RoiLich, RoiJaeden } from './classes/Personnage.js';
 import { Jeu } from './classes/Jeu.js';
 
-//let noms = inscription();
-let jaeden    = new RoiJaeden('S');
-let lich      = new RoiLich('N');
-let jeu       = new Jeu();
+const jeu = new Jeu();
 
-// To do le score des joueurs
-//let ids           = afficherJoueurs();
-
-jeu.score.innerHTML     = `${jaeden.pseudo} | `;
-jeu.score.innerHTML     = `${lich.pseudo}`;
-jeu.score.innerHTML     = `${jaeden.sante} | ${lich.sante}`;
-
-
-
-
-jeu.ajouterJoueur(jaeden);
-jeu.ajouterJoueur(lich);
+jeu.afficherScore();
+jeu.ajouterJoueur(jeu.jaeden);
+jeu.ajouterJoueur(jeu.lich);
 
 
 $(document).ready(function() {
     $('#jaeden-btn-droite').bind('click', function(e) {
-        plateau.deplacerDroite(jaeden);
+        jeu.plateau.deplacerDroite(jeu.jaeden);
     });
 
     $('#jaeden-btn-gauche').bind('click', function(e) {
-        plateau.deplacerGauche(jaeden);
+        jeu.plateau.deplacerGauche(jeu.jaeden);
     });
 
     $('#jaeden-btn-haut').bind('click', function(e) {
-        plateau.deplacerHaut(jaeden);
+        jeu.plateau.deplacerHaut(jeu.jaeden);
     });
 
     $('#jaeden-btn-bas').bind('click', function(e) {
-        plateau.deplacerBas(jaeden);
+        jeu.plateau.deplacerBas(jeu.jaeden);
     });
 
     $('#lich-btn-droite').bind('click', function(e) {
-        plateau.deplacerDroite(lich);
+        jeu.plateau.deplacerDroite(jeu.lich);
     });
 
     $('#lich-btn-gauche').bind('click', function(e) {
-        plateau.deplacerGauche(lich);
+        jeu.plateau.deplacerGauche(jeu.lich);
     });
 
     $('#lich-btn-haut').bind('click', function(e) {
-        plateau.deplacerHaut(lich);
+        jeu.plateau.deplacerHaut(jeu.lich);
     });
 
     $('#lich-btn-bas').bind('click', function(e) {
-        plateau.deplacerBas(lich);
+        jeu.plateau.deplacerBas(jeu.lich);
     });
 });
-

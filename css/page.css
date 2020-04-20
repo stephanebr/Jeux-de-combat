@@ -40,10 +40,6 @@ li {
     font: 700 24px/26.4px MedievalSharp;
 } 
 
-p { 
-     font: 400 14px/20px MedievalSharp; 
-} 
-
 blockquote { 
      font: 400 21px/30px MedievalSharp; 
 } 
@@ -52,8 +48,17 @@ pre {
      font: 400 13px/18.5714px MedievalSharp;
 }
 
-#armes {
-   
+#armes p {
+    position: relative;
+}
+
+.degats {
+    position: absolute;
+    bottom: 45px;
+    right: 5px;
+    color: black;
+    font-weight: bold;
+    font-size: 1em;
 }
 
 .padding-img {

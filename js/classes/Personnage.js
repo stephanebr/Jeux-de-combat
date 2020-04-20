@@ -1,4 +1,4 @@
-import { Couteau, Hache, Epe, Glaive, BaguetteMagique } from './Arme.js';
+import { Couteau, Hache, Epee, Glaive, BaguetteMagique } from './Arme.js';
 import { html } from '../fonctions.js';
 
 class Personnage {

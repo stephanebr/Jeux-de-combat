@@ -1,48 +1,77 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="fr">
   <head>
-    <meta charset="UTF-8">
-    <title>déplacer un élément avec les flèches du clavier</title>
-    <style type="text/css">
-      .myDiv {
-    width: 150px;
-    height: 53px;
-    position: relative;
-    margin: 100px auto 0;
-    background: url("https://1.bp.blogspot.com/-I-a7SivlqkY/XR1iGIJh0FI/AAAAAAAAFEk/ynto7iWeqxkjhxH5UDMywUYHad3fFMHTACLcBGAs/s1600/carr2.png");
-    background-repeat: no-repeat;
-}
-    </style>
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script type="text/javascript">
-      $(document).keydown(function(e){
-    switch (e.which){
-    case 37:    // flèche gauche
-        $(".myDiv").finish().animate({
-            left: "-=10"
-        });
-        break;
-    case 38:    // flèche haut
-        $(".myDiv").finish().animate({
-            top: "-=10"
-        });
-        break;
-    case 39:    // flèche droite
-        $(".myDiv").finish().animate({
-            left: "+=10"
-        });
-        break;
-    case 40:    // flèche du bas
-        $(".myDiv").finish().animate({
-            top: "+=10"
-        });
-        break;
-    }
-});
-    </script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="bootstrap-4.3.1/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=MedievalSharp"/>
+    <link rel="stylesheet" type="text/css" href="css/page.css"/>
+    <link rel="stylesheet" type="text/css" href="css/menu.css"/>
+    <link rel="stylesheet" type="text/css" href="css/plateau.css"/>
+    <title>The War Of Kings : Page inscription</title>
   </head>
   <body>
-    <p><b>Cliquez ici pour déplacer l'objet.</b></p>
-    <div class="myDiv"></div>
-  </body>
+    <header id="titre">
+      <h1>The War Of Kings</h1>
+    </header>
+
+    <div id="jaeden"></div>
+    <div id="lich"></div>
+    <div id="score-jaeden"></div>
+    <div id="score-lich"></div>
+
+    <h2 class="text-center">Liste des armes</h2>
+    <div id="armes" class="row justify-content-center">    
+      <p>
+        <img src="images/epee-1.png" alt="Image d'une Epée" class="img-thumbnail" id="epee">
+        <span class="degats">15</span>
+        <br>
+      <span>Epée</span>
+      </p>
+      <p>
+        <img src="images/hache-1.png" alt="Image d'une Hache" class="img-thumbnail" id="hache">
+        <span class="degats">17</span>
+        <br>
+        <span>Hache</span>
+      </p>
+      <p>
+        <img src="images/glaive-1.png" alt="Image d'un Glaive" class="img-thumbnail" id="glaive">
+        <span class="degats">18</span>
+        <br>
+        <span>Glaive</span>
+      </p>
+      <p>
+        <img src="images/baguette_magique-1.png" alt="Image d'une Baguette-magique" class="img-thumbnail padding-img" id="baguette-magique">
+        <span class="degats">20</span>
+        <br>
+        <span>Baguette<br>magique</span>          
+      </p>    
+    </div>
+    
+    <div id="interface" class="row align-items-start">
+      <div class="boutons col-xl-4 col-lg-4 col-md-12">
+        <h2>Roi Jaeden</h2>
+        <button id="jaeden-btn-droite">Droite</button>
+        <button id="jaeden-btn-gauche">Gauche</button>
+        <button id="jaeden-btn-haut">Haut</button>
+        <button id="jaeden-btn-bas">Bas</button>
+        <button id="jaeden-btn-attaquer">Attaquer</button>
+      </div>
+
+      <div id="plateau-de-jeu" class="col-xl-4 col-lg-4 col-md-12"></div>
+
+      <div class="boutons col-xl-4 col-lg-4 col-md-12">
+        <h2>Roi Lich</h2>
+        <button id="lich-btn-droite">Droite</button>
+        <button id="lich-btn-gauche">Gauche</button>
+        <button id="lich-btn-haut">Haut</button>
+        <button id="lich-btn-bas">Bas</button>
+        <button id="lich-btn-attaquer">Attaquer</button>
+      </div>
+    </div>
+    
+    <script src="js/jquery-3.4.1.slim.min.js"></script>
+
+    <script type="module" src="js/main.js"></script>
+</body>
 </html>
