@@ -13,7 +13,10 @@ class Jeu {
     constructor() {
         this.jaeden   = new RoiJaeden(this.pseudo);
         this.lich     = new RoiLich(this.pseudo);
-        this.armes = new Hache(), new Glaive(), new BaguetteMagique(), new Epee();
+        this.armes    = new Hache();
+        this.armes    = new Glaive();
+        this.armes    = new BaguetteMagique();
+        this.armes    = new Epee();
         this._plateau = new Plateau(10, 10);
         this._plateau.genererObstacle(10);
         this._plateau.placerArme(this.armes);        
@@ -27,7 +30,7 @@ class Jeu {
         return this._plateau;
     }
 
-    get arme() {
+    get armes() {
         return this._armes;
     }
 
@@ -63,6 +66,7 @@ class Jeu {
         this.joueurs = joueur; // On ajoute au tableau
         this.plateau.placerPersonnage(joueur) // On trouve un Id libre pour placer un personnage sur le plateau
         //document.getElementById(joueur.position).innerHTML  = joueur.pseudo; // On affiche le personnage
+        console.log(this.armes);
     }
 
     afficherScore() {
