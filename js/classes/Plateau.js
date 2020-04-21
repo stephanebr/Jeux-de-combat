@@ -1,5 +1,3 @@
-import { Hache, Epee, Glaive, BaguetteMagique } from './Arme.js';
-
 class Plateau {
 
     _casesPleines;
@@ -9,11 +7,11 @@ class Plateau {
     _rangees;
 
     constructor(colonnes, rangees) {
-        this._casesPleines     = [];
-        this._caseObstacles    = [];
-        this._caseArmes        = [];
-        this._colonnes         = colonnes;
-        this._rangees          = rangees;
+        this.casesPleines     = [];
+        this.caseObstacles    = [];
+        this.caseArmes        = [];
+        this.colonnes         = colonnes;
+        this.rangees          = rangees;
         this.creer();
     }
 
@@ -128,7 +126,6 @@ class Plateau {
     }
 
     placerArme(armes) {
-        armes = [];
         for(let i = 0; i < armes.length; i++) {
             let idArme = this.trouverCaseVide();
 
@@ -266,7 +263,7 @@ class Plateau {
         let idPerso    = document.getElementById(cellule);
     
         if(this.caseObstacles.includes(cell) || idPerso.classList.contains('cellule-perso') == true) {
-            alert("La case droite n'est pas libre !");
+            alert("La case n'est pas libre !");
             return false;
         }
 
@@ -301,7 +298,7 @@ class Plateau {
         }
 
         if(this.estCeQueLaCaseEstLibre(nPosition)) {
-            personnage.positionner(position, nPosition);
+            personnage.mouvement = personnage.deplacer(position, nPosition);
         }        
     }
 
@@ -320,7 +317,7 @@ class Plateau {
         }
 
         if(this.estCeQueLaCaseEstLibre(nPosition)) {
-            personnage.positionner(position, nPosition);
+            personnage.mouvement = personnage.deplacer(position, nPosition);
         }
     }
 
@@ -339,7 +336,7 @@ class Plateau {
         }
 
         if(this.estCeQueLaCaseEstLibre(nPosition)) {
-            personnage.positionner(position, nPosition);
+            personnage.mouvement = personnage.deplacer(position, nPosition);
         }
     }
 
@@ -354,7 +351,7 @@ class Plateau {
         let nPosition = parseInt(position) + 10;
 
         if(this.estCeQueLaCaseEstLibre(nPosition)) {
-            personnage.positionner(position, nPosition);
+            personnage.mouvement = personnage.deplacer(position, nPosition);
         }
     }
 }

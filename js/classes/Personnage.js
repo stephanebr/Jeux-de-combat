@@ -1,4 +1,4 @@
-import { Couteau, Hache, Epee, Glaive, BaguetteMagique } from './Arme.js';
+import { Couteau } from './Arme.js';
 import { html } from '../fonctions.js';
 
 class Personnage {
@@ -11,12 +11,12 @@ class Personnage {
     _arme;
 
     constructor(pseudo, classe, sante, position, arme) {
-        this._pseudo     = pseudo;
-        this._classe     = classe;
-        this._sante      = sante;
-        this._position   = position;
-        this._mouvement  = 0;
-        this._arme       = new Couteau();
+        this.pseudo     = pseudo;
+        this.classe     = classe;
+        this.sante      = sante;
+        this.position   = position;
+        this.mouvement  = 0;
+        this.arme       = new Couteau();
     }
 
     /**
@@ -46,6 +46,11 @@ class Personnage {
     }
 
     get mouvement() {
+        if(this._mouvement >= 3) {
+            alert(`Vous avez déjà effectué vos 3 déplacements`);
+            return false;
+        }
+
         return this._mouvement;
     }
 
@@ -81,7 +86,7 @@ class Personnage {
     }
 
     attaquer(personnage) {
-        if(personnage == this) {
+        if(personnage === this) {
             html("Vous êtes fous, vous êtes en train de vous taper !<br>");
         }
 
@@ -91,13 +96,13 @@ class Personnage {
         }
 
         html(`${this.pseudo} attaque ${personnage.pseudo} avec son ${this.arme.type} qui fait ${this.arme.degats} dégâts.<br> ${personnage.pseudo} vous perdez ${this.arme.degats} points de vie.<br>`);
-        personnage.informations();
+        personnage.informer();
 
         personnage.sante -= this.arme.degats;
 
         if(this.arme) {
             html(`${this.pseudo} attaque ${personnage.pseudo} avec son ${this.arme.type} qui fait ${this.arme.degats} dégâts.<br> ${personnage.pseudo} vous perdez ${this.arme.degats} points de vie.<br>`);
-            personnage.informations();
+            personnage.informer();
         }
 
         if(!personnage.vie) {
@@ -111,7 +116,7 @@ class Personnage {
         html(`${this.pseudo} Bravo, vous avez gagné !<br>`);
     }
 
-    informations() {
+    informer() {
          html(`${this.pseudo} ${this.classe} a ${this.sante} points de vie.<br>`);
     }
 
@@ -119,14 +124,13 @@ class Personnage {
         html(`${this.pseudo} Vous avez perdu, vous êtes mort !<br>`);
     } 
     
-    positionner(position, nPosition) {
+    deplacer(position, nPosition) {
         document.getElementById(position).classList.remove('cellule-' + this.classe, 'cellule-perso');
         document.getElementById(nPosition).classList.add('cellule-' + this.classe, 'cellule-perso');
-        this.position = document.getElementById(nPosition).id;
+        this.position = nPosition;
         this.mouvement++;
         
-        return this.mouvement;
-        
+        return this.mouvement;        
     }
 
     prendre(arme) {
@@ -135,17 +139,6 @@ class Personnage {
 }
 
 
-class RoiJaeden extends Personnage {
-    constructor(pseudo) {
-        super(pseudo, "roi-jaeden", 100);
-    }    
-}
 
 
-class RoiLich extends Personnage {
-    constructor(pseudo) {
-        super(pseudo, "roi-lich", 100);
-    }
-}
-
-export { Personnage, RoiJaeden, RoiLich };
+export { Personnage };

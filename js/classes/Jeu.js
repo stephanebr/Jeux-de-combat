@@ -1,5 +1,6 @@
 import { Plateau } from './Plateau.js';
-import { RoiJaeden, RoiLich } from './Personnage.js';
+import { RoiJaeden } from './RoiJaeden.js';
+import { RoiLich } from './RoiLich.js';
 import { Hache, Glaive, BaguetteMagique, Epee } from './Arme.js';
 
 
@@ -17,9 +18,9 @@ class Jeu {
         this.armes    = new Glaive();
         this.armes    = new BaguetteMagique();
         this.armes    = new Epee();
-        this._plateau = new Plateau(10, 10);
-        this._plateau.genererObstacle(10);
-        this._plateau.placerArme(this.armes);        
+        this.plateau  = new Plateau(10, 10);
+        this.plateau.genererObstacle(10);
+        this.plateau.placerArme(this.armes);        
     }
 
     get joueurs() {
@@ -70,7 +71,7 @@ class Jeu {
     }
 
     afficherScore() {
-        const noms  = this.inscription();
+        const noms  = this.inscrireJoueur();
         const score = {
             idJaeden: document.getElementById('jaeden').innerHTML = noms[0],
             idLich: document.getElementById('lich').innerHTML     = noms[1],
@@ -79,7 +80,17 @@ class Jeu {
         };
     }
 
-    inscription() {
+    desactiverBouton(personnage, idBtnDroite, idBtnGauche, idBtnHaut, idBtnBas) {
+        if(personnage.mouvement >= 2) {
+            $(idBtnDroite).prop('disabled', true);
+            $(idBtnGauche).prop('disabled', true);
+            $(idBtnHaut).prop('disabled', true);
+            $(idBtnBas).prop('disabled', true);
+            alert('vous ne pouvez plus jouer');
+        }
+    }
+
+    inscrireJoueur() {
         let noms = [];
     
         do {
