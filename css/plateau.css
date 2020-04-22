@@ -1,5 +1,5 @@
 .cellule-obstacle {
-    background: no-repeat center url('../images/obstacle-1.png');     
+    background: no-repeat center url('../images/obstacle.png');     
     background-size: cover;
 }
 
@@ -8,35 +8,47 @@
     min-width: 50px;
 }
 
-.cellule-roi-jaeden {
-    background: no-repeat center url('../images/kil-jaeden-1.png');     
+#jaeden-h2, #lich-h2 {
+    color: black;
+}
+
+#jaeden-h2 {
     background-color: orchid;
 }
 
+.cellule-roi-jaeden {
+    background: no-repeat center url('../images/kil-jaeden.png');     
+    background-color: orchid;
+}
+
+#lich-h2 {
+    background-color: lime;
+}
+
 .cellule-roi-lich {
-    background: no-repeat center url('../images/roi-lich-1.png');     
+    background: no-repeat center url('../images/roi-lich.png');     
     background-color: lime;
 }
 
 .cellule-hache {
-    background: no-repeat center url('../images/hache-1.png');     
+    background: no-repeat center url('../images/hache.png');     
     background-size: cover;
     background-color: blue;
 }
 
 .cellule-glaive {
-    background: no-repeat center url('../images/glaive-1.png');     
+    background: no-repeat center url('../images/glaive.png');     
     background-size: cover;
     background-color: purple;
 }
 
 .cellule-baguette-magique {
-    background: no-repeat center url('../images/baguette_magique-1.png');     
+    background: no-repeat center url('../images/baguette-magique.png');     
     background-color: darkgoldenrod;
 }
 
 .cellule-epee {
-    background: no-repeat center url('../images/epee-1.png');     
+    background: no-repeat center url('../images/epee.png');     
     background-size: cover;
     background-color: lightblue;
 }

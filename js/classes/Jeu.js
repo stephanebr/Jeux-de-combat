@@ -14,10 +14,10 @@ class Jeu {
     constructor() {
         this.jaeden   = new RoiJaeden(this.pseudo);
         this.lich     = new RoiLich(this.pseudo);
+        this.armes    = new Epee();
         this.armes    = new Hache();
         this.armes    = new Glaive();
         this.armes    = new BaguetteMagique();
-        this.armes    = new Epee();
         this.plateau  = new Plateau(10, 10);
         this.plateau.genererObstacle(10);
         this.plateau.placerArme(this.armes);        
@@ -36,6 +36,9 @@ class Jeu {
     }
 
     get peutJouer() {
+        if(this._peutJouer === false) {
+            return false;
+        }
         return this._peutJouer;
     }
 
@@ -73,19 +76,35 @@ class Jeu {
     afficherScore() {
         const noms  = this.inscrireJoueur();
         const score = {
-            idJaeden: document.getElementById('jaeden').innerHTML = noms[0],
-            idLich: document.getElementById('lich').innerHTML     = noms[1],
-            scoreJaeden: document.getElementById('score-jaeden').innerHTML   = `${this.jaeden.sante}`,
-            scoreLich: document.getElementById('score-lich').innerHTML   = `${this.lich.sante}`
+            idJaeden: document.getElementById('jaeden').innerHTML          = noms[0],
+            idLich: document.getElementById('lich').innerHTML              = noms[1],
+            scoreJaeden: document.getElementById('score-jaeden').innerHTML = `${this.jaeden.sante}`,
+            scoreLich: document.getElementById('score-lich').innerHTML     = `${this.lich.sante}`
         };
     }
 
-    desactiverBouton(personnage, idBtnDroite, idBtnGauche, idBtnHaut, idBtnBas) {
+    afficherArmes() {
+        const listArmes = [];
+        const idArmes = document.getElementById('armes');
+        let img;
+        
+        for(let arme of this.armes){
+            img = `<p>
+                        <img src="../images/${arme.type}.png" alt="Image ${arme.type}" class="img-thumbnail" id="${arme.type}">
+                        <span class="degats">${arme.degats}</span>
+                        <br>
+                        <span>${arme.type}</span>
+                    </p>`;
+
+            listArmes.push(img);
+
+            idArmes.innerHTML = listArmes;            
+         }       
+    }
+
+    desactiverBouton(personnage, classBtn) {
         if(personnage.mouvement >= 2) {
-            $(idBtnDroite).prop('disabled', true);
-            $(idBtnGauche).prop('disabled', true);
-            $(idBtnHaut).prop('disabled', true);
-            $(idBtnBas).prop('disabled', true);
+            $(classBtn).prop('disabled', true);
             alert('vous ne pouvez plus jouer');
         }
     }
