@@ -105,7 +105,14 @@ class Jeu {
     desactiverBouton(personnage, classBtn) {
         if(personnage.mouvement >= 2) {
             $(classBtn).prop('disabled', true);
-            alert('vous ne pouvez plus jouer');
+            alert('Vous ne pouvez plus jouer !');
+        }
+    }
+
+    activerBouton(classBtn) {
+        if(this.jaeden.mouvement == 0) {
+            $(classBtn).prop('disabled', false);
+            alert(`Vous pouvez jouer !`);
         }
     }
 
@@ -125,6 +132,19 @@ class Jeu {
         noms.push(this.jaeden.pseudo, this.lich.pseudo);
     
         return noms;
+    }
+
+    debuterPartie(personnage) {
+        if(personnage === this.jaeden) {
+            if(this.peutJouer) {
+                this.activerBouton('.jaeden-btns');
+                this.desactiverBouton('.lich-btns');
+                this.peutJouer = true;
+            }
+        }
+
+        this.activerBouton('.lich-btns');
+        this.desactiverBouton('.lich-btns');
     }
 
 }
