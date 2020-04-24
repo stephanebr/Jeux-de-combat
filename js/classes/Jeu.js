@@ -93,12 +93,12 @@ class Jeu {
                         <img src="../images/${arme.type}.png" alt="Image ${arme.type}" class="img-thumbnail" id="${arme.type}">
                         <span class="degats">${arme.degats}</span>
                         <br>
-                        <span>${arme.type}</span>
+                        <span class="nom-arme">${arme.type}</span>
                     </p>`;
 
             listArmes.push(img);
 
-            idArmes.innerHTML = listArmes;            
+            idArmes.innerHTML = listArmes.join('');            
          }       
     }
 

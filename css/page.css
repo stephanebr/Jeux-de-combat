@@ -61,11 +61,6 @@ pre {
     font-size: 1em;
 }
 
-.padding-img {
-    padding-left: 21px;
-    padding-right: 21px;
-}
-
 img#epee {
     background-color: lightblue;
 }
@@ -81,4 +76,10 @@ img#hache {
 
 img#baguette-magique {    
     background-color: darkgoldenrod;
+    padding-left: 1.2em;
+    padding-right: 1.4em;
+}
+
+.nom-arme {
+    text-transform: capitalize;
 }
