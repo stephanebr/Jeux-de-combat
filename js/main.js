@@ -6,46 +6,46 @@ jeu.afficherScore();
 jeu.ajouterJoueur(jeu.jaeden);
 jeu.ajouterJoueur(jeu.lich);
 jeu.afficherArmes();
-jeu.debuterPartie(jeu.jaeden);
 
 $(document).ready(function() {
-    $('#jaeden-btn-droite').bind('click', function(e) {  
-        //jeu.desactiverBouton(jeu.jaeden, '.jaeden-btns')          
+    $('#jaeden-btn-droite').on('click', function(e) {
+        jeu.desactiverBouton(jeu.jaeden, '.jaeden-btns');  
         jeu.plateau.deplacerDroite(jeu.jaeden);
+        alert(jeu.jaeden.mouvement);      
     });
 
-    $('#jaeden-btn-gauche').bind('click', function(e) {
-        //jeu.desactiverBouton(jeu.jaeden, '.jaeden-btns')
+    $('#jaeden-btn-gauche').on('click', function(e) {
+        jeu.desactiverBouton(jeu.jaeden, '.jaeden-btns');  
         jeu.plateau.deplacerGauche(jeu.jaeden);
     });
 
-    $('#jaeden-btn-haut').bind('click', function(e) {
-        //jeu.desactiverBouton(jeu.jaeden, '.jaeden-btns')
+    $('#jaeden-btn-haut').on('click', function(e) {
+        jeu.desactiverBouton(jeu.jaeden, '.jaeden-btns');  
         jeu.plateau.deplacerHaut(jeu.jaeden);
     });
 
-    $('#jaeden-btn-bas').bind('click', function(e) {
-        //jeu.desactiverBouton(jeu.jaeden, '.jaeden-btns')
+    $('#jaeden-btn-bas').on('click', function(e) {
+        jeu.desactiverBouton(jeu.jaeden, '.jaeden-btns');  
         jeu.plateau.deplacerBas(jeu.jaeden);
     });
 
-    $('#lich-btn-droite').bind('click', function(e) {
-        //jeu.desactiverBouton(jeu.lich, '.lich-btns');
+    $('#lich-btn-droite').on('click', function(e) {
+        jeu.desactiverBouton(jeu.lich, '.lich-btns');  
         jeu.plateau.deplacerDroite(jeu.lich);
     });
 
-    $('#lich-btn-gauche').bind('click', function(e) {
-        //jeu.desactiverBouton(jeu.lich, '.lich-btns');
+    $('#lich-btn-gauche').on('click', function(e) {
+        jeu.desactiverBouton(jeu.lich, '.lich-btns');  
         jeu.plateau.deplacerGauche(jeu.lich);
     });
 
-    $('#lich-btn-haut').bind('click', function(e) {
-        //jeu.desactiverBouton(jeu.lich, '.lich-btns');
+    $('#lich-btn-haut').on('click', function(e) {
+        jeu.desactiverBouton(jeu.lich, '.lich-btns');  
         jeu.plateau.deplacerHaut(jeu.lich);
     });
 
-    $('#lich-btn-bas').bind('click', function(e) {
-        //jeu.desactiverBouton(jeu.lich, '.lich-btns');
+    $('#lich-btn-bas').on('click', function(e) {
+        jeu.desactiverBouton(jeu.lich, '.lich-btns');  
         jeu.plateau.deplacerBas(jeu.lich);
     });
 });

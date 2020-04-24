@@ -36,10 +36,10 @@ class Jeu {
     }
 
     get peutJouer() {
-        if(this._peutJouer === false) {
-            return false;
+        if(this._peutJouer === true) {
+            return true;
         }
-        return this._peutJouer;
+        return false;
     }
 
     get score() {
@@ -104,7 +104,7 @@ class Jeu {
 
     desactiverBouton(personnage, classBtn) {
         if(personnage.mouvement >= 2) {
-            $(classBtn).prop('disabled', true);
+            $(classBtn).off('click');
             alert('Vous ne pouvez plus jouer !');
         }
     }
@@ -135,11 +135,13 @@ class Jeu {
     }
 
     debuterPartie(personnage) {
+        this.peutJouer = true;
+
         if(personnage === this.jaeden) {
             if(this.peutJouer) {
                 this.activerBouton('.jaeden-btns');
                 this.desactiverBouton('.lich-btns');
-                this.peutJouer = true;
+                this.peutJouer = false;
             }
         }
 

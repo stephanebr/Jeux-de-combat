@@ -48,7 +48,6 @@ class Personnage {
     get mouvement() {
         if(this._mouvement >= 3) {
             alert(`Vous avez déjà effectué vos 3 déplacements`);
-            return false;
         }
 
         return this._mouvement;
