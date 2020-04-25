@@ -15,21 +15,13 @@ class Arme {
         this._degats = degats;
     }    
 
-    get type() {
-        return this._type;
-    }
+    get type() { return this._type; }
 
-    get degats() {
-        return this._degats;
-    }
+    get degats() { return this._degats; }
 
-    set type(_type) {
-        this._nom = _type;
-    }
+    set type(_type) { this._nom = _type; }
 
-    set degats(_degats) {
-        this._degats = _degats;
-    }
+    set degats(_degats) { this._degats = _degats; }
 }
 
 

@@ -23,48 +23,25 @@ class Jeu {
         this.plateau.placerArme(this.armes);        
     }
 
-    get joueurs() {
-        return this._joueurs;
-    }
+    get joueurs() { return this._joueurs; }
 
-    get plateau() {
-        return this._plateau;
-    }
+    get plateau() { return this._plateau; }
 
-    get armes() {
-        return this._armes;
-    }
+    get armes() { return this._armes; }
 
-    get peutJouer() {
-        if(this._peutJouer === true) {
-            return true;
-        }
-        return false;
-    }
+    get peutJouer() { this._peutJouer ? true : false; }
 
-    get score() {
-        return this._score;
-    }
+    get score() { return this._score; }
 
-    set joueurs(joueur) {
-        this._joueurs.push(joueur);
-    }
+    set joueurs(joueur) { this._joueurs.push(joueur); }
 
-    set plateau(plateau) {
-        this._plateau = plateau;
-    }
+    set plateau(plateau) { this._plateau = plateau; }
 
-    set armes(armes) {
-        this._armes.push(armes);
-    }
+    set armes(armes) { this._armes.push(armes); }
 
-    set peutJouer(peutJouer) {
-        this._peutJouer = peutJouer;
-    }
+    set peutJouer(peutJouer) { this._peutJouer = peutJouer; }
 
-    set score(score) {
-        this._score = score;
-    }
+    set score(score) { this._score = score; }
 
     ajouterJoueur(joueur) {
         this.joueurs = joueur; // On ajoute au tableau
@@ -102,14 +79,12 @@ class Jeu {
          }       
     }
 
-    desactiverBouton(personnage, classBtn) {
-        if(personnage.mouvement >= 2) {
-            $(classBtn).off('click');
-            alert('Vous ne pouvez plus jouer !');
-        }
+    desactiverBoutons(classBtn) {
+        $(classBtn).off('click');
+        alert('Vous ne pouvez plus jouer !');
     }
 
-    activerBouton(classBtn) {
+    activerBoutons(classBtn) {
         if(this.jaeden.mouvement == 0) {
             $(classBtn).prop('disabled', false);
             alert(`Vous pouvez jouer !`);

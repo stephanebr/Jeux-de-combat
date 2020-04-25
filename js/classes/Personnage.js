@@ -22,67 +22,31 @@ class Personnage {
     /**
      * GETTERS ET SETTERS
      */
-    get pseudo() {
-        return this._pseudo;
-    }
+    get pseudo() { return this._pseudo; }
 
-    get classe() {
-        return this._classe;
-    }
+    get classe() { return this._classe; }
 
-    get sante() {
-        return this._sante;
-    }
+    get sante() { return this._sante; }
 
-    get vie() {
-        if(this.sante <= 0) {
-            return false;
-        }
-        return true;
-    }
+    get vie() { return this.sante <= 0 ? false : true; }
 
-    get position() {
-        return this._position;
-    }
+    get position() { return this._position; }
 
-    get mouvement() {
-        if(this._mouvement >= 3) {
-            alert(`Vous avez déjà effectué vos 3 déplacements`);
-        }
+    get mouvement() { return this._mouvement >= 3 ? alert("Vous avez déjà effectué vos 3 déplacements") : this._mouvement; }
 
-        return this._mouvement;
-    }
+    get arme() { return this._arme; }
+    
+    set pseudo(pseudo) { this._pseudo = pseudo; }
 
-    get arme() {
-        return this._arme;
-    }
+    set classe(classe) { this._classe = classe; }
 
-    set pseudo(pseudo) {
-        this._pseudo = pseudo;
-    }
+    set sante(sante) { this.sante < 0 ? this._sante = sante : ""; }
 
-    set classe(classe) {
-        this._classe = classe;
-    }
+    set position(position) { this._position = position; }
 
-    set sante(sante) {
-        if(sante < 0) {
-            sante = 0;
-        }
-        this._sante = sante;
-    }
-
-    set position(position) {
-        this._position = position;
-    }
-
-    set mouvement(nbMouvement) {
-        this._mouvement = nbMouvement;
-    }
-
-    set arme(arme) {
-        this._arme = arme;
-    }
+    set mouvement(nbMouvement) { this._mouvement = nbMouvement; }
+    
+    set arme(arme) { this._arme = arme; }
 
     attaquer(personnage) {
         if(personnage === this) {
