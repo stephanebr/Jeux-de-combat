@@ -29,7 +29,7 @@ class Jeu {
 
     get armes() { return this._armes; }
 
-    get peutJouer() { this._peutJouer ? true : false; }
+    get peutJouer() { this._peutJouer; }
 
     get score() { return this._score; }
 
@@ -124,6 +124,25 @@ class Jeu {
         this.desactiverBouton('.lich-btns');
     }
 
+    verifMouvement(personnage, classBtn, fonctionDeplacer) {
+        if (personnage.mouvement >= 3) {
+            this.desactiverBoutons(classBtn);
+            this.peutJouer = false;
+        }
+        
+        fonctionDeplacer;
+    }
+
+    quiPeutJouer(personnage) {
+        if(personnage === this.jaeden) {
+            this.peutJouer = true;
+            $(".roi-lich-btns").off('click'); 
+        }
+    }
+
+    deroulementPartie() {
+        
+    }
 }
 
 export { Jeu };

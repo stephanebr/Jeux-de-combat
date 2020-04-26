@@ -32,7 +32,7 @@ class Personnage {
 
     get position() { return this._position; }
 
-    get mouvement() { return this._mouvement >= 3 ? alert("Vous avez déjà effectué vos 3 déplacements") : this._mouvement; }
+    get mouvement() { return this._mouvement; }
 
     get arme() { return this._arme; }
     
