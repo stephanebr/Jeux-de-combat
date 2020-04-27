@@ -59,7 +59,7 @@ class Personnage {
         }
 
         html(`${this.pseudo} attaque ${personnage.pseudo} avec son ${this.arme.type} qui fait ${this.arme.degats} dégâts.<br> ${personnage.pseudo} vous perdez ${this.arme.degats} points de vie.<br>`);
-        personnage.informer();
+        //personnage.informer();
 
         personnage.sante -= this.arme.degats;
 

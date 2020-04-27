@@ -30,6 +30,10 @@ $(document).ready(function() {
         jeu.verifMouvement(jeu.jaeden, jeu.lich, '.roi-jaeden-btns', '.roi-lich-btns', jeu.plateau.deplacerBas(jeu.jaeden));
     });
 
+    $('#jaeden-btn-attaquer').on('click', function() {
+        jeu.jaeden.attaquer(jeu.lich);
+    });
+
     $('#jaeden-btn-terminer').on('click', function(e) {  
         jeu.desactiverBoutons('.roi-jaeden-btns', jeu.joueurs[1]);
         jeu.activerBoutons('.roi-lich-btns', jeu.joueurs[0]);

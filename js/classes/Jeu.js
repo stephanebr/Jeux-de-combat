@@ -62,9 +62,9 @@ class Jeu {
         const score = {
             idJaeden: document.getElementById('jaeden').innerHTML          = noms[0],
             idLich: document.getElementById('lich').innerHTML              = noms[1],
-            scoreJaeden: document.getElementById('score-jaeden').innerHTML = this.jaeden.sante,
-            scoreLich: document.getElementById('score-lich').innerHTML     = this.lich.sante
-        };
+            scoreJaeden: document.getElementById('score-jaeden').innerHTML = ` : ${this.jaeden.sante}` ,
+            scoreLich: document.getElementById('score-lich').innerHTML     = ` : ${this.lich.sante}`
+        }
     }
 
     afficherArmes() {
@@ -101,13 +101,22 @@ class Jeu {
     inscrireJoueur() {    
         do {
             this.jaeden.pseudo = prompt('Veuillez saisir le prénom du premier joueur :');
-        } 
-        while( this.jaeden.pseudo == null || this.jaeden.pseudo == '');
+            
+        }
+        while(this.jaeden.pseudo == '');
+
+        if (this.jaeden.pseudo == null) {
+            window.location.href = "index.html";
+        }
     
         do {
             this.lich.pseudo = prompt('Veuillez saisir le prénom du deuxième joueur :');
         }
-        while(this.lich.pseudo == null || this.lich.pseudo == '');
+        while(this.lich.pseudo == '');
+
+        if (this.lich.pseudo == null) {
+            window.location.href = "index.html";
+        }
     
         this.joueurs = this.jaeden.pseudo;
         this.joueurs = this.lich.pseudo;
