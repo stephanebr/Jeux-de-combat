@@ -8,8 +8,9 @@ class Jeu {
     _joueurs   = []; // Tableau contenant les joueurs
     _plateau; // Objet contenant le plateau instancié
     _armes     = [];
-    _peutJouer; // le nom du joueur qui peut jouer
-    _score     = {}; // tableau json contenant le score 
+    _peutJouer; // Le nom du joueur qui peut jouer
+    _score     = {}; // Tableau json contenant le score
+    _msgAlert;  // Messages d'actions
 
     constructor() {
         this.jaeden   = new RoiJaeden(this.pseudo);
@@ -32,6 +33,8 @@ class Jeu {
     get peutJouer() { this._peutJouer; }
 
     get score() { return this._score; }
+    
+    get msgAlert() { return this._msgAlert; }
 
     set joueurs(joueur) { this._joueurs.push(joueur); }
 
@@ -43,6 +46,9 @@ class Jeu {
 
     set score(score) { this._score = score; }
 
+    set msgAlert(message) { this._msgAlert = message; }
+
+
     ajouterJoueur(joueur) {
         this.joueurs = joueur; // On ajoute au tableau
         this.plateau.placerPersonnage(joueur) // On trouve un Id libre pour placer un personnage sur le plateau
@@ -52,11 +58,12 @@ class Jeu {
 
     afficherScore() {
         const noms  = this.inscrireJoueur();
+    
         const score = {
             idJaeden: document.getElementById('jaeden').innerHTML          = noms[0],
             idLich: document.getElementById('lich').innerHTML              = noms[1],
-            scoreJaeden: document.getElementById('score-jaeden').innerHTML = `${this.jaeden.sante}`,
-            scoreLich: document.getElementById('score-lich').innerHTML     = `${this.lich.sante}`
+            scoreJaeden: document.getElementById('score-jaeden').innerHTML = this.jaeden.sante,
+            scoreLich: document.getElementById('score-lich').innerHTML     = this.lich.sante
         };
     }
 
@@ -66,7 +73,7 @@ class Jeu {
         let img;
         
         for(let arme of this.armes){
-            img = `<p>
+            img = `<p class="pl-5">
                         <img src="../images/${arme.type}.png" alt="Image ${arme.type}" class="img-thumbnail" id="${arme.type}">
                         <span class="degats">${arme.degats}</span>
                         <br>
@@ -79,21 +86,19 @@ class Jeu {
          }       
     }
 
-    desactiverBoutons(classBtn) {
-        $(classBtn).off('click');
-        alert('Vous ne pouvez plus jouer !');
+    activerBoutons(classBtn, nomPersonnage) {
+        $(classBtn).removeAttr('disabled');
+        this.msgAlert = alert(`Vous pouvez jouer ${nomPersonnage} !`);
+        return this.msgAlert;
     }
 
-    activerBoutons(classBtn) {
-        if(this.jaeden.mouvement == 0) {
-            $(classBtn).prop('disabled', false);
-            alert(`Vous pouvez jouer !`);
-        }
+    desactiverBoutons(classBtn, nomPersonnage) {
+        $(classBtn).attr('disabled', 'disabled');
+        this.msgAlert = alert(`${nomPersonnage} vous avez fini votre tour !`);
+        return this.msgAlert;
     }
 
-    inscrireJoueur() {
-        let noms = [];
-    
+    inscrireJoueur() {    
         do {
             this.jaeden.pseudo = prompt('Veuillez saisir le prénom du premier joueur :');
         } 
@@ -104,9 +109,10 @@ class Jeu {
         }
         while(this.lich.pseudo == null || this.lich.pseudo == '');
     
-        noms.push(this.jaeden.pseudo, this.lich.pseudo);
+        this.joueurs = this.jaeden.pseudo;
+        this.joueurs = this.lich.pseudo;
     
-        return noms;
+        return this.joueurs;
     }
 
     debuterPartie(personnage) {
@@ -124,10 +130,11 @@ class Jeu {
         this.desactiverBouton('.lich-btns');
     }
 
-    verifMouvement(personnage, classBtn, fonctionDeplacer) {
-        if (personnage.mouvement >= 3) {
-            this.desactiverBoutons(classBtn);
-            this.peutJouer = false;
+    verifMouvement(personnage1, personnage2, classBtnP1, classBtnP2, fonctionDeplacer) {
+        if (personnage1.mouvement >= 3) {
+            this.desactiverBoutons(classBtnP1, personnage1.pseudo);
+            this.activerBoutons(classBtnP2, personnage2.pseudo);
+            personnage1.mouvement = 0;
         }
         
         fonctionDeplacer;
@@ -136,8 +143,13 @@ class Jeu {
     quiPeutJouer(personnage) {
         if(personnage === this.jaeden) {
             this.peutJouer = true;
-            $(".roi-lich-btns").off('click'); 
+            $('.roi-lich-btns').attr('disabled', 'disabled');
+            $('roi-jaeden-btns').removeAttr('disabled');
         }
+        else {
+            $('.roi-jaeden-btns').attr('disabled', 'disabled');
+            $('roi-lich-btns').removeAttr('disabled');
+        }       
     }
 
     deroulementPartie() {

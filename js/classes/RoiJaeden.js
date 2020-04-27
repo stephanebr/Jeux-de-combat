@@ -2,7 +2,7 @@ import { Personnage } from './Personnage.js';
 
 class RoiJaeden extends Personnage {
     constructor(pseudo) {
-        super(pseudo, "roi-jaeden", 100);
+        super(pseudo, "roi-jaeden");
     }    
 }
 

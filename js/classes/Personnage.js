@@ -10,10 +10,10 @@ class Personnage {
     _mouvement;
     _arme;
 
-    constructor(pseudo, classe, sante, position, arme) {
+    constructor(pseudo, classe, position) {
         this.pseudo     = pseudo;
         this.classe     = classe;
-        this.sante      = sante;
+        this.sante      = 100;
         this.position   = position;
         this.mouvement  = 0;
         this.arme       = new Couteau();
@@ -40,7 +40,7 @@ class Personnage {
 
     set classe(classe) { this._classe = classe; }
 
-    set sante(sante) { this.sante < 0 ? this._sante = sante : ""; }
+    set sante(sante) { this._sante = sante; }
 
     set position(position) { this._position = position; }
 
@@ -80,7 +80,7 @@ class Personnage {
     }
 
     informer() {
-         html(`${this.pseudo} ${this.classe} a ${this.sante} points de vie.<br>`);
+        html(`${this.pseudo} ${this.classe} a ${this.sante} points de vie.<br>`);
     }
 
     mourir() {
