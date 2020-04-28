@@ -13,15 +13,16 @@ class Jeu {
     _msgAlert;  // Messages d'actions
 
     constructor() {
-        this.jaeden   = new RoiJaeden(this.pseudo);
-        this.lich     = new RoiLich(this.pseudo);
-        this.armes    = new Epee();
-        this.armes    = new Hache();
-        this.armes    = new Glaive();
-        this.armes    = new BaguetteMagique();
-        this.plateau  = new Plateau(10, 10);
+        this.jaeden    = new RoiJaeden(this.pseudo);
+        this.lich      = new RoiLich(this.pseudo);
+        this.armes     = new Epee();
+        this.armes     = new Hache();
+        this.armes     = new Glaive();
+        this.armes     = new BaguetteMagique();
+        this.plateau   = new Plateau(10, 10);
         this.plateau.genererObstacle(10);
-        this.plateau.placerArme(this.armes);        
+        this.plateau.placerArme(this.armes); 
+        this.peutJouer = this.jaeden.classe;      
     }
 
     get joueurs() { return this._joueurs; }
@@ -30,7 +31,7 @@ class Jeu {
 
     get armes() { return this._armes; }
 
-    get peutJouer() { this._peutJouer; }
+    get peutJouer() { console.log(this._peutJouer); }
 
     get score() { return this._score; }
     
@@ -126,9 +127,12 @@ class Jeu {
 
     verifMouvement(personnage1, personnage2, classBtnP1, classBtnP2, fonctionDeplacer) {
         if (personnage1.mouvement >= 3) {
+            console.log('Changer de joueur');
             this.desactiverBoutons(classBtnP1, personnage1.pseudo);
             this.activerBoutons(classBtnP2, personnage2.pseudo);
+            this.peutJouer = personnage2.classe;
             personnage1.mouvement = 0;
+            console.log(this._peutJouer);
         }
         
         fonctionDeplacer;

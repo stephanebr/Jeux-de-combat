@@ -14,9 +14,9 @@ $(document).ready(function() {
     alert(`${jeu.joueurs[0]} vous commencez la partie !`);
 
     //Les boutons de mouvement du roi Jaeden
-    /*$('#jaeden-btn-droite').on('click', function(e) {
+    $('#jaeden-btn-droite').on('click', function(e) {
         jeu.verifMouvement(jeu.jaeden, jeu.lich, '.roi-jaeden-btns', '.roi-lich-btns', jeu.plateau.deplacerDroite(jeu.jaeden));
-    });*/
+    });
 
     $('#jaeden-btn-gauche').on('click', function(e) {  
         jeu.verifMouvement(jeu.jaeden, jeu.lich, '.roi-jaeden-btns', '.roi-lich-btns', jeu.plateau.deplacerGauche(jeu.jaeden));
@@ -61,11 +61,24 @@ $(document).ready(function() {
         jeu.activerBoutons('.roi-jaeden-btns', jeu.joueurs[0]);
     });
 
-    $("#jaeden-btn-droite").keydown(function(e){
+    $("html").keydown(function(e){
         console.log(e);
         e.preventDefault();
-        if(e.keyCode == "39") {
+
+        if(e.key == 'ArrowRight') {
             jeu.verifMouvement(jeu.jaeden, jeu.lich, '.roi-lich-btns', '.roi-jaeden-btns', jeu.plateau.deplacerDroite(jeu.jaeden));
+        }
+
+        if(e.key == 'ArrowLeft') {
+            jeu.verifMouvement(jeu.jaeden, jeu.lich, '.roi-lich-btns', '.roi-jaeden-btns', jeu.plateau.deplacerGauche(jeu.jaeden));
+        }
+
+        if(e.key == 'ArrowUp') {
+            jeu.verifMouvement(jeu.jaeden, jeu.lich, '.roi-lich-btns', '.roi-jaeden-btns', jeu.plateau.deplacerHaut(jeu.jaeden));
+        }
+
+        if(e.key == 'ArrowDown') {
+            jeu.verifMouvement(jeu.jaeden, jeu.lich, '.roi-lich-btns', '.roi-jaeden-btns', jeu.plateau.deplacerBas(jeu.jaeden));
         }
     });
 });
