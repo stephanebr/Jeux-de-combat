@@ -124,21 +124,6 @@ class Jeu {
         return this.joueurs;
     }
 
-    debuterPartie(personnage) {
-        this.peutJouer = true;
-
-        if(personnage === this.jaeden) {
-            if(this.peutJouer) {
-                this.activerBouton('.jaeden-btns');
-                this.desactiverBouton('.lich-btns');
-                this.peutJouer = false;
-            }
-        }
-
-        this.activerBouton('.lich-btns');
-        this.desactiverBouton('.lich-btns');
-    }
-
     verifMouvement(personnage1, personnage2, classBtnP1, classBtnP2, fonctionDeplacer) {
         if (personnage1.mouvement >= 3) {
             this.desactiverBoutons(classBtnP1, personnage1.pseudo);
@@ -147,22 +132,6 @@ class Jeu {
         }
         
         fonctionDeplacer;
-    }
-
-    quiPeutJouer(personnage) {
-        if(personnage === this.jaeden) {
-            this.peutJouer = true;
-            $('.roi-lich-btns').attr('disabled', 'disabled');
-            $('roi-jaeden-btns').removeAttr('disabled');
-        }
-        else {
-            $('.roi-jaeden-btns').attr('disabled', 'disabled');
-            $('roi-lich-btns').removeAttr('disabled');
-        }       
-    }
-
-    deroulementPartie() {
-        
     }
 }
 
