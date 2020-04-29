@@ -31,7 +31,7 @@ class Jeu {
 
     get armes() { return this._armes; }
 
-    get peutJouer() { console.log(this._peutJouer); }
+    get peutJouer() { return this._peutJouer; }
 
     get score() { return this._score; }
     
@@ -125,14 +125,24 @@ class Jeu {
         return this.joueurs;
     }
 
-    verifMouvement(personnage1, personnage2, classBtnP1, classBtnP2, fonctionDeplacer) {
-        if (personnage1.mouvement >= 3) {
-            console.log('Changer de joueur');
-            this.desactiverBoutons(classBtnP1, personnage1.pseudo);
-            this.activerBoutons(classBtnP2, personnage2.pseudo);
-            this.peutJouer = personnage2.classe;
-            personnage1.mouvement = 0;
-            console.log(this._peutJouer);
+    verifMouvement(fonctionDeplacer) {
+        let personnage;
+
+        if(this.peutJouer == this.jaeden.classe) {
+            personnage     = this.jaeden;
+        }
+        else {
+            personnage = this.lich;
+        }
+
+        console.log('Avant if mouvement : ' + personnage.mouvement);
+        
+        if (personnage.mouvement >= 3) {
+            console.log('if mouvement : ' + personnage.mouvement);
+            this.desactiverBoutons(`.${this.jaeden.classe}-btns`, this.jaeden.classe);
+            this.activerBoutons(`.${this.lich.classe}-btns`, this.lich.classe);
+            this.peutJouer = this.lich.classe;
+            personnage.mouvement = 0;
         }
         
         fonctionDeplacer;
