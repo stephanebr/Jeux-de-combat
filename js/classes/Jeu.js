@@ -21,7 +21,7 @@ class Jeu {
         this.armes     = new BaguetteMagique();
         this.plateau   = new Plateau(10, 10);
         this.plateau.genererObstacle(10);
-        this.plateau.placerArme(this.armes); 
+        this.plateau.placerArme(this.armes);
         this.peutJouer = this.jaeden.classe;      
     }
 
@@ -68,7 +68,7 @@ class Jeu {
         }
     }
 
-    afficherArmes() {
+    afficherArme() {
         const listArmes = [];
         const idArmes = document.getElementById('armes');
         let img;
@@ -125,26 +125,14 @@ class Jeu {
         return this.joueurs;
     }
 
-    verifMouvement(fonctionDeplacer) {
-        let personnage;
-
-        if(this.peutJouer == this.jaeden.classe) {
-            personnage     = this.jaeden;
-        }
-        else {
-            personnage = this.lich;
+    verifMouvement(personnage1, personnage2, classBtnP1, classBtnP2, fonctionDeplacer) {
+        if (personnage1.mouvement >= 3) {
+            this.desactiverBoutons(classBtnP1, personnage1.classe);
+            this.activerBoutons(classBtnP2, personnage2.classe);
+            personnage1.mouvement = 0;
+            this.peutJouer = personnage2.classe;
         }
 
-        console.log('Avant if mouvement : ' + personnage.mouvement);
-        
-        if (personnage.mouvement >= 3) {
-            console.log('if mouvement : ' + personnage.mouvement);
-            this.desactiverBoutons(`.${this.jaeden.classe}-btns`, this.jaeden.classe);
-            this.activerBoutons(`.${this.lich.classe}-btns`, this.lich.classe);
-            this.peutJouer = this.lich.classe;
-            personnage.mouvement = 0;
-        }
-        
         fonctionDeplacer;
     }
 }
