@@ -3,8 +3,6 @@ function html(message) {
     div.innerHTML += message;
 }
 
-
-
 export { html };
 
 

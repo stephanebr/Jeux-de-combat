@@ -5,24 +5,22 @@ import { Hache, Glaive, BaguetteMagique, Epee } from './Arme.js';
 
 
 class Jeu {
-    _joueurs   = []; // Tableau contenant les joueurs
-    _plateau; // Objet contenant le plateau instancié
-    _armes     = [];
-    _peutJouer; // Le nom du joueur qui peut jouer
-    _score     = {}; // Tableau json contenant le score
-    _msgAlert;  // Messages d'actions
-
+   
     constructor() {
-        this.jaeden    = new RoiJaeden(this.pseudo);
-        this.lich      = new RoiLich(this.pseudo);
-        this.armes     = new Epee();
-        this.armes     = new Hache();
-        this.armes     = new Glaive();
-        this.armes     = new BaguetteMagique();
-        this.plateau   = new Plateau(10, 10);
-        this.plateau.genererObstacle(10);
-        this.plateau.placerArme(this.armes);
-        this.peutJouer = this.jaeden.classe;      
+        this.jaeden     = new RoiJaeden(this.pseudo);
+        this.lich       = new RoiLich(this.pseudo);
+        this._armes     = new Epee();
+        this._armes     = new Hache();
+        this._armes     = new Glaive();
+        this._armes     = new BaguetteMagique();
+        this._plateau   = new Plateau(10, 10); // Objet contenant le plateau instancié
+        this._plateau.genererObstacle(10);
+        this._plateau.placerArme(this.armes);
+        this._peutJouer = this.jaeden.classe; // Le nom du joueur qui peut jouer
+        this._joueurs   = []; // Tableau contenant les joueurs
+        this._score     = {}; // Tableau json contenant le score
+        this._msgAlert;  // Messages d'actions
+          
     }
 
     get joueurs() { return this._joueurs; }

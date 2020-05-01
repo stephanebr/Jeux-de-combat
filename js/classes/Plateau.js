@@ -1,17 +1,11 @@
 class Plateau {
 
-    _casesPleines;
-    _caseObstacles;
-    _caseArmes;
-    _colonnes;
-    _rangees;
-
     constructor(colonnes, rangees) {
-        this.casesPleines     = [];
-        this.caseObstacles    = [];
-        this.caseArmes        = [];
-        this.colonnes         = colonnes;
-        this.rangees          = rangees;
+        this._casesPleines     = [];
+        this._caseObstacles    = [];
+        this._caseArmes        = [];
+        this._colonnes         = colonnes;
+        this._rangees          = rangees;
         this.creer();
     }
 
@@ -24,7 +18,7 @@ class Plateau {
 
     get caseArmes() { return this._caseArmes; }
 
-    get colonnes() { return this._colonnes; }
+    get colonnes() { return this._colonnes.toUpperCase(); }
 
     get rangees() { return this._rangees; }
 

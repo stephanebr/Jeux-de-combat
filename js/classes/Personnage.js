@@ -2,14 +2,14 @@ import { Couteau } from './Arme.js';
 import { html } from '../fonctions.js';
 
 class Personnage {
-
+    
     constructor(pseudo, classe, position) {
-        this.pseudo     = pseudo;
-        this.classe     = classe;
-        this.sante      = 100;
-        this.position   = position;
-        this.mouvement  = 0;
-        this.arme       = new Couteau();
+        this._pseudo     = pseudo;
+        this._classe     = classe;
+        this._sante      = 100;
+        this._position   = position;
+        this._mouvement  = 0;
+        this._arme       = new Couteau();
     }
 
     /**
@@ -93,8 +93,5 @@ class Personnage {
        this.attaquer(this(arme));
     }
 }
-
-
-
 
 export { Personnage };
