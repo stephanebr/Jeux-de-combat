@@ -3,13 +3,6 @@ import { html } from '../fonctions.js';
 
 class Personnage {
 
-    _pseudo;
-    _classe;
-    _sante
-    _position;
-    _mouvement;
-    _arme;
-
     constructor(pseudo, classe, position) {
         this.pseudo     = pseudo;
         this.classe     = classe;
@@ -28,7 +21,7 @@ class Personnage {
 
     get sante() { return this._sante; }
 
-    get vie() { return this.sante <= 0 ? false : true; }
+    get vie() { return !(this.sante <= 0); } 
 
     get position() { return this._position; }
 
