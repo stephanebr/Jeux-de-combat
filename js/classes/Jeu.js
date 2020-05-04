@@ -9,10 +9,11 @@ class Jeu {
     constructor() {
         this.jaeden     = new RoiJaeden(this.pseudo);
         this.lich       = new RoiLich(this.pseudo);
-        this._armes     = new Epee();
-        this._armes     = new Hache();
-        this._armes     = new Glaive();
-        this._armes     = new BaguetteMagique();
+        this._armes     = [];
+        this.armes      = new Epee();
+        this.armes      = new Hache();
+        this.armes      = new Glaive();
+        this.armes      = new BaguetteMagique();
         this._plateau   = new Plateau(10, 10); // Objet contenant le plateau instancié
         this._plateau.genererObstacle(10);
         this._plateau.placerArme(this.armes);
@@ -68,21 +69,21 @@ class Jeu {
 
     afficherArme() {
         const listArmes = [];
-        const idArmes = document.getElementById('armes');
+        const idArmes   = document.getElementById('armes');
         let img;
-        
-        for(let arme of Object.keys(this.armes)){
+
+        this.armes.forEach(arme => {
             img = `<p class="pl-5">
-                    <img src="images/${arme.type}.png" alt="Image ${arme.type}" class="img-thumbnail" id="${arme.type}">
-                    <span class="degats">${arme.degats}</span>
-                    <br>
-                    <span class="nom-arme">${arme.type}</span>
-                    </p>`;
+            <img src="images/${arme.type}.png" alt="Image ${arme.type}" class="img-thumbnail" id="${arme.type}">
+            <span class="degats">${arme.degats}</span>
+            <br>
+            <span class="nom-arme">${arme.type}</span>
+            </p>`;
 
             listArmes.push(img);
 
-            idArmes.innerHTML = listArmes.join('');            
-         }       
+            idArmes.innerHTML = listArmes.join('');         
+        });
     }
 
     activerBoutons(classBtn, nomPersonnage) {
