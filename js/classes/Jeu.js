@@ -5,7 +5,7 @@ import { Hache, Glaive, BaguetteMagique, Epee } from './Arme.js';
 
 
 class Jeu {
-   
+
     constructor() {
         this.jaeden     = new RoiJaeden(this.pseudo);
         this.lich       = new RoiLich(this.pseudo);
@@ -71,12 +71,12 @@ class Jeu {
         const idArmes = document.getElementById('armes');
         let img;
         
-        for(let arme of this.armes){
+        for(let arme of Object.keys(this.armes)){
             img = `<p class="pl-5">
-                        <img src="../images/${arme.type}.png" alt="Image ${arme.type}" class="img-thumbnail" id="${arme.type}">
-                        <span class="degats">${arme.degats}</span>
-                        <br>
-                        <span class="nom-arme">${arme.type}</span>
+                    <img src="images/${arme.type}.png" alt="Image ${arme.type}" class="img-thumbnail" id="${arme.type}">
+                    <span class="degats">${arme.degats}</span>
+                    <br>
+                    <span class="nom-arme">${arme.type}</span>
                     </p>`;
 
             listArmes.push(img);

@@ -18,7 +18,7 @@ class Plateau {
 
     get caseArmes() { return this._caseArmes; }
 
-    get colonnes() { return this._colonnes.toUpperCase(); }
+    get colonnes() { return this._colonnes; }
 
     get rangees() { return this._rangees; }
 
