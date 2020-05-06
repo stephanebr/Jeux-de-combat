@@ -5,48 +5,43 @@ import { Hache, Glaive, BaguetteMagique, Epee } from './Arme.js';
 
 
 class Jeu {
+    #armes     = []; // Tableau contenant la liste des armes
+    #plateau   = new Plateau(10, 10); // Objet contenant le plateau instancié
+    #joueurs   = []; // Tableau contenant le pseudo des joueurs inscrits
+    #peutJouer; // Le nom du personnage qui peut jouer
+    #msgAlert; // Messages d'actions
 
     constructor() {
         this.jaeden     = new RoiJaeden(this.pseudo);
         this.lich       = new RoiLich(this.pseudo);
-        this._armes     = [];
         this.armes      = new Epee();
         this.armes      = new Hache();
         this.armes      = new Glaive();
         this.armes      = new BaguetteMagique();
-        this._plateau   = new Plateau(10, 10); // Objet contenant le plateau instancié
-        this._plateau.genererObstacle(10);
-        this._plateau.placerArme(this.armes);
-        this._peutJouer = this.jaeden.classe; // Le nom du joueur qui peut jouer
-        this._joueurs   = []; // Tableau contenant les joueurs
-        this._score     = {}; // Tableau json contenant le score
-        this._msgAlert;  // Messages d'actions
-          
+        this.plateau.genererObstacle(10);
+        this.plateau.placerArme(this.armes); 
+        this.peutJouer  = this.jaeden.classe; 
     }
 
-    get joueurs() { return this._joueurs; }
+    get joueurs() { return this.#joueurs; }
 
-    get plateau() { return this._plateau; }
+    get plateau() { return this.#plateau; }
 
-    get armes() { return this._armes; }
+    get armes() { return this.#armes; }
 
-    get peutJouer() { return this._peutJouer; }
-
-    get score() { return this._score; }
+    get peutJouer() { return this.#peutJouer; }
     
-    get msgAlert() { return this._msgAlert; }
+    get msgAlert() { return this.#msgAlert; }
 
-    set joueurs(joueur) { this._joueurs.push(joueur); }
+    set joueurs(joueur) { this.#joueurs.push(joueur); }
 
-    set plateau(plateau) { this._plateau = plateau; }
+    set plateau(plateau) { this.#plateau = plateau; }
 
-    set armes(armes) { this._armes.push(armes); }
+    set armes(armes) { this.#armes.push(armes); }
 
-    set peutJouer(peutJouer) { this._peutJouer = peutJouer; }
+    set peutJouer(peutJouer) { this.#peutJouer = peutJouer; }
 
-    set score(score) { this._score = score; }
-
-    set msgAlert(message) { this._msgAlert = message; }
+    set msgAlert(message) { this.#msgAlert = message; }
 
 
     ajouterJoueur(joueur) {
@@ -59,10 +54,13 @@ class Jeu {
     afficherScore() {
         const noms  = this.inscrireJoueur();
     
-        const score = {
+        this.jaeden.score = {
             idJaeden: document.getElementById('jaeden').innerHTML          = noms[0],
+            scoreJaeden: document.getElementById('score-jaeden').innerHTML = ` : ${this.jaeden.sante}`           
+        }
+
+        this.lich.score = {
             idLich: document.getElementById('lich').innerHTML              = noms[1],
-            scoreJaeden: document.getElementById('score-jaeden').innerHTML = ` : ${this.jaeden.sante}` ,
             scoreLich: document.getElementById('score-lich').innerHTML     = ` : ${this.lich.sante}`
         }
     }
@@ -88,14 +86,12 @@ class Jeu {
 
     activerBoutons(classBtn, nomPersonnage) {
         $(classBtn).removeAttr('disabled');
-        this.msgAlert = alert(`Vous pouvez jouer ${nomPersonnage} !`);
-        return this.msgAlert;
+        return this.msgAlert = alert(`Vous pouvez jouer ${nomPersonnage} !`);
     }
 
     desactiverBoutons(classBtn, nomPersonnage) {
         $(classBtn).attr('disabled', 'disabled');
-        this.msgAlert = alert(`${nomPersonnage} vous avez fini votre tour !`);
-        return this.msgAlert;
+        return this.msgAlert = alert(`${nomPersonnage} vous avez fini votre tour !`);
     }
 
     inscrireJoueur() {    
@@ -129,6 +125,7 @@ class Jeu {
             this.desactiverBoutons(classBtnP1, personnage1.classe);
             this.activerBoutons(classBtnP2, personnage2.classe);
             personnage1.mouvement = 0;
+            personnage2.mouvement = 0;
             this.peutJouer = personnage2.classe;
         }
 

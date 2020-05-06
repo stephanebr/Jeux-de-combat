@@ -16,26 +16,32 @@ $(document).ready(function() {
     //Les boutons de mouvement du roi Jaeden
     $('#jaeden-btn-droite').on('click', function(e) {
         jeu.verifMouvement(jeu.jaeden, jeu.lich, `.${jeu.jaeden.classe}-btns`, `.${jeu.lich.class}-btns`, jeu.plateau.deplacerDroite(jeu.jaeden));
+        console.log(`Nb de tour joué : ${jeu.jaeden.mouvement}`);
     });
 
-    $('#jaeden-btn-gauche').on('click', function(e) {  
+    $('#jaeden-btn-gauche').on('click', function(e) {
         jeu.verifMouvement(jeu.jaeden, jeu.lich, `.${jeu.jaeden.classe}-btns`, `.${jeu.lich.class}-btns`, jeu.plateau.deplacerGauche(jeu.jaeden));
+        console.log(`Nb de tour joué : ${jeu.jaeden.mouvement}`);
     });
 
     $('#jaeden-btn-haut').on('click', function(e) {  
         jeu.verifMouvement(jeu.jaeden, jeu.lich, `.${jeu.jaeden.classe}-btns`, `.${jeu.lich.class}-btns`, jeu.plateau.deplacerHaut(jeu.jaeden));
+        console.log(`Nb de tour joué : ${jeu.jaeden.mouvement}`);
     });
 
-    $('#jaeden-btn-bas').on('click', function(e) {  
+    $('#jaeden-btn-bas').on('click', function(e) {
         jeu.verifMouvement(jeu.jaeden, jeu.lich, `.${jeu.jaeden.classe}-btns`, `.${jeu.lich.class}-btns`, jeu.plateau.deplacerBas(jeu.jaeden));
+        console.log(`Nb de tour joué : ${jeu.jaeden.mouvement}`);
     });
 
     $('#jaeden-btn-attaquer').on('click', function() {
         jeu.jaeden.attaquer(jeu.lich);
     });
 
-    $('#jaeden-btn-terminer').on('click', function(e) {  
+    $('#jaeden-btn-terminer').on('click', function(e) {
+        jeu.jaeden.mouvement = 3;  
         jeu.desactiverBoutons(`.${jeu.jaeden.classe}-btns`, jeu.joueurs[1]);
+        jeu.lich.mouvement = 0;
         jeu.activerBoutons(`.${jeu.lich.classe}-btns`, jeu.joueurs[0]);
     });
             
@@ -57,7 +63,9 @@ $(document).ready(function() {
     });
 
     $('#lich-btn-terminer').on('click', function(e) {  
+        jeu.lich.mouvement = 3;
         jeu.desactiverBoutons(`.${jeu.lich.classe}-btns`, jeu.joueurs[1]);
+        jeu.jaeden.mouvement = 0;
         jeu.activerBoutons(`.${jeu.jaeden.classe}-btns`, jeu.joueurs[0]);
     });
 

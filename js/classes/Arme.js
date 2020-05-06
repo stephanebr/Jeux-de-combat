@@ -1,25 +1,27 @@
 /**
  * Classes des armes :
  * 
- * Private @String : _type 
- * Private @Number : _degats             
+ * Private @String : #type 
+ * Private @Number : #degats             
  *              
  *              
  */
 class Arme {
+    #type;
+    #degats;
 
     constructor(type, degats) {
-        this._type    = type;
-        this._degats  = degats;
+        this.type    = type;
+        this.degats  = degats;
     }    
 
-    get type() { return this._type; }
+    get type() { return this.#type; }
 
-    get degats() { return this._degats; }
+    get degats() { return this.#degats; }
 
-    set type(type) { this._nom = type; }
+    set type(type) { this.#type = type; }
 
-    set degats(degats) { this._degats = degats; }
+    set degats(degats) { this.#degats = degats; }
 }
 
 
