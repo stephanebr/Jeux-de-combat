@@ -71,7 +71,7 @@ class Jeu {
         let img;
 
         this.armes.forEach(arme => {
-            img = `<p class="pl-5">
+            img = `<p class="pl-4">
             <img src="images/${arme.type}.png" alt="Image ${arme.type}" class="img-thumbnail" id="${arme.type}">
             <span class="degats">${arme.degats}</span>
             <br>
@@ -128,8 +128,6 @@ class Jeu {
             personnage2.mouvement = 0;
             this.peutJouer = personnage2.classe;
         }
-
-        fonctionDeplacer;
     }
 }
 

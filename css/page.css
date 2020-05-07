@@ -52,6 +52,14 @@ pre {
     position: relative;
 }
 
+#armes :nth-child(4n) {
+    padding-left: 0 !important;
+}
+
+#baguette-magique + .degats {
+    right: 47px;
+}
+
 .degats {
     position: absolute;
     bottom: 20px;
@@ -74,12 +82,16 @@ img#hache {
 
 }
 
-img#baguette-magique {    
+img#baguette-magique {   
+    position: relative;
+    left: 32px; 
     background-color: darkgoldenrod;
     padding-left: 1.2em;
     padding-right: 1.4em;
 }
 
 .nom-arme {
+    display: block;
+    text-align: center;
     text-transform: capitalize;
 }
