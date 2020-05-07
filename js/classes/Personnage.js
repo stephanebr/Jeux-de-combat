@@ -2,53 +2,49 @@ import { Couteau } from './Arme.js';
 import { html } from '../fonctions.js';
 
 class Personnage {
-    #pseudo;
-    #classe;
-    #sante     = 100;
-    #position;
-    #mouvement = 0;
-    #arme      = new Couteau();
-    #score     = {}; //Tableau json contenant le score des joueurs
 
     constructor(pseudo, classe, position) {
-        this.pseudo     = pseudo;
-        this.classe     = classe;
-        //this.sante      = 100;
-        this.position   = position;
+        this._pseudo     = pseudo;
+        this._classe     = classe;
+        this._sante      = 100;
+        this._position   = position;
+        this._mouvement  = 0;
+        this._armes      = new Couteau();
+        this._score      = {}; //Tableau json contenant le score des joueurs
     }
 
     /**
      * GETTERS ET SETTERS
      */
-    get pseudo() { return this.#pseudo; }
+    get pseudo() { return this._pseudo; }
 
-    get classe() { return this.#classe; }
+    get classe() { return this._classe; }
 
-    get sante() { return this.#sante; }
+    get sante() { return this._sante; }
 
-    get vie() { return !(this.sante <= 0); } 
+    get vie() { return !(this._sante <= 0); } 
 
-    get position() { return this.#position; }
+    get position() { return this._position; }
 
-    get mouvement() { return this.#mouvement; }
+    get mouvement() { return this._mouvement; }
 
-    get arme() { return this.#arme; }
+    get arme() { return this._arme; }
 
-    get score() { return this.#score; }
+    get score() { return this._score; }
     
-    set pseudo(pseudo) { this.#pseudo = pseudo; }
+    set pseudo(pseudo) { this._pseudo = pseudo; }
 
-    set classe(classe) { this.#classe = classe; }
+    set classe(classe) { this._classe = classe; }
 
-    set sante(sante) { this.#sante = sante; }
+    set sante(sante) { this._sante = sante; }
 
-    set position(position) { this.#position = position; }
+    set position(position) { this._position = position; }
 
-    set mouvement(nbMouvement) { this.#mouvement = nbMouvement; }
+    set mouvement(nbMouvement) { this._mouvement = nbMouvement; }
     
-    set arme(arme) { this.#arme = arme; }
+    set arme(arme) { this._arme = arme; }
 
-    set score(score) { this.#score = score; }
+    set score(score) { this._score = score; }
 
     attaquer(personnage) {
         if(personnage === this) {

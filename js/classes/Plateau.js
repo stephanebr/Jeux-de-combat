@@ -1,44 +1,39 @@
 class Plateau {
-    #casesPleines  = [];
-    #caseObstacles = [];
-    #caseArmes     = [];
-    #colonnes;
-    #rangees;
-
+    
     constructor(colonnes, rangees) {
-        this.casesPleines     = [];
-        this.caseObstacles    = [];
-        this.caseArmes        = [];
-        this.colonnes         = colonnes;
-        this.rangees          = rangees;
+        this._casesPleines     = [];
+        this._caseObstacles    = [];
+        this._caseArmes        = [];
+        this._colonnes         = colonnes;
+        this._rangees          = rangees;
         this.creer();
     }
 
     /**
      * Getteers
      */
-    get casesPleines() { return this.#casesPleines; }
+    get casesPleines() { return this._casesPleines; }
 
-    get caseObstacles() { return this.#caseObstacles; }
+    get caseObstacles() { return this._caseObstacles; }
 
-    get caseArmes() { return this.#caseArmes; }
+    get caseArmes() { return this._caseArmes; }
 
-    get colonnes() { return this.#colonnes; }
+    get colonnes() { return this._colonnes; }
 
-    get rangees() { return this.#rangees; }
+    get rangees() { return this._rangees; }
 
     /**
      * Setters
      */
-    set casesPleines(casesPleines) { this.#casesPleines = casesPleines; }
+    set casesPleines(casesPleines) { this._casesPleines = casesPleines; }
 
-    set caseObstacles(caseObstacles) { this.#caseObstacles = caseObstacles; }
+    set caseObstacles(caseObstacles) { this._caseObstacles = caseObstacles; }
 
-    set caseArmes(caseArmes) { this.#caseArmes = caseArmes; }
+    set caseArmes(caseArmes) { this._caseArmes = caseArmes; }
 
-    set colonnes(colonnes) { this.#colonnes = colonnes; }
+    set colonnes(colonnes) { this._colonnes = colonnes; }
 
-    set rangees(rangees) { this.#rangees = rangees; }
+    set rangees(rangees) { this._rangees = rangees; }
 
     creer() {
         let plateauDeJeu = document.getElementById('plateau-de-jeu');

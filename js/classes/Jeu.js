@@ -5,43 +5,42 @@ import { Hache, Glaive, BaguetteMagique, Epee } from './Arme.js';
 
 
 class Jeu {
-    #armes     = []; // Tableau contenant la liste des armes
-    #plateau   = new Plateau(10, 10); // Objet contenant le plateau instancié
-    #joueurs   = []; // Tableau contenant le pseudo des joueurs inscrits
-    #peutJouer; // Le nom du personnage qui peut jouer
-    #msgAlert; // Messages d'actions
 
     constructor() {
         this.jaeden     = new RoiJaeden(this.pseudo);
         this.lich       = new RoiLich(this.pseudo);
+        this._armes      = []; // Tableau contenant la liste des armes
         this.armes      = new Epee();
         this.armes      = new Hache();
         this.armes      = new Glaive();
         this.armes      = new BaguetteMagique();
+        this._plateau    = new Plateau(10, 10); // Objet contenant le plateau instancié
         this.plateau.genererObstacle(10);
-        this.plateau.placerArme(this.armes); 
-        this.peutJouer  = this.jaeden.classe; 
+        this.plateau.placerArme(this.armes);
+        this._joueurs    = []; // Tableau contenant le pseudo des joueurs inscrits
+        this._peutJouer  = this.jaeden.classe; // Le nom du personnage qui peut jouer
+        this._msgAlert   = ''; // Messages d'actions
     }
 
-    get joueurs() { return this.#joueurs; }
+    get joueurs() { return this._joueurs; }
 
-    get plateau() { return this.#plateau; }
+    get plateau() { return this._plateau; }
 
-    get armes() { return this.#armes; }
+    get armes() { return this._armes; }
 
-    get peutJouer() { return this.#peutJouer; }
+    get peutJouer() { return this._peutJouer; }
     
-    get msgAlert() { return this.#msgAlert; }
+    get msgAlert() { return this._msgAlert; }
 
-    set joueurs(joueur) { this.#joueurs.push(joueur); }
+    set joueurs(joueur) { this._joueurs.push(joueur); }
 
-    set plateau(plateau) { this.#plateau = plateau; }
+    set plateau(plateau) { this._plateau = plateau; }
 
-    set armes(armes) { this.#armes.push(armes); }
+    set armes(armes) { this._armes.push(armes); }
 
-    set peutJouer(peutJouer) { this.#peutJouer = peutJouer; }
+    set peutJouer(peutJouer) { this._peutJouer = peutJouer; }
 
-    set msgAlert(message) { this.#msgAlert = message; }
+    set msgAlert(message) { this._msgAlert = message; }
 
 
     ajouterJoueur(joueur) {

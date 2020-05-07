@@ -7,21 +7,19 @@
  *              
  */
 class Arme {
-    #type;
-    #degats;
 
     constructor(type, degats) {
-        this.type    = type;
-        this.degats  = degats;
+        this._type    = type;
+        this._degats  = degats;
     }    
 
-    get type() { return this.#type; }
+    get type() { return this._type; }
 
-    get degats() { return this.#degats; }
+    get degats() { return this._degats; }
 
-    set type(type) { this.#type = type; }
+    set type(type) { this._type = type; }
 
-    set degats(degats) { this.#degats = degats; }
+    set degats(degats) { this._degats = degats; }
 }
 
 
