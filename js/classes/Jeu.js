@@ -119,9 +119,11 @@ class Jeu {
         return this.joueurs;
     }
 
-    verifMouvement(personnage1, personnage2, classBtnP1, classBtnP2, fonctionDeplacer) {
-        if (personnage1.mouvement >= 3) {
+    verifMouvement(personnage1, personnage2, classBtnP1, classBtnP2) {
+        if (personnage1.mouvement >= 2) {
+            console.log(`desactiver`);
             this.desactiverBoutons(classBtnP1, personnage1.classe);
+            console.log(`activer`);
             this.activerBoutons(classBtnP2, personnage2.classe);
             personnage1.mouvement = 0;
             personnage2.mouvement = 0;
