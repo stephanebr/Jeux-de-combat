@@ -8,11 +8,13 @@
     min-width: 50px;
 }
 
-#jaeden-h2, #lich-h2 {
+#roi-jaeden-h2, #roi-lich-h2 {
     color: black;
+    text-transform: capitalize;
+    
 }
 
-#jaeden-h2 {
+#roi-jaeden-h2 {
     background-color: orchid;
 }
 
@@ -21,7 +23,7 @@
     background-color: orchid;
 }
 
-#lich-h2 {
+#roi-lich-h2 {
     background-color: lime;
 }
 

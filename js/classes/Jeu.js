@@ -15,7 +15,7 @@ class Jeu {
         this.armes      = new Glaive();
         this.armes      = new BaguetteMagique();
         this._plateau    = new Plateau(10, 10); // Objet contenant le plateau instancié
-        this.plateau.genererObstacle(10);
+        this.plateau.genererObstacle(1);
         this.plateau.placerArme(this.armes);
         this._joueurs    = []; // Tableau contenant le pseudo des joueurs inscrits
         this._peutJouer  = this.jaeden.classe; // Le nom du personnage qui peut jouer
@@ -54,19 +54,19 @@ class Jeu {
         const noms  = this.inscrireJoueur();
     
         this.jaeden.score = {
-            idJaeden: document.getElementById('jaeden').innerHTML          = noms[0],
-            scoreJaeden: document.getElementById('score-jaeden').innerHTML = ` : ${this.jaeden.sante}`           
+            idJaeden: $('jaeden').html(nom[0]),
+            scoreJaeden: $('score-jaeden').html(` : ${this.jaeden.sante}`)           
         }
 
         this.lich.score = {
-            idLich: document.getElementById('lich').innerHTML              = noms[1],
-            scoreLich: document.getElementById('score-lich').innerHTML     = ` : ${this.lich.sante}`
+            idLich: $('lich').html(nom[1]),
+            scoreLich: $('score-lich').html(` : ${this.lich.sante}`)
         }
     }
 
     afficherArme() {
         const listArmes = [];
-        const idArmes   = document.getElementById('armes');
+        const idArmes   = $('armes');
         let img;
 
         this.armes.forEach(arme => {
@@ -79,18 +79,8 @@ class Jeu {
 
             listArmes.push(img);
 
-            idArmes.innerHTML = listArmes.join('');         
+            idArmes.html(listArmes.join(''));        
         });
-    }
-
-    activerBoutons(classBtn, nomPersonnage) {
-        $(classBtn).removeAttr('disabled');
-        return this.msgAlert = alert(`Vous pouvez jouer ${nomPersonnage} !`);
-    }
-
-    desactiverBoutons(classBtn, nomPersonnage) {
-        $(classBtn).attr('disabled', 'disabled');
-        return this.msgAlert = alert(`${nomPersonnage} vous avez fini votre tour !`);
     }
 
     inscrireJoueur() {    
@@ -119,16 +109,18 @@ class Jeu {
         return this.joueurs;
     }
 
-    verifMouvement(personnage1, personnage2, classBtnP1, classBtnP2) {
-        if (personnage1.mouvement >= 2) {
-            console.log(`desactiver`);
-            this.desactiverBoutons(classBtnP1, personnage1.classe);
-            console.log(`activer`);
-            this.activerBoutons(classBtnP2, personnage2.classe);
+    verifMouvement(personnage1, personnage2) {
+        if (personnage1.mouvement >= 3) {
+            this.changerJoueur(personnage2.classe);
+            alert(`${this.joueurs[0]} vous avez fini votre tour !`);
+            alert(`Vous pouvez jouer ${this.joueurs[1]}`);
+            $('.nom-personnage').html(personnage2.classe).attr('id', `${personnage2.classe}-h2`);
             personnage1.mouvement = 0;
-            personnage2.mouvement = 0;
-            this.peutJouer = personnage2.classe;
         }
+    }
+
+    changerJoueur(classePersonnage) {
+        this.peutJouer = classePersonnage;
     }
 }
 

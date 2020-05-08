@@ -8,110 +8,131 @@ jeu.ajouterJoueur(jeu.lich);
 jeu.afficherArme();
 
 $(document).ready(function() {
-    $(`.${jeu.lich.classe}-btns`).attr('disabled', 'disabled');
     alert(`${jeu.joueurs[0]} vous commencez la partie !`);
+    $('.nom-personnage').html(jeu.jaeden.classe).attr('id', `${jeu.jaeden.classe}-h2`);
 
-    //Les boutons de mouvement du roi Jaeden
-    $('#jaeden-btn-droite').on('click', function(e) {
-        jeu.verifMouvement(jeu.jaeden, jeu.lich, `.${jeu.jaeden.classe}-btns`, `.${jeu.lich.classe}-btns`);
-        jeu.plateau.deplacerDroite(jeu.jaeden);
+
+    //Les boutons des mouvements
+    $('#btn-droite').on('click', function(e) {
+        if(jeu.peutJouer == jeu.jaeden.classe) {
+            jeu.plateau.deplacerDroite(jeu.jaeden);
+            jeu.verifMouvement(jeu.jaeden, jeu.lich);
+           
+        } 
+        else {
+            console.log("Lich : peut joeur"+jeu.peutJouer)
+            jeu.plateau.deplacerDroite(jeu.lich);
+            jeu.verifMouvement(jeu.lich, jeu.jaeden);           
+        }
     });
 
-    $('#jaeden-btn-gauche').on('click', function(e) {
-        jeu.verifMouvement(jeu.jaeden, jeu.lich, `.${jeu.jaeden.classe}-btns`, `.${jeu.lich.classe}-btns`);
-        jeu.plateau.deplacerGauche(jeu.jaeden);
+    $('#btn-gauche').on('click', function(e) {
+        if(jeu.peutJouer == jeu.jaeden.classe) {
+            jeu.plateau.deplacerGauche(jeu.jaeden);
+            jeu.verifMouvement(jeu.jaeden, jeu.lich);
+           
+        } 
+        else {
+            console.log("Lich : peut joeur"+jeu.peutJouer)
+            jeu.plateau.deplacerGauche(jeu.lich);
+            jeu.verifMouvement(jeu.lich, jeu.jaeden);           
+        }
     });
 
-    $('#jaeden-btn-haut').on('click', function(e) {  
-        jeu.verifMouvement(jeu.jaeden, jeu.lich, `.${jeu.jaeden.classe}-btns`, `.${jeu.lich.classe}-btns`);
-        jeu.plateau.deplacerHaut(jeu.jaeden);
+    $('#btn-haut').on('click', function(e) {  
+        if(jeu.peutJouer == jeu.jaeden.classe) {
+            jeu.plateau.deplacerHaut(jeu.jaeden);
+            jeu.verifMouvement(jeu.jaeden, jeu.lich);
+           
+        } 
+        else {
+            console.log("Lich : peut joeur"+jeu.peutJouer)
+            jeu.plateau.deplacerHaut(jeu.lich);
+            jeu.verifMouvement(jeu.lich, jeu.jaeden);           
+        }
     });
 
-    $('#jaeden-btn-bas').on('click', function(e) {
-        jeu.verifMouvement(jeu.jaeden, jeu.lich, `.${jeu.jaeden.classe}-btns`, `.${jeu.lich.class}-btns`);
-        jeu.plateau.deplacerBas(jeu.jaeden);
+    $('#btn-bas').on('click', function(e) {
+        if(jeu.peutJouer == jeu.jaeden.classe) {
+            jeu.plateau.deplacerBas(jeu.jaeden);
+            jeu.verifMouvement(jeu.jaeden, jeu.lich);
+           
+        } 
+        else {
+            console.log("Lich : peut joeur"+jeu.peutJouer)
+            jeu.plateau.deplacerBas(jeu.lich);
+            jeu.verifMouvement(jeu.lich, jeu.jaeden);           
+        }
     });
 
-    $('#jaeden-btn-attaquer').on('click', function() {
-        jeu.jaeden.attaquer(jeu.lich);
+    // Bouton d'attaque
+    $('#btn-attaquer').on('click', function() {
+    
     });
 
-    $('#jaeden-btn-terminer').on('click', function(e) {
-        jeu.jaeden.mouvement = 3;  
-        jeu.desactiverBoutons(`.${jeu.jaeden.classe}-btns`, jeu.joueurs[1]);
-        jeu.activerBoutons(`.${jeu.lich.classe}-btns`, jeu.joueurs[0]);
-    });
-            
-    //Les boutons de mouvements du roi Lich
-    $('#lich-btn-droite').on('click', function(e) {
-        jeu.verifMouvement(jeu.lich, jeu.jaeden, `.${jeu.lich.classe}-btns`, `.${jeu.jaeden.classe}-btns`);
-        jeu.plateau.deplacerDroite(jeu.lich);
-    });
-
-    $('#lich-btn-gauche').on('click', function(e) {
-        jeu.verifMouvement(jeu.lich, jeu.jaeden, `.${jeu.lich.classe}-btns`, `.${jeu.jaeden.classe}-btns`);
-        jeu.plateau.deplacerGauche(jeu.lich);
-    });
-
-    $('#lich-btn-haut').on('click', function(e) {
-        jeu.verifMouvement(jeu.lich, jeu.jaeden, `.${jeu.lich.classe}-btns`, `.${jeu.jaeden.classe}-btns`);
-        jeu.plateau.deplacerHaut(jeu.lich);
+    // Bouton pour terminer le tour
+    $('#btn-terminer').on('click', function(e) {
+        if(jeu.peutJouer == jeu.jaeden.classe) {
+            jeu.changerJoueur(jeu.lich.classe);
+            jeu.lich.mouvement = 0;
+            alert(`${jeu.joueurs[0]} vous passer votre tour !`);
+            alert(`Vous pouvez jouer ${jeu.joueurs[1]}, votre adversaire à passé son tour !`);          
+        } 
+        else {
+            jeu.changerJoueur(jeu.jaeden.classe);
+            jeu.jaeden.mouvement = 0;
+            alert(`${jeu.joueurs[1]} vous passer votre tour !`);
+            alert(`Vous pouvez jouer ${jeu.joueurs[0]}, votre adversaire à passé son tour !`);   
+        }
     });
 
-    $('#lich-btn-bas').on('click', function(e) {
-        jeu.verifMouvement(jeu.lich, jeu.jaeden, `.${jeu.lich.classe}-btns`, `.${jeu.jaeden.classe}-btns`);
-        jeu.plateau.deplacerBas(jeu.lich);
-    });
-
-    $('#lich-btn-terminer').on('click', function(e) {  
-        jeu.lich.mouvement = 3;
-        jeu.desactiverBoutons(`.${jeu.lich.classe}-btns`, jeu.joueurs[1]);
-        jeu.activerBoutons(`.${jeu.jaeden.classe}-btns`, jeu.joueurs[0]);
-    });
-
-    $("html").keydown(function(e){
+    // Déplacement par les flêches du clavier
+    $('html').keydown(function(e){
         e.preventDefault();
 
         if(e.key == 'ArrowRight') {
+            
             if(jeu.peutJouer == jeu.jaeden.classe) {
-                jeu.verifMouvement(jeu.jaeden, jeu.lich, `.${jeu.jaeden.classe}-btns`, `.${jeu.lich.classe}-btns`);
+                console.log("Jeaden : peut jouer"+jeu.peutJouer)
+                jeu.verifMouvement(jeu.jaeden, jeu.lich);
                 jeu.plateau.deplacerDroite(jeu.jaeden);
             }
             else {
-                jeu.verifMouvement(jeu.lich, jeu.jaeden, `.${jeu.lich.classe}-btns`, `.${jeu.jaeden.classe}-btns`);
+                console.log("Lich : peut joeur"+jeu.peutJouer)
+                jeu.verifMouvement(jeu.lich, jeu.jaeden);
                 jeu.plateau.deplacerDroite(jeu.lich);
             }            
         }                
 
         if(e.key == 'ArrowLeft') {
             if(jeu.peutJouer == jeu.jaeden.classe) {
-                jeu.verifMouvement(jeu.jaeden, jeu.lich, `.${jeu.jaeden.classe}-btns`, `.${jeu.lich.classe}-btns`);
+                jeu.verifMouvement(jeu.jaeden, jeu.lich);
                 jeu.plateau.deplacerGauche(jeu.jaeden);
             }
             else {
-                jeu.verifMouvement(jeu.lich, jeu.jaeden, `.${jeu.lich.classe}-btns`, `.${jeu.jaeden.classe}-btns`);
+                jeu.verifMouvement(jeu.lich, jeu.jaeden);
                 jeu.plateau.deplacerGauche(jeu.lich);
             }            
         }
 
         if(e.key == 'ArrowUp') {
             if(jeu.peutJouer == jeu.jaeden.classe) {
-                jeu.verifMouvement(jeu.jaeden, jeu.lich, `.${jeu.jaeden.classe}-btns`, `.${jeu.lich.classe}-btns`);
+                jeu.verifMouvement(jeu.jaeden, jeu.lich);
                 jeu.plateau.deplacerHaut(jeu.jaeden);
             }
             else {
-                jeu.verifMouvement(jeu.lich, jeu.jaeden, `.${jeu.lich.classe}-btns`, `.${jeu.jaeden.classe}-btns`);
+                jeu.verifMouvement(jeu.lich, jeu.jaeden);
                 jeu.plateau.deplacerHaut(jeu.lich);
             }            
         }
 
         if(e.key == 'ArrowDown') {
             if(jeu.peutJouer == jeu.jaeden.classe) {
-                jeu.verifMouvement(jeu.jaeden, jeu.lich, `.${jeu.jaeden.classe}-btns`, `.${jeu.lich.classe}-btns`);
+                jeu.verifMouvement(jeu.jaeden, jeu.lich);
                 jeu.plateau.deplacerBas(jeu.jaeden)
             }
             else {
-                jeu.verifMouvement(jeu.lich, jeu.jaeden, `.${jeu.lich.classe}-btns`, `.${jeu.jaeden.classe}-btns`);
+                jeu.verifMouvement(jeu.lich, jeu.jaeden);
                 jeu.plateau.deplacerBas(jeu.lich)
             }           
         }
