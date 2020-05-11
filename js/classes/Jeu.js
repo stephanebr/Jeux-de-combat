@@ -54,12 +54,12 @@ class Jeu {
         const noms  = this.inscrireJoueur();
     
         this.jaeden.score = {
-            idJaeden: $('jaeden').html(nom[0]),
+            idJaeden: $('jaeden').html(noms[0]),
             scoreJaeden: $('score-jaeden').html(` : ${this.jaeden.sante}`)           
         }
 
         this.lich.score = {
-            idLich: $('lich').html(nom[1]),
+            idLich: $('lich').html(noms[1]),
             scoreLich: $('score-lich').html(` : ${this.lich.sante}`)
         }
     }

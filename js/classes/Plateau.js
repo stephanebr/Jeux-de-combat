@@ -36,7 +36,7 @@ class Plateau {
     set rangees(rangees) { this._rangees = rangees; }
 
     creer() {
-        let plateauDeJeu = $('plateau-de-jeu');
+        let plateauDeJeu = document.getElementById('plateau-de-jeu');
         
         // Création de l'élément <table> et d'un élément <tbody>
         let tbl = document.createElement("table");
@@ -47,7 +47,7 @@ class Plateau {
             // Création des lignes du tableau
             let lignes = document.createElement('tr');
             lignes.setAttribute('ligne', '' + i);
-            lignes.addClass('cellule-plateau');
+            lignes.classList.add('cellule-plateau');
         
             for (let j = 0; j < 10; j++) {
                 // Création des éléments <td>
@@ -67,7 +67,7 @@ class Plateau {
         // Mettre le <tbody> dans <table>
         tbl.appendChild(tblBody);
         // Ajouter <table> au niveau de l'id plateau-de-jeu
-        plateauDeJeu.appendChild(tbl);
+        plateauDeJeu.append(tbl);
         // Définitiion des attributs
         tbl.setAttribute("border", "2");
         tbl.setAttribute("width", "500");
