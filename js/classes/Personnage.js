@@ -86,8 +86,8 @@ class Personnage {
     } 
     
     deplacer(position, nPosition) {
-        document.getElementById(position).classList.remove('cellule-' + this.classe, 'cellule-perso');
-        document.getElementById(nPosition).classList.add('cellule-' + this.classe, 'cellule-perso');
+        $(`#${position}`).removeClass(`cellule-${this.classe}`, 'cellule-perso');
+        $(`#${nPosition}`).addClass(`cellule-${this.classe}`, 'cellule-perso');
         this.position = nPosition;
         this.mouvement++;
         
