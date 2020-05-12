@@ -10,7 +10,7 @@ class Plateau {
     }
 
     /**
-     * Getteers
+     * Getters
      */
     get casesPleines() { return this._casesPleines; }
 
@@ -82,8 +82,8 @@ class Plateau {
             this.casesPleines.push(obstacle);
             this.caseObstacles.push(obstacle);
 
-            obstacle = $(`#${obstacle}`);
-            obstacle.addClass("cellule-obstacle");
+            obstacle = document.getElementById(obstacle);
+            obstacle.classList.add('cellule-obstacle');
         }
     }
 
@@ -94,8 +94,8 @@ class Plateau {
     placerPersonnage(personnage) {
         let id = this.trouverCaseUtilisable();        
         this.casesPleines.push(id);
-        let cellulePersonnage = $(`#${id}`);
-        cellulePersonnage.addClass('cellule-' + personnage.classe, 'cellule-perso');
+        let cellulePersonnage = document.getElementById(id);
+        cellulePersonnage.classList.add(`cellule-${personnage.classe}`, 'cellule-perso');
         personnage.position = cellulePersonnage.id;
     }
 
@@ -106,9 +106,9 @@ class Plateau {
             this.casesPleines.push(idArme);
             this.caseArmes.push(idArme);
             
-            let celluleArme = $(`#${idArme}`);
-            celluleArme.addClass("cellule-" + armes[i].type);
-            celluleArme.addClass("cellule-arme"); 
+            let celluleArme = document.getElementById(idArme);
+            celluleArme.classList.add(`cellule-${armes[i].type}`);
+            celluleArme.classList.add('cellule-arme'); 
         }
 
         return armes;

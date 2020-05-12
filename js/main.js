@@ -15,53 +15,53 @@ $(document).ready(function() {
     //Les boutons des mouvements
     $('#btn-droite').on('click', function(e) {
         if(jeu.peutJouer == jeu.jaeden.classe) {
-            jeu.plateau.deplacerDroite(jeu.jaeden);
             jeu.verifMouvement(jeu.jaeden, jeu.lich);
+            jeu.plateau.deplacerDroite(jeu.jaeden);
            
         } 
         else {
-            console.log("Lich : peut joeur"+jeu.peutJouer)
-            jeu.plateau.deplacerDroite(jeu.lich);
-            jeu.verifMouvement(jeu.lich, jeu.jaeden);           
+            console.log("Lich : peut joeur"+jeu.peutJouer);
+            jeu.verifMouvement(jeu.lich, jeu.jaeden);  
+            jeu.plateau.deplacerDroite(jeu.lich);         
         }
     });
 
     $('#btn-gauche').on('click', function(e) {
         if(jeu.peutJouer == jeu.jaeden.classe) {
-            jeu.plateau.deplacerGauche(jeu.jaeden);
             jeu.verifMouvement(jeu.jaeden, jeu.lich);
+            jeu.plateau.deplacerGauche(jeu.jaeden);
            
         } 
         else {
             console.log("Lich : peut joeur"+jeu.peutJouer)
-            jeu.plateau.deplacerGauche(jeu.lich);
-            jeu.verifMouvement(jeu.lich, jeu.jaeden);           
+            jeu.verifMouvement(jeu.lich, jeu.jaeden);
+            jeu.plateau.deplacerGauche(jeu.lich);           
         }
     });
 
     $('#btn-haut').on('click', function(e) {  
         if(jeu.peutJouer == jeu.jaeden.classe) {
-            jeu.plateau.deplacerHaut(jeu.jaeden);
             jeu.verifMouvement(jeu.jaeden, jeu.lich);
+            jeu.plateau.deplacerHaut(jeu.jaeden);
            
         } 
         else {
             console.log("Lich : peut joeur"+jeu.peutJouer)
-            jeu.plateau.deplacerHaut(jeu.lich);
-            jeu.verifMouvement(jeu.lich, jeu.jaeden);           
+            jeu.verifMouvement(jeu.lich, jeu.jaeden);
+            jeu.plateau.deplacerHaut(jeu.lich);           
         }
     });
 
     $('#btn-bas').on('click', function(e) {
         if(jeu.peutJouer == jeu.jaeden.classe) {
-            jeu.plateau.deplacerBas(jeu.jaeden);
             jeu.verifMouvement(jeu.jaeden, jeu.lich);
+            jeu.plateau.deplacerBas(jeu.jaeden);
            
         } 
         else {
             console.log("Lich : peut joeur"+jeu.peutJouer)
-            jeu.plateau.deplacerBas(jeu.lich);
-            jeu.verifMouvement(jeu.lich, jeu.jaeden);           
+            jeu.verifMouvement(jeu.lich, jeu.jaeden);
+            jeu.plateau.deplacerBas(jeu.lich);           
         }
     });
 

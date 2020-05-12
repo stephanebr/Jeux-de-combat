@@ -86,16 +86,20 @@ class Personnage {
     } 
     
     deplacer(position, nPosition) {
-        $(`#${position}`).removeClass(`cellule-${this.classe}`, 'cellule-perso');
-        $(`#${nPosition}`).addClass(`cellule-${this.classe}`, 'cellule-perso');
+        document.getElementById(position).classList.remove(`cellule-${this.classe}`, 'cellule-perso');
+        document.getElementById(nPosition).classList.add(`cellule-${this.classe}`, 'cellule-perso');
         this.position = nPosition;
         this.mouvement++;
+
+        console.log(`mouvements : ${this.mouvement}`);
         
         return this.mouvement;        
     }
 
     prendre(arme) {
-       this.attaquer(this(arme));
+       this.arme = new arme.type;
+       console.log(`nouvelle arme : ${this.arme}`);
+       document.getElementById(this.nPosition).classList.remove(`cellule-${arme.type}`, 'cellule-perso');
     }
 }
 

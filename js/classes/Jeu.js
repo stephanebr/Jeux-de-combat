@@ -54,19 +54,19 @@ class Jeu {
         const noms  = this.inscrireJoueur();
     
         this.jaeden.score = {
-            idJaeden: $('jaeden').html(noms[0]),
-            scoreJaeden: $('score-jaeden').html(` : ${this.jaeden.sante}`)           
+            idJaeden: $('#jaeden').html(noms[0]),
+            scoreJaeden: $('#score-jaeden').html(` : ${this.jaeden.sante}`)           
         }
 
         this.lich.score = {
-            idLich: $('lich').html(noms[1]),
-            scoreLich: $('score-lich').html(` : ${this.lich.sante}`)
+            idLich: $('#lich').html(noms[1]),
+            scoreLich: $('#score-lich').html(` : ${this.lich.sante}`)
         }
     }
 
     afficherArme() {
         const listArmes = [];
-        const idArmes   = $('armes');
+        const idArmes   = $('#armes');
         let img;
 
         this.armes.forEach(arme => {
@@ -110,12 +110,15 @@ class Jeu {
     }
 
     verifMouvement(personnage1, personnage2) {
-        if (personnage1.mouvement >= 3) {
+        if (personnage1.mouvement >= 2) {
             this.changerJoueur(personnage2.classe);
             alert(`${this.joueurs[0]} vous avez fini votre tour !`);
             alert(`Vous pouvez jouer ${this.joueurs[1]}`);
             $('.nom-personnage').html(personnage2.classe).attr('id', `${personnage2.classe}-h2`);
             personnage1.mouvement = 0;
+            personnage2.mouvement = 0;
+            console.log(`perso 1 : ${personnage1.mouvement}`)
+            console.log(`perso 2 : ${personnage2.mouvement}`)
         }
     }
 
