@@ -1,6 +1,6 @@
 import { Jeu } from './classes/Jeu.js';
 
-const jeu = new Jeu();
+export const jeu = new Jeu();
 
 jeu.afficherScore();
 jeu.ajouterJoueur(jeu.jaeden);

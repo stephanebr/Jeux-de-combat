@@ -1,3 +1,5 @@
+import { jeu } from '../main.js';
+
 class Plateau {
     
     constructor(colonnes, rangees) {
@@ -251,6 +253,20 @@ class Plateau {
 
         if(this.caseArmes.includes(cell)) {
             alert("Prendre l'arme !");
+            
+            jeu.armes.forEach(nomArme => {
+                let idArme = document.getElementById(cell).classList.contains(`cellule-${nomArme.type}`);
+
+                console.log(`Tableau des classes de l'id : ${idArme}`);
+
+                let classArme = document.getElementsByClassName(`cellule-${nomArme.type}`);
+
+                console.log(`l : 262 Classe de l'arme : ${classArme}`);
+
+                console.log(`l : 264 Nom de l'arme : ${nomArme.type}`);
+
+            });
+
             return true;
         }
 
