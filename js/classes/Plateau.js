@@ -98,6 +98,7 @@ class Plateau {
         this.casesPleines.push(id);
         let cellulePersonnage = document.getElementById(id);
         cellulePersonnage.classList.add(`cellule-${personnage.classe}`, 'cellule-perso');
+        cellulePersonnage.setAttribute('data-perso', '' + personnage.classe);
         personnage.position = cellulePersonnage.id;
     }
 
@@ -110,7 +111,8 @@ class Plateau {
             
             let celluleArme = document.getElementById(idArme);
             celluleArme.classList.add(`cellule-${armes[i].type}`);
-            celluleArme.classList.add('cellule-arme'); 
+            celluleArme.classList.add('cellule-arme');
+            celluleArme.setAttribute('data-idArme', '' + i);
         }
 
         return armes;
@@ -250,22 +252,48 @@ class Plateau {
 
     estCeQueLaCaseAUneArme(cellule) {
         let cell = String(cellule);
+        let personnage;
 
+        let dataPerso = document.getElementById(cell - 1).getAttribute('data-perso');
+
+        console.log(`le nom : ${dataPerso}`);
+        
         if(this.caseArmes.includes(cell)) {
             alert("Prendre l'arme !");
-            
-            jeu.armes.forEach(nomArme => {
-                let idArme = document.getElementById(cell).classList.contains(`cellule-${nomArme.type}`);
+    
+            let idArme = document.getElementById(cell).getAttribute('data-idArme');
 
-                console.log(`Tableau des classes de l'id : ${idArme}`);
+            console.log(`l'id : ${idArme}`);
 
-                let classArme = document.getElementsByClassName(`cellule-${nomArme.type}`);
+            if(dataPerso === 'roi-jaeden') {
+                personnage = jeu.jaeden;
+            } 
+            else {
+                personnage = jeu.lich;
+            }
 
-                console.log(`l : 262 Classe de l'arme : ${classArme}`);
-
-                console.log(`l : 264 Nom de l'arme : ${nomArme.type}`);
-
-            });
+            switch (idArme) {
+                case '0':
+                        personnage.arme = jeu.armes[0];
+                        console.log(`Vous avez : ${personnage.arme.type}`);
+                    break;
+                case '1':
+                        personnage.arme = jeu.armes[1];
+                        console.log(`Vous avez : ${personnage.arme.type}`);
+                    break;
+                case '2':
+                        personnage.arme = jeu.armes[2];
+                        console.log(`Vous avez : ${personnage.arme.type}`);
+                    break;
+                case '3':
+                        personnage.arme = jeu.armes[3];
+                        console.log(`Vous avez : ${personnage.arme.type}`);
+                    break;        
+                default:
+                        console.log(`Vous avez : ${personnage.arme.type}`);
+                break;
+            }
+                
 
             return true;
         }

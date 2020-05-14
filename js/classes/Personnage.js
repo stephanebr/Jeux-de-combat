@@ -9,7 +9,7 @@ class Personnage {
         this._sante      = 100;
         this._position   = position;
         this._mouvement  = 0;
-        this._armes      = new Couteau();
+        this._arme       = new Couteau();
         this._score      = {}; //Tableau json contenant le score des joueurs
     }
 
@@ -87,7 +87,9 @@ class Personnage {
     
     deplacer(position, nPosition) {
         document.getElementById(position).classList.remove(`cellule-${this.classe}`, 'cellule-perso');
+        document.getElementById(position).removeAttribute('data-perso');
         document.getElementById(nPosition).classList.add(`cellule-${this.classe}`, 'cellule-perso');
+        document.getElementById(nPosition).setAttribute('data-perso', '' + this.classe);
         this.position = nPosition;
         this.mouvement++;
 
