@@ -9,17 +9,17 @@ class Jeu {
     constructor() {
         this.jaeden     = new RoiJaeden(this.pseudo);
         this.lich       = new RoiLich(this.pseudo);
-        this._armes      = []; // Tableau contenant la liste des armes
+        this._armes     = []; // Tableau contenant la liste des armes
         this.armes      = new Epee();
         this.armes      = new Hache();
         this.armes      = new Glaive();
         this.armes      = new BaguetteMagique();
-        this._plateau    = new Plateau(10, 10); // Objet contenant le plateau instancié
+        this._plateau   = new Plateau(10, 10); // Objet contenant le plateau instancié
         this.plateau.genererObstacle(1);
         this.plateau.placerArme(this.armes);
-        this._joueurs    = []; // Tableau contenant le pseudo des joueurs inscrits
-        this._peutJouer  = this.jaeden.classe; // Le nom du personnage qui peut jouer
-        this._msgAlert   = ''; // Messages d'actions
+        this._joueurs   = []; // Tableau contenant le pseudo des joueurs inscrits
+        this._peutJouer = this.jaeden.classe; // Le nom du personnage qui peut jouer
+        this._msgAlert  = ''; // Messages d'actions
     }
 
     get joueurs() { return this._joueurs; }

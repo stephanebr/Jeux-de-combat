@@ -95,3 +95,9 @@ img#baguette-magique {
     text-align: center;
     text-transform: capitalize;
 }
+
+#mon-arme {
+    width: 70px;
+    height: 70px;
+    margin-top: 20px;
+}

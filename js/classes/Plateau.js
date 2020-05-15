@@ -41,7 +41,7 @@ class Plateau {
         let plateauDeJeu = document.getElementById('plateau-de-jeu');
         
         // Création de l'élément <table> et d'un élément <tbody>
-        let tbl = document.createElement("table");
+        let tbl     = document.createElement("table");
         let tblBody = document.createElement("tbody");
         
         // Création de toutes les cellules du tableau
@@ -253,47 +253,25 @@ class Plateau {
     estCeQueLaCaseAUneArme(cellule) {
         let cell = String(cellule);
         let personnage;
+        let idArme = document.getElementById(cell);
 
-        let dataPerso = document.getElementById(cell - 1).getAttribute('data-perso');
-
-        console.log(`le nom : ${dataPerso}`);
-        
         if(this.caseArmes.includes(cell)) {
+            let dataIdArme = idArme.getAttribute('data-idArme');
             alert("Prendre l'arme !");
-    
-            let idArme = document.getElementById(cell).getAttribute('data-idArme');
 
-            console.log(`l'id : ${idArme}`);
-
-            if(dataPerso === 'roi-jaeden') {
+            if(jeu.peutJouer === jeu.jaeden.classe) {
                 personnage = jeu.jaeden;
             } 
             else {
                 personnage = jeu.lich;
             }
 
-            switch (idArme) {
-                case '0':
-                        personnage.arme = jeu.armes[0];
-                        console.log(`Vous avez : ${personnage.arme.type}`);
-                    break;
-                case '1':
-                        personnage.arme = jeu.armes[1];
-                        console.log(`Vous avez : ${personnage.arme.type}`);
-                    break;
-                case '2':
-                        personnage.arme = jeu.armes[2];
-                        console.log(`Vous avez : ${personnage.arme.type}`);
-                    break;
-                case '3':
-                        personnage.arme = jeu.armes[3];
-                        console.log(`Vous avez : ${personnage.arme.type}`);
-                    break;        
-                default:
-                        console.log(`Vous avez : ${personnage.arme.type}`);
-                break;
-            }
-                
+            personnage.prendre(dataIdArme);
+            document.getElementById('mon-arme').classList.add(`cellule-${personnage.arme.type}`);
+
+            idArme.setAttribute('data-idArme', '');
+            idArme.classList.remove(`cellule-${personnage.arme.type}`);
+            idArme.classList.remove('cellule-arme');
 
             return true;
         }

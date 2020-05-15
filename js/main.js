@@ -11,7 +11,6 @@ $(document).ready(function() {
     alert(`${jeu.joueurs[0]} vous commencez la partie !`);
     $('.nom-personnage').html(jeu.jaeden.classe).attr('id', `${jeu.jaeden.classe}-h2`);
 
-
     //Les boutons des mouvements
     $('#btn-droite').on('click', function(e) {
         if(jeu.peutJouer == jeu.jaeden.classe) {

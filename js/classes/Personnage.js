@@ -1,5 +1,6 @@
 import { Couteau } from './Arme.js';
 import { html } from '../fonctions.js';
+import { jeu } from '../main.js';
 
 class Personnage {
 
@@ -98,10 +99,28 @@ class Personnage {
         return this.mouvement;        
     }
 
-    prendre(arme) {
-       this.arme = new arme.type;
-       console.log(`nouvelle arme : ${this.arme}`);
-       document.getElementById(this.nPosition).classList.remove(`cellule-${arme.type}`, 'cellule-perso');
+    prendre(idArme) {        
+        switch (idArme) {
+            case '0':
+                this.arme = jeu.armes[0];
+                console.log(`${this.classe} vous avez : ${this.arme.type} qui fait ${this.arme.degats} de dégats`);
+            break;
+            case '1':
+                this.arme = jeu.armes[1];
+                console.log(`${this.classe} vous avez : ${this.arme.type} qui fait ${this.arme.degats} de dégats`);
+            break;
+            case '2':
+                this.arme = jeu.armes[2];
+                console.log(`${this.classe} vous avez : ${this.arme.type} qui fait ${this.arme.degats} de dégats`);
+            break;
+            case '3':
+                this.arme = jeu.armes[3];
+                console.log(`${this.classe} vous avez : ${this.arme.type} qui fait ${this.arme.degats} de dégats`);
+            break;        
+            default:
+                console.log(`${this.classe} vous avez : ${this.arme.type} qui fait ${this.arme.degats} de dégats`);
+            break;
+        }
     }
 }
 
