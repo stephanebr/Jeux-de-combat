@@ -4,8 +4,8 @@ class Plateau {
     
     constructor(colonnes, rangees) {
         this._casesPleines     = [];
-        this._caseObstacles    = [];
-        this._caseArmes        = [];
+        this._casesObstacles   = [];
+        this._casesArmes       = [];
         this._colonnes         = colonnes;
         this._rangees          = rangees;
         this.creer();
@@ -16,9 +16,9 @@ class Plateau {
      */
     get casesPleines() { return this._casesPleines; }
 
-    get caseObstacles() { return this._caseObstacles; }
+    get casesObstacles() { return this._casesObstacles; }
 
-    get caseArmes() { return this._caseArmes; }
+    get casesArmes() { return this._casesArmes; }
 
     get colonnes() { return this._colonnes; }
 
@@ -29,9 +29,9 @@ class Plateau {
      */
     set casesPleines(casesPleines) { this._casesPleines = casesPleines; }
 
-    set caseObstacles(caseObstacles) { this._caseObstacles = caseObstacles; }
+    set casesObstacles(caseObstacles) { this._casesObstacles = caseObstacles; }
 
-    set caseArmes(caseArmes) { this._caseArmes = caseArmes; }
+    set casesArmes(caseArmes) { this._casesArmes = caseArmes; }
 
     set colonnes(colonnes) { this._colonnes = colonnes; }
 
@@ -82,7 +82,7 @@ class Plateau {
             let obstacle = this.trouverCaseVide();
 
             this.casesPleines.push(obstacle);
-            this.caseObstacles.push(obstacle);
+            this.casesObstacles.push(obstacle);
 
             obstacle = document.getElementById(obstacle);
             obstacle.classList.add('cellule-obstacle');
@@ -96,6 +96,7 @@ class Plateau {
     placerPersonnage(personnage) {
         let id = this.trouverCaseUtilisable();        
         this.casesPleines.push(id);
+        console.log(`cases persos : ${this.casesPersos} `);
         let cellulePersonnage = document.getElementById(id);
         cellulePersonnage.classList.add(`cellule-${personnage.classe}`, 'cellule-perso');
         cellulePersonnage.setAttribute('data-perso', '' + personnage.classe);
@@ -107,7 +108,7 @@ class Plateau {
             let idArme = this.trouverCaseVide();
 
             this.casesPleines.push(idArme);
-            this.caseArmes.push(idArme);
+            this.casesArmes.push(idArme);
             
             let celluleArme = document.getElementById(idArme);
             celluleArme.classList.add(`cellule-${armes[i].type}`);
@@ -240,14 +241,19 @@ class Plateau {
         let cell       = String(cellule);
         let idPerso    = document.getElementById(cellule);
     
-        if(this.caseObstacles.includes(cell) || idPerso.classList.contains('cellule-perso') == true) {
+        if(this.casesObstacles.includes(cell) || idPerso.classList.contains('cellule-perso') == true) {
             alert("La case n'est pas libre !");
+
+            if(idPerso.classList.contains('cellule-perso') == true) {
+                alert('Vous pouvez attaquer le personnage');
+                
+            }
+
             return false;
         }
-
-        this.estCeQueLaCaseAUneArme(cell);
+            this.estCeQueLaCaseAUneArme(cell);
         
-        return true;
+            return true;
     }
 
     estCeQueLaCaseAUneArme(cellule) {
@@ -255,7 +261,7 @@ class Plateau {
         let personnage;
         let idArme = document.getElementById(cell);
 
-        if(this.caseArmes.includes(cell)) {
+        if(this.casesArmes.includes(cell)) {
             let dataIdArme = idArme.getAttribute('data-idArme');
             alert("Prendre l'arme !");
 
@@ -267,11 +273,14 @@ class Plateau {
             }
 
             personnage.prendre(dataIdArme);
-            document.getElementById('mon-arme').classList.add(`cellule-${personnage.arme.type}`);
 
-            idArme.setAttribute('data-idArme', '');
+            $('#mon-arme').html(personnage.arme.degats).attr('class', `cellule-${personnage.arme.type} img-thumbnail`);
+
+            idArme.removeAttribute('data-idArme');
             idArme.classList.remove(`cellule-${personnage.arme.type}`);
             idArme.classList.remove('cellule-arme');
+
+            this.casesArmes.splice(this.casesArmes.indexOf(cell),1);
 
             return true;
         }
@@ -340,7 +349,7 @@ class Plateau {
     //Le joueur à le droit de se déplacer de 3 cases max
         let position = personnage.position;
 
-        if(position >= 89) {
+        if(position >= 99) {
             return false;
         }
 

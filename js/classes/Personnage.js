@@ -93,8 +93,6 @@ class Personnage {
         document.getElementById(nPosition).setAttribute('data-perso', '' + this.classe);
         this.position = nPosition;
         this.mouvement++;
-
-        console.log(`mouvements : ${this.mouvement}`);
         
         return this.mouvement;        
     }

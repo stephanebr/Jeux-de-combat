@@ -10,6 +10,7 @@ jeu.afficherArme();
 $(document).ready(function() {
     alert(`${jeu.joueurs[0]} vous commencez la partie !`);
     $('.nom-personnage').html(jeu.jaeden.classe).attr('id', `${jeu.jaeden.classe}-h2`);
+    $('#mon-arme').html(jeu.jaeden.arme.degats).attr('class', `${jeu.jaeden.classe} cellule-${jeu.jaeden.arme.type} img-thumbnail`);
 
     //Les boutons des mouvements
     $('#btn-droite').on('click', function(e) {

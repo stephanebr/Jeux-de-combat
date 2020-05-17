@@ -110,11 +110,12 @@ class Jeu {
     }
 
     verifMouvement(personnage1, personnage2) {
-        if (personnage1.mouvement >= 2) {
+        if (personnage1.mouvement >= 100) {
             this.changerJoueur(personnage2.classe);
             alert(`${this.joueurs[0]} vous avez fini votre tour !`);
             alert(`Vous pouvez jouer ${this.joueurs[1]}`);
             $('.nom-personnage').html(personnage2.classe).attr('id', `${personnage2.classe}-h2`);
+            $('#mon-arme').html(personnage2.arme.degats).attr('class', `${personnage2.classe} cellule-${personnage2.arme.type} img-thumbnail`);
             personnage1.mouvement = 0;
             personnage2.mouvement = 0;
             console.log(`perso 1 : ${personnage1.mouvement}`)

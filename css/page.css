@@ -100,4 +100,7 @@ img#baguette-magique {
     width: 70px;
     height: 70px;
     margin-top: 20px;
+    color: black;
+    font-weight: bold;
+    font-size: 1em;
 }
