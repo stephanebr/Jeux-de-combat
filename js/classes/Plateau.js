@@ -45,18 +45,21 @@ class Plateau {
         let tblBody = document.createElement("tbody");
         
         // Création de toutes les cellules du tableau
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < this.rangees; i++) {
             // Création des lignes du tableau
             let lignes = document.createElement('tr');
             lignes.setAttribute('ligne', '' + i);
             lignes.classList.add('cellule-plateau');
         
-            for (let j = 0; j < 10; j++) {
+            for (let j = 0; j < this.colonnes; j++) {
                 // Création des éléments <td>
                 let cellules = document.createElement("td");
+
                 /* Création des id dynamiquements aux cellules en récupérant la concaténation de i + j et
                 *  stock le resultat dans une propriété resultat
                 */ 
+                cellules.setAttribute('data-ligne', "" + i);
+                cellules.setAttribute('data-colonne', "" + j);
                 cellules.setAttribute("id", "" + i + j);
                 cellules.classList.add("cellule-plateau");
                 lignes.appendChild(cellules);
@@ -153,10 +156,11 @@ class Plateau {
         return this.trouverCaseUtilisable();
     }
 
-    caseHauteLibre(cellule) {
+    caseHauteLibre(celluleId) {
         let result = true;
-
-        if(cellule < 10) {
+        let cellule = document.getElementById(celluleId);
+        
+        if(cellule.getAttribute('data-ligne') < '' ) {
             result = false;
         }
 
@@ -241,10 +245,10 @@ class Plateau {
         let cell       = String(cellule);
         let idPerso    = document.getElementById(cellule);
     
-        if(this.casesObstacles.includes(cell) || idPerso.classList.contains('cellule-perso') == true) {
+        if(this.casesObstacles.includes(cell) || idPerso.classList.contains('cellule-perso')) {
             alert("La case n'est pas libre !");
 
-            if(idPerso.classList.contains('cellule-perso') == true) {
+            if(idPerso.classList.contains('cellule-perso')) {
                 alert('Vous pouvez attaquer le personnage');
                 
             }
