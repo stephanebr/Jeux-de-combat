@@ -53,15 +53,15 @@ class Plateau {
         
             for (let j = 0; j < this.colonnes; j++) {
                 // Création des éléments <td>
-                let cellules = document.createElement("td");
+                let cellules = document.createElement('td');
 
                 /* Création des id dynamiquements aux cellules en récupérant la concaténation de i + j et
                 *  stock le resultat dans une propriété resultat
                 */ 
                 cellules.setAttribute('data-ligne', "" + i);
                 cellules.setAttribute('data-colonne', "" + j);
-                cellules.setAttribute("id", "" + i + j);
-                cellules.classList.add("cellule-plateau");
+                cellules.setAttribute('id', "" + i + j);
+                cellules.classList.add('cellule-plateau');
                 lignes.appendChild(cellules);
             }
 
@@ -157,10 +157,10 @@ class Plateau {
     }
 
     caseHauteLibre(celluleId) {
-        let result = true;
+        let result  = true;
         let cellule = document.getElementById(celluleId);
         
-        if(cellule.getAttribute('data-ligne') < '' ) {
+        if(cellule.getAttribute('data-ligne') === '0') {
             result = false;
         }
 
@@ -179,10 +179,11 @@ class Plateau {
         return result;
     }
 
-    caseBasLibre(cellule) {
-        let result = true;
+    caseBasLibre(celluleId) {
+        let result  = true;
+        let cellule = document.getElementById(celluleId);
 
-        if(cellule == 89) {
+        if(cellule.getAttribute('data-colonne') > this.colonnes) {
             result = false;
         }
 
@@ -197,18 +198,19 @@ class Plateau {
         return result;
     }
 
-    caseGaucheLibre(cellule) {
-        let result = true;
+    caseGaucheLibre(celluleId) {
+        let result  = true;
+        let cellule = document.getElementById(celluleId);
 
-        if(cellule % 10 === 0) { //Si je suis sur la première colonne
+        if(cellule.getAttribute('data-colonne') === '0' && cellule.getAttribute('data-ligne') === 0) { //Si je suis sur la première colonne
             result = false;
         }   
 
-        let celluleGauche = cellule - 1;
+        let celluleGauche = cellule.getAttribute('data-colonne') - 1;
 
-        if(celluleGauche < 10) {
+        /*if(celluleGauche < 10) {
             celluleGauche = '0' + celluleGauche + '';
-        }
+        }*/
 
         celluleGauche = celluleGauche.toString();
 
@@ -222,7 +224,7 @@ class Plateau {
     caseDroiteLibre(cellule) {
         let result = true;
         
-        if(cellule == 99) {
+        if(cellule.getAttribute('data-colonne') === this.colonnes) {
             result = false;
         }
 
@@ -241,6 +243,84 @@ class Plateau {
         return result;
     }
 
+    deplacerDroite(personnage) {
+        //Le joueur à le droit de se déplacer de 3 cases max
+        let position = personnage.position;
+        let cellule  = document.getElementById(position);
+
+        if(cellule.getAttribute('data-colonne') === this.colonnes) {
+            return false;
+        }
+
+        let nPosition = parseInt(position) + 1;
+
+        if(nPosition <= 9) {
+            nPosition = '0' + nPosition;
+        }
+
+        if(this.estCeQueLaCaseEstLibre(nPosition)) {
+            personnage.mouvement = personnage.deplacer(position, nPosition);
+        }        
+        }
+    
+    deplacerGauche(personnage) {
+    //Le joueur à le droit de se déplacer de 3 cases max
+        let position = personnage.position;
+        let cellule = document.getElementById(position);
+
+        if(cellule.getAttribute('data-colonne') > this.colonnes) {
+            return false;
+        }
+
+        let nPosition = cellule.getAttribute('data-colonne') - 1;
+
+        console.log(`nouvelle position ${nPosition}`);
+
+        /*if(nPosition <= 9) {
+            nPosition = '0' + nPosition;
+        }*/
+
+        if(this.estCeQueLaCaseEstLibre(nPosition)) {
+            personnage.mouvement = personnage.deplacer(position, nPosition);
+        }
+    }
+    
+    deplacerHaut(personnage) {
+    //Le joueur à le droit de se déplacer de 3 cases max
+        let position = personnage.position;
+        let cellule  = document.getElementById(position);
+
+        if(cellule.getAttribute('data-ligne') === '0') {
+            return false;
+        }
+
+        let nPosition = parseInt(position) - 10;
+
+        if(nPosition <= 9) {
+            nPosition = '0' + nPosition;
+        }
+
+        if(this.estCeQueLaCaseEstLibre(nPosition)) {
+            personnage.mouvement = personnage.deplacer(position, nPosition);
+        }
+    }
+
+    deplacerBas(personnage) {
+    //Le joueur à le droit de se déplacer de 3 cases max
+        let position = personnage.position;
+        let cellule  = document.getElementById(position);
+
+        if(cellule.getAttribute('data-ligne') > this.rangees) {
+            return false;
+        }
+
+        let nPosition = parseInt(position) + 10;
+
+        if(this.estCeQueLaCaseEstLibre(nPosition)) {
+            personnage.mouvement = personnage.deplacer(position, nPosition);
+        }
+    }
+
     estCeQueLaCaseEstLibre(cellule) {
         let cell       = String(cellule);
         let idPerso    = document.getElementById(cellule);
@@ -250,7 +330,6 @@ class Plateau {
 
             if(idPerso.classList.contains('cellule-perso')) {
                 alert('Vous pouvez attaquer le personnage');
-                
             }
 
             return false;
@@ -290,78 +369,6 @@ class Plateau {
         }
 
         return false;
-    }
-
-    deplacerDroite(personnage) {
-    //Le joueur à le droit de se déplacer de 3 cases max
-        let position = personnage.position;
-
-        if(position == 99) {
-            return false;
-        }
-
-        let nPosition = parseInt(position) + 1;
-
-        if(nPosition <= 9) {
-            nPosition = '0' + nPosition;
-        }
-
-        if(this.estCeQueLaCaseEstLibre(nPosition)) {
-            personnage.mouvement = personnage.deplacer(position, nPosition);
-        }        
-    }
-
-    deplacerGauche(personnage) {
-    //Le joueur à le droit de se déplacer de 3 cases max
-        let position = personnage.position;
-
-        if(position == '00') {
-            return false;
-        }
-
-        let nPosition = parseInt(position) - 1;
-
-        if(nPosition <= 9) {
-            nPosition = '0' + nPosition;
-        }
-
-        if(this.estCeQueLaCaseEstLibre(nPosition)) {
-            personnage.mouvement = personnage.deplacer(position, nPosition);
-        }
-    }
-
-     deplacerHaut(personnage) {
-    //Le joueur à le droit de se déplacer de 3 cases max
-        let position = personnage.position;
-
-        if(position <= 9) {
-            return false;
-        }
-
-        let nPosition = parseInt(position) - 10;
-
-        if(nPosition <= 9) {
-            nPosition = '0' + nPosition;
-        }
-
-        if(this.estCeQueLaCaseEstLibre(nPosition)) {
-            personnage.mouvement = personnage.deplacer(position, nPosition);
-        }
-    }
-
-     deplacerBas(personnage) {
-    //Le joueur à le droit de se déplacer de 3 cases max
-        let position = personnage.position;
-
-        if(position >= 99) {
-            return false;
-        }
-
-        let nPosition = parseInt(position) + 10;
-
-        if(this.estCeQueLaCaseEstLibre(nPosition)) {
-            personnage.mouvement = personnage.deplacer(position, nPosition);
-        }
     }
 }
 

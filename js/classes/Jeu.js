@@ -14,7 +14,7 @@ class Jeu {
         this.armes      = new Hache();
         this.armes      = new Glaive();
         this.armes      = new BaguetteMagique();
-        this._plateau   = new Plateau(10, 10); // Objet contenant le plateau instancié
+        this._plateau   = new Plateau(12,15); // Objet contenant le plateau instancié
         this.plateau.genererObstacle(1);
         this.plateau.placerArme(this.armes);
         this._joueurs   = []; // Tableau contenant le pseudo des joueurs inscrits
