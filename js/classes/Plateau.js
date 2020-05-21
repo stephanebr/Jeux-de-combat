@@ -57,10 +57,10 @@ class Plateau {
 
                 /* Création des id dynamiquements aux cellules en récupérant la concaténation de i + j et
                 *  stock le resultat dans une propriété resultat
-                */ 
+                */
                 cellules.setAttribute('data-ligne', '' + i);
                 cellules.setAttribute('data-colonne', '' + j);
-                cellules.setAttribute('id', '' + i + j);
+                cellules.setAttribute('id', '' + i + '-' + j);
                 cellules.classList.add('cellule-plateau');
                 lignes.appendChild(cellules);
             }
@@ -97,7 +97,8 @@ class Plateau {
     }
 
     placerPersonnage(personnage) {
-        let id = this.trouverCaseUtilisable();        
+        let id = this.trouverCaseUtilisable();
+        console.log('case libre : ' + id);        
         this.casesPleines.push(id);
         console.log(`cases persos : ${this.casesPersos}`);
         let cellulePersonnage = document.getElementById(id);
@@ -125,7 +126,7 @@ class Plateau {
     trouverCaseVide() {
         let x         = this.nombreAleatoire(this.rangees);
         let y         = this.nombreAleatoire(this.colonnes);
-        const cellule = String(x) + String(y); 
+        const cellule = String(x) + '-' + String(y); 
         
         if (this.casesPleines.includes(cellule)) {
             return this.trouverCaseVide();
@@ -176,7 +177,7 @@ class Plateau {
         }*/
 
 
-        let celluleHaute = document.getElementById(dataColonne.toString() + '-' + dataLigne);
+        let celluleHaute = cellule - 10;
 
         console.log('l 181 cellule haute : ' + celluleHaute);
 
@@ -214,7 +215,7 @@ class Plateau {
             result = false;
         }   
 
-        let celluleGauche = cellule.getAttribute('data-colonne') - 1;
+        let celluleGauche = cellule - 1;
 
 
         /*if(celluleGauche < 10) {
@@ -282,17 +283,13 @@ class Plateau {
             return false;
         }
 
-        let dataColonne = cellule.getAttribute('data-colonne') - 1;
-
-        console.log('data colonne : ' + dataColonne);
-
-        let nPosition = cellule.setAttribute('data-colonne', '' + dataColonne);
+        let nPosition = parseInt(position) - 1;
 
         console.log(`nouvelle position ${nPosition}`);
 
-        /*if(nPosition <= 9) {
+        if(nPosition <= 9) {
             nPosition = '0' + nPosition;
-        }*/
+        }
 
         if(this.estCeQueLaCaseEstLibre(nPosition)) {
             personnage.mouvement = personnage.deplacer(position, nPosition);
@@ -310,15 +307,13 @@ class Plateau {
 
         /*let new_case = document.getElementById(monPerso.position.ligne+'-'+monPerso.position.col)*/
 
-        //let nPosition = parseInt(position) - 10;
+        let nPosition = parseInt(position) - 10;
 
-        let dataColonne = cellule.getAttribute('data-colonne');
-        let dataLigne   = cellule.getAttribute('data-ligne') - 1;
+        //let dataColonne = cellule.getAttribute('data-colonne');
+        //let dataLigne   = cellule.getAttribute('data-ligne') - 1;
 
-        console.log('data colonne :' + dataColonne);
-        console.log('data ligne :' + dataLigne);
-
-        let nPosition = document.getElementById(position).setAttribute('data-ligne', '' + dataLigne);
+        //console.log('data colonne :' + dataColonne);
+        //console.log('data ligne :' + dataLigne);
 
         console.log('l 315 cellule haute : ' + nPosition);
 
