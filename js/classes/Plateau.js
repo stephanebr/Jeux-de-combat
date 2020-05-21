@@ -58,9 +58,9 @@ class Plateau {
                 /* Création des id dynamiquements aux cellules en récupérant la concaténation de i + j et
                 *  stock le resultat dans une propriété resultat
                 */ 
-                cellules.setAttribute('data-ligne', "" + i);
-                cellules.setAttribute('data-colonne', "" + j);
-                cellules.setAttribute('id', "" + i + j);
+                cellules.setAttribute('data-ligne', '' + i);
+                cellules.setAttribute('data-colonne', '' + j);
+                cellules.setAttribute('id', '' + i + j);
                 cellules.classList.add('cellule-plateau');
                 lignes.appendChild(cellules);
             }
@@ -99,7 +99,7 @@ class Plateau {
     placerPersonnage(personnage) {
         let id = this.trouverCaseUtilisable();        
         this.casesPleines.push(id);
-        console.log(`cases persos : ${this.casesPersos} `);
+        console.log(`cases persos : ${this.casesPersos}`);
         let cellulePersonnage = document.getElementById(id);
         cellulePersonnage.classList.add(`cellule-${personnage.classe}`, 'cellule-perso');
         cellulePersonnage.setAttribute('data-perso', '' + personnage.classe);
@@ -164,13 +164,21 @@ class Plateau {
             result = false;
         }
 
-        let celluleHaute = cellule - 10;
+        /*Si monPerso.position.colonne - 1 > 0
+        monPerso.position.colonne -= 1
+        let new_case = document.getElementById(monPerso.position.ligne+'-'+monPerso.position.col)*/
 
-        if(celluleHaute < 10) {
+        let dataLigne   = cellule.getAttribute('data-ligne') - 1;
+        let dataColonne = cellule.getAttribute('data-colonne');
+
+        /*if(celluleHaute < 10) {
             celluleHaute = '0' + celluleHaute + '';
-        }
+        }*/
 
-        celluleHaute = celluleHaute.toString();
+
+        let celluleHaute = document.getElementById(dataColonne.toString() + '-' + dataLigne);
+
+        console.log('l 181 cellule haute : ' + celluleHaute);
 
         if(this.casesPleines.includes(celluleHaute)) {
             result = false;
@@ -202,11 +210,12 @@ class Plateau {
         let result  = true;
         let cellule = document.getElementById(celluleId);
 
-        if(cellule.getAttribute('data-colonne') === '0' && cellule.getAttribute('data-ligne') === 0) { //Si je suis sur la première colonne
+        if(cellule.getAttribute('data-colonne') === '0' && cellule.getAttribute('data-ligne') === '0') { //Si je suis sur la première colonne
             result = false;
         }   
 
         let celluleGauche = cellule.getAttribute('data-colonne') - 1;
+
 
         /*if(celluleGauche < 10) {
             celluleGauche = '0' + celluleGauche + '';
@@ -268,11 +277,16 @@ class Plateau {
         let position = personnage.position;
         let cellule = document.getElementById(position);
 
-        if(cellule.getAttribute('data-colonne') > this.colonnes) {
+        if(cellule.getAttribute('data-colonne') === '0' && cellule.getAttribute('data-ligne') === '0') {
+            console.log('la colonne est egale à 0');
             return false;
         }
 
-        let nPosition = cellule.getAttribute('data-colonne') - 1;
+        let dataColonne = cellule.getAttribute('data-colonne') - 1;
+
+        console.log('data colonne : ' + dataColonne);
+
+        let nPosition = cellule.setAttribute('data-colonne', '' + dataColonne);
 
         console.log(`nouvelle position ${nPosition}`);
 
@@ -294,11 +308,23 @@ class Plateau {
             return false;
         }
 
-        let nPosition = parseInt(position) - 10;
+        /*let new_case = document.getElementById(monPerso.position.ligne+'-'+monPerso.position.col)*/
 
-        if(nPosition <= 9) {
+        //let nPosition = parseInt(position) - 10;
+
+        let dataColonne = cellule.getAttribute('data-colonne');
+        let dataLigne   = cellule.getAttribute('data-ligne') - 1;
+
+        console.log('data colonne :' + dataColonne);
+        console.log('data ligne :' + dataLigne);
+
+        let nPosition = document.getElementById(position).setAttribute('data-ligne', '' + dataLigne);
+
+        console.log('l 315 cellule haute : ' + nPosition);
+
+        /*if(nPosition <= 9) {
             nPosition = '0' + nPosition;
-        }
+        }*/
 
         if(this.estCeQueLaCaseEstLibre(nPosition)) {
             personnage.mouvement = personnage.deplacer(position, nPosition);
