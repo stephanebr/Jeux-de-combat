@@ -1,7 +1,7 @@
 import { Plateau } from './Plateau.js';
 import { RoiJaeden } from './RoiJaeden.js';
 import { RoiLich } from './RoiLich.js';
-import { Hache, Glaive, BaguetteMagique, Epee } from './Arme.js';
+import { Hache, Glaive, BaguetteMagique, Epee, Couteau } from './Arme.js';
 
 
 class Jeu {
