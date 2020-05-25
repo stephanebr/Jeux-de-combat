@@ -19,8 +19,8 @@
 }
 
 .cellule-roi-jaeden {
-    background: no-repeat center url('../images/kil-jaeden.png');     
-    background-color: orchid;
+    background: no-repeat center url('../images/kil-jaeden.png') !important;     
+    background-color: orchid !important;
 }
 
 #roi-lich-h2 {
@@ -28,8 +28,8 @@
 }
 
 .cellule-roi-lich {
-    background: no-repeat center url('../images/roi-lich.png');     
-    background-color: lime;
+    background: no-repeat center url('../images/roi-lich.png') !important;     
+    background-color: lime !important;
 }
 
 .cellule-hache {

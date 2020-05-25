@@ -46,8 +46,6 @@ class Jeu {
     ajouterJoueur(joueur) {
         this.joueurs = joueur; // On ajoute au tableau
         this.plateau.placerPersonnage(joueur) // On trouve un Id libre pour placer un personnage sur le plateau
-        //document.getElementById(joueur.position).innerHTML  = joueur.pseudo; // On affiche le personnage
-        console.log(this.armes);
     }
 
     afficherScore() {
@@ -120,6 +118,25 @@ class Jeu {
             personnage2.mouvement = 0;
             console.log(`perso 1 : ${personnage1.mouvement}`)
             console.log(`perso 2 : ${personnage2.mouvement}`)
+        }
+    }
+
+    combat() {
+        while(this.jaeden.sante > 0 || this.lich.sante > 0) {
+            if(this.peutJouer === this.jaeden.classe) {
+                this.jaeden.attaquer(this.lich);
+                this.changerJoueur(this.lich.classe);
+            } else {
+                this.lich.attaquer(this.jaeden);
+                this.changerJoueur(this.jaeden.classe);
+            }
+
+            console.log('jaeden : ' + this.jaeden.sante);
+            console.log('Lich : ' + this.lich.sante);
+        }
+
+        if(this.jaeden.sante <= 0 || this.lich.sante <= 0) {
+            alert('Vous êtes mort !');
         }
     }
 

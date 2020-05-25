@@ -304,6 +304,7 @@ class Plateau {
 
       if(idPerso.classList.contains("cellule-perso")) {
         alert("Vous pouvez attaquer le personnage");
+        $('#btn-attaquer').show();
       }
 
       return false;
@@ -329,11 +330,12 @@ class Plateau {
         personnage = jeu.lich;
       }
 
+      personnage.deposer(idArme);
+
       personnage.prendre(dataIdArme);
 
       $("#mon-arme").html(personnage.arme.degats).attr("class", `cellule-${personnage.arme.type} img-thumbnail`);
 
-      idArme.removeAttribute("data-idArme");
       idArme.classList.remove(`cellule-${personnage.arme.type}`);
       idArme.classList.remove("cellule-arme");
 

@@ -11,55 +11,56 @@ $(document).ready(function() {
     alert(`${jeu.joueurs[0]} vous commencez la partie !`);
     $('.nom-personnage').html(jeu.jaeden.classe).attr('id', `${jeu.jaeden.classe}-h2`);
     $('#mon-arme').html(jeu.jaeden.arme.degats).attr('class', `${jeu.jaeden.classe} cellule-${jeu.jaeden.arme.type} img-thumbnail`);
+    $('#btn-attaquer').hide();
 
     //Les boutons des mouvements
     $('#btn-droite').on('click', function(e) {
-        if(jeu.peutJouer == jeu.jaeden.classe) {
+        if(jeu.peutJouer === jeu.jaeden.classe) {
             jeu.verifMouvement(jeu.jaeden, jeu.lich);
             jeu.plateau.deplacerDroite(jeu.jaeden);
            
         } 
         else {
-            console.log("Lich : peut joeur"+jeu.peutJouer);
+            console.log("Lich : peut jouer" + jeu.peutJouer);
             jeu.verifMouvement(jeu.lich, jeu.jaeden);  
             jeu.plateau.deplacerDroite(jeu.lich);         
         }
     });
 
     $('#btn-gauche').on('click', function(e) {
-        if(jeu.peutJouer == jeu.jaeden.classe) {
+        if(jeu.peutJouer === jeu.jaeden.classe) {
             jeu.verifMouvement(jeu.jaeden, jeu.lich);
             jeu.plateau.deplacerGauche(jeu.jaeden);
            
         } 
         else {
-            console.log("Lich : peut joeur"+jeu.peutJouer)
+            console.log("Lich : peut jouer" + jeu.peutJouer)
             jeu.verifMouvement(jeu.lich, jeu.jaeden);
             jeu.plateau.deplacerGauche(jeu.lich);           
         }
     });
 
     $('#btn-haut').on('click', function(e) {  
-        if(jeu.peutJouer == jeu.jaeden.classe) {
+        if(jeu.peutJouer === jeu.jaeden.classe) {
             jeu.verifMouvement(jeu.jaeden, jeu.lich);
             jeu.plateau.deplacerHaut(jeu.jaeden);
            
         } 
         else {
-            console.log("Lich : peut joeur"+jeu.peutJouer)
+            console.log("Lich : peut jouer" + jeu.peutJouer)
             jeu.verifMouvement(jeu.lich, jeu.jaeden);
             jeu.plateau.deplacerHaut(jeu.lich);           
         }
     });
 
     $('#btn-bas').on('click', function(e) {
-        if(jeu.peutJouer == jeu.jaeden.classe) {
+        if(jeu.peutJouer === jeu.jaeden.classe) {
             jeu.verifMouvement(jeu.jaeden, jeu.lich);
             jeu.plateau.deplacerBas(jeu.jaeden);
            
         } 
         else {
-            console.log("Lich : peut joeur"+jeu.peutJouer)
+            console.log("Lich : peut jouer" + jeu.peutJouer)
             jeu.verifMouvement(jeu.lich, jeu.jaeden);
             jeu.plateau.deplacerBas(jeu.lich);           
         }
@@ -67,7 +68,7 @@ $(document).ready(function() {
 
     // Bouton d'attaque
     $('#btn-attaquer').on('click', function() {
-    
+        jeu.combat();
     });
 
     // Bouton pour terminer le tour
