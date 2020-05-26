@@ -324,14 +324,11 @@ class Plateau {
       let dataIdArme = idArme.getAttribute("data-idArme");
       alert("Prendre l'arme !");
 
-      if(jeu.peutJouer === jeu.jaeden.classe) {
-        personnage = jeu.jaeden;
-      } else {
-        personnage = jeu.lich;
-      }
+      personnage = jeu.peutJouer;
 
       personnage.deposer(idArme);
 
+      console.log("l 331 : dataIdArme : " + dataIdArme);
       personnage.prendre(dataIdArme);
 
       $("#mon-arme").html(personnage.arme.degats).attr("class", `cellule-${personnage.arme.type} img-thumbnail`);

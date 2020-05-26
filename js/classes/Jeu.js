@@ -7,18 +7,19 @@ import { Hache, Glaive, BaguetteMagique, Epee, Couteau } from './Arme.js';
 class Jeu {
 
     constructor() {
-        this.jaeden     = new RoiJaeden(this.pseudo);
-        this.lich       = new RoiLich(this.pseudo);
         this._armes     = []; // Tableau contenant la liste des armes
         this.armes      = new Epee();
         this.armes      = new Hache();
         this.armes      = new Glaive();
         this.armes      = new BaguetteMagique();
-        this._plateau   = new Plateau(12,15); // Objet contenant le plateau instancié
+        this._plateau   = new Plateau(12,8); // Objet contenant le plateau instancié
         this.plateau.genererObstacle(1);
         this.plateau.placerArme(this.armes);
+        this.armes      = new Couteau();
+        this.jaeden     = new RoiJaeden(this.pseudo, this.armes[this.armes.length -1]);
+        this.lich       = new RoiLich(this.pseudo, this.armes[this.armes.length -1]);
         this._joueurs   = []; // Tableau contenant le pseudo des joueurs inscrits
-        this._peutJouer = this.jaeden.classe; // Le nom du personnage qui peut jouer
+        this._peutJouer = this.jaeden; // Le nom du personnage qui peut jouer
         this._msgAlert  = ''; // Messages d'actions
     }
 
@@ -108,8 +109,8 @@ class Jeu {
     }
 
     verifMouvement(personnage1, personnage2) {
-        if (personnage1.mouvement >= 100) {
-            this.changerJoueur(personnage2.classe);
+        if (personnage1.mouvement >= 2) {
+            this.changerJoueur(personnage2);
             alert(`${this.joueurs[0]} vous avez fini votre tour !`);
             alert(`Vous pouvez jouer ${this.joueurs[1]}`);
             $('.nom-personnage').html(personnage2.classe).attr('id', `${personnage2.classe}-h2`);
@@ -123,12 +124,13 @@ class Jeu {
 
     combat() {
         while(this.jaeden.sante > 0 || this.lich.sante > 0) {
-            if(this.peutJouer === this.jaeden.classe) {
+            if(this.peutJouer === this.jaeden) {
+                
                 this.jaeden.attaquer(this.lich);
-                this.changerJoueur(this.lich.classe);
+                this.changerJoueur(this.lich);
             } else {
                 this.lich.attaquer(this.jaeden);
-                this.changerJoueur(this.jaeden.classe);
+                this.changerJoueur(this.jaeden);
             }
 
             console.log('jaeden : ' + this.jaeden.sante);

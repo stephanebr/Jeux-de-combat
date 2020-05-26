@@ -4,13 +4,13 @@ import { jeu } from '../main.js';
 
 class Personnage {
 
-    constructor(pseudo, classe, position) {
+    constructor(pseudo, classe, position, arme) {
         this._pseudo     = pseudo;
         this._classe     = classe;
         this._sante      = 100;
         this._position   = position;
         this._mouvement  = 0;
-        this._arme       = new Couteau();
+        this._arme       = arme;
         this._score      = {}; //Tableau json contenant le score des joueurs
     }
 
@@ -98,40 +98,19 @@ class Personnage {
         return this.mouvement;        
     }
 
-    prendre(idArme) {  
-        jeu.armes.push(new Couteau());
-
-        switch (idArme) {
-            case '0':
-                this.arme = jeu.armes[0];
-                console.log(`${this.classe} vous avez : ${this.arme.type} qui fait ${this.arme.degats} de dégats`);
-            break;
-            case '1':
-                this.arme = jeu.armes[1];
-                console.log(`${this.classe} vous avez : ${this.arme.type} qui fait ${this.arme.degats} de dégats`);
-            break;
-            case '2':
-                this.arme = jeu.armes[2];
-                console.log(`${this.classe} vous avez : ${this.arme.type} qui fait ${this.arme.degats} de dégats`);
-            break;
-            case '3':
-                this.arme = jeu.armes[3];
-                console.log(`${this.classe} vous avez : ${this.arme.type} qui fait ${this.arme.degats} de dégats`);
-            break;        
-            case '4':
-                this.arme = jeu.armes[4];
-                console.log(`${this.classe} vous avez : ${this.arme.type} qui fait ${this.arme.degats} de dégats`);
-            break;
-            default:
-                this.arme = jeu.armes[5];
-                console.log(`${this.classe} vous avez : ${this.arme.type} qui fait ${this.arme.degats} de dégats`);
-            break;
-        }
+    prendre(idArme) { 
+        console.log("L.102 - IDArme : "+idArme) 
+        this.arme = jeu.armes[Number(idArme)];
+        console.log("L-106 : this.arme "+this.arme)
+        console.log(`${this.classe} vous avez : ${this.arme.type} qui fait ${this.arme.degats} de dégats`);
+    
     }
 
-    deposer(idArme) {
-        idArme.classList.add(`cellule-${this.arme.type}`);
-        idArme.setAttribute('data-idArme', '' + jeu.armes.indexOf(jeu.armes));
+    deposer(surCelluleID) {
+        surCelluleID.classList.add(`cellule-${this.arme.type}`);
+        console.log("Mon arme :" + this.arme)
+        console.log(jeu.armes); 
+        surCelluleID.setAttribute('data-idArme', '' + jeu.armes.indexOf(this.arme));
     }
 }
 
