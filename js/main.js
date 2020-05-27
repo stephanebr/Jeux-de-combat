@@ -10,6 +10,7 @@ jeu.afficherArme();
 $(document).ready(function() {
     alert(`${jeu.joueurs[0]} vous commencez la partie !`);
     $('.nom-personnage').html(jeu.jaeden.classe).attr('id', `${jeu.jaeden.classe}-h2`);
+    console.log(jeu.jaeden);
     $('#mon-arme').html(jeu.jaeden.arme.degats).attr('class', `${jeu.jaeden.classe} cellule-${jeu.jaeden.arme.type} img-thumbnail`);
     $('#btn-attaquer').hide();
 
@@ -18,9 +19,7 @@ $(document).ready(function() {
         if(jeu.peutJouer === jeu.jaeden) {
             jeu.verifMouvement(jeu.jaeden, jeu.lich);
             jeu.plateau.deplacerDroite(jeu.jaeden);
-           
-        } 
-        else {
+        } else {
             console.log("Lich : peut jouer" + jeu.peutJouer.classe);
             jeu.verifMouvement(jeu.lich, jeu.jaeden);  
             jeu.plateau.deplacerDroite(jeu.lich);         
@@ -32,8 +31,7 @@ $(document).ready(function() {
             jeu.verifMouvement(jeu.jaeden, jeu.lich);
             jeu.plateau.deplacerGauche(jeu.jaeden);
            
-        } 
-        else {
+        } else {
             console.log("Lich : peut jouer" + jeu.peutJouer.classe)
             jeu.verifMouvement(jeu.lich, jeu.jaeden);
             jeu.plateau.deplacerGauche(jeu.lich);           
@@ -45,8 +43,7 @@ $(document).ready(function() {
             jeu.verifMouvement(jeu.jaeden, jeu.lich);
             jeu.plateau.deplacerHaut(jeu.jaeden);
            
-        } 
-        else {
+        } else {
             console.log("Lich : peut jouer" + jeu.peutJouer.classe)
             jeu.verifMouvement(jeu.lich, jeu.jaeden);
             jeu.plateau.deplacerHaut(jeu.lich);           

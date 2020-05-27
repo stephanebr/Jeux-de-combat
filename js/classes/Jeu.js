@@ -109,7 +109,7 @@ class Jeu {
     }
 
     verifMouvement(personnage1, personnage2) {
-        if (personnage1.mouvement >= 2) {
+        if (personnage1.mouvement >= 100) {
             this.changerJoueur(personnage2);
             alert(`${this.joueurs[0]} vous avez fini votre tour !`);
             alert(`Vous pouvez jouer ${this.joueurs[1]}`);
@@ -123,7 +123,7 @@ class Jeu {
     }
 
     combat() {
-        while(this.jaeden.sante > 0 || this.lich.sante > 0) {
+             console.log(`sante jaeden : ${this.jaeden.sante}`);
             if(this.peutJouer === this.jaeden) {
                 
                 this.jaeden.attaquer(this.lich);
@@ -135,7 +135,6 @@ class Jeu {
 
             console.log('jaeden : ' + this.jaeden.sante);
             console.log('Lich : ' + this.lich.sante);
-        }
 
         if(this.jaeden.sante <= 0 || this.lich.sante <= 0) {
             alert('Vous êtes mort !');

@@ -73,9 +73,6 @@ class Plateau {
         /* Création des id dynamiquements aux cellules en récupérant la concaténation de i + j et
          *  stock le resultat dans une propriété resultat
          */
-
-        cellules.setAttribute("data-ligne", "" + i);
-        cellules.setAttribute("data-colonne", "" + j);
         cellules.setAttribute("id", "" + j + "/" + i);
         cellules.classList.add("cellule-plateau");
         lignes.appendChild(cellules);
@@ -199,7 +196,7 @@ class Plateau {
       return false;
     }
     
-    if (this.casesPleines.includes(celluleBasse)) {
+    if(this.casesPleines.includes(celluleBasse)) {
       result = false;
     }
 
@@ -292,7 +289,33 @@ class Plateau {
 
     if(this.estCeQueLaCaseEstLibre(celluleBasse)) {
       personnage.mouvement = personnage.deplacer(position, celluleBasse);
+      let tabId = this.recupererCellules(position);
+
+      if(idPerso.classList.contains("cellule-perso")) {
+        alert("Vous pouvez attaquer le personnage");
+        $('#btn-attaquer').show();
+      }
+
+      /*
+       TO DO : fonction(id) {
+         return array[id : bas, haut, gauche et droite]
+
+         deuxieme fonction(array[id]) qui verifie que si un de ces elements si la class cellule-perso est presente
+       }
+
+      */
     }
+  }
+
+  recupererCellules(id) {
+    let tabId = [];
+    const celluleHaute = Plateau.majId(id, 0, 0);
+    const celluleDroite = Plateau.majId(id, 1, 1);
+    const celluleBasse = Plateau.majId(id, 0, 2);
+    const celluleGauche = Plateau.majId(id, -1, 1);
+    tabId.push(celluleHaute, celluleGauche, celluleBasse, celluleDroite);
+
+    return tabId;
   }
 
   estCeQueLaCaseEstLibre(cellule) {
@@ -301,11 +324,6 @@ class Plateau {
 
     if(this.casesObstacles.includes(cell) || idPerso.classList.contains("cellule-perso")) {
       alert("La case n'est pas libre !");
-
-      if(idPerso.classList.contains("cellule-perso")) {
-        alert("Vous pouvez attaquer le personnage");
-        $('#btn-attaquer').show();
-      }
 
       return false;
     }
