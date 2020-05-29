@@ -142,7 +142,7 @@ class Plateau {
     let y = this.nombreAleatoire(this.colonnes);
     const cellule = String(y) + "/" + String(x);
 
-    if (this.casesPleines.includes(cellule)) {
+    if(this.casesPleines.includes(cellule)) {
       return this.trouverCaseVide();
     }
 
@@ -282,6 +282,7 @@ class Plateau {
     let position = personnage.position;
     const celluleBasse = Plateau.majId(position, 0, 1);
     const nPosition = Plateau.conversionIdEnCoord(celluleBasse);
+    let idBas = [];
 
     if(nPosition.y >= this.rangees) {
       return false;
@@ -291,10 +292,21 @@ class Plateau {
       personnage.mouvement = personnage.deplacer(position, celluleBasse);
       let tabId = this.recupererCellules(position);
 
-      if(idPerso.classList.contains("cellule-perso")) {
+      tabId.forEach((id, index) => {
+        idBas.push(id);
+        console.log('index des cellule : ' + index + ' = à ' + id);
+      });
+
+      console.log('id bas ' + idBas);
+
+      if(document.getElementById(idBas).contains('cellule-perso')) {
+        console.log('Vous pouvez attaquer');
+      }
+
+      /*if(idPerso.classList.contains("cellule-perso")) {
         alert("Vous pouvez attaquer le personnage");
         $('#btn-attaquer').show();
-      }
+      }*/
 
       /*
        TO DO : fonction(id) {
