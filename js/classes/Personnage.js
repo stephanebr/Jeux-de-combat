@@ -1,6 +1,7 @@
 import { Couteau } from './Arme.js';
 import { html } from '../fonctions.js';
 import { jeu } from '../main.js';
+import { Plateau } from './Plateau.js';
 
 class Personnage {
 
@@ -88,12 +89,15 @@ class Personnage {
     }
     
     deplacer(position, nPosition) {
-        document.getElementById(position).classList.remove(`cellule-${this.classe}`, 'cellule-perso');
-        document.getElementById(position).removeAttribute('data-perso');
+        document.getElementById(this.position).classList.remove(`cellule-${this.classe}`, 'cellule-perso');
+        document.getElementById(this.position).removeAttribute('data-perso');
         document.getElementById(nPosition).classList.add(`cellule-${this.classe}`, 'cellule-perso');
         document.getElementById(nPosition).setAttribute('data-perso', '' + this.classe);
         this.position = nPosition;
         this.mouvement++;
+
+        let tabId = Plateau.recupererCellules(nPosition);
+        Plateau.verifierClassPersonnage(tabId);
         
         return this.mouvement;        
     }

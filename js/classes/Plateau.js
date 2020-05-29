@@ -26,6 +26,58 @@ class Plateau {
     return `${nPosition.x}/${nPosition.y}`;
   }
 
+  static recupererCellules(id) {
+    let tabId = [];
+    const celluleHaute = Plateau.majId(id, 0, -1);
+    const celluleDroite = Plateau.majId(id, 1, 0);
+    const celluleBasse = Plateau.majId(id, 0, 1);
+    const celluleGauche = Plateau.majId(id, -1, 0);
+    const celluleH = Plateau.conversionIdEnCoord(celluleHaute);
+    const celluleD = Plateau.conversionIdEnCoord(celluleDroite);
+    const celluleB = Plateau.conversionIdEnCoord(celluleBasse);
+    const celluleG = Plateau.conversionIdEnCoord(celluleGauche);
+    
+    if(celluleH.y < 0) {
+      console.log(`Pas de cellule haute de dispo ${celluleH.y}`);
+      return false;
+    }
+
+    if(celluleD.x > this.colonnes) {
+      console.log(`Pas de cellule droite de dispo ${celluleD.x}`);
+      return false;
+    }
+    
+    if(celluleB.y > this.rangees) {
+      console.log(`Pas de cellule basse de dispo ${celluleB.y}`);
+      return false;
+    }
+  
+    if(celluleG.x < 0) {
+      console.log(`Pas de cellule gauche de dispo ${celluleG.x}`);
+      return false;
+    }    
+
+    tabId.push(celluleHaute, celluleGauche, celluleBasse, celluleDroite);
+ 
+    return tabId;
+  }
+
+  static verifierClassPersonnage(tableauId) {
+    let combatDemare = false;
+
+    tableauId.forEach((id) => {
+      if(document.getElementById(id).classList.contains('cellule-perso')) {
+        alert('Vous pouvez attaquer votre adversaire !');
+        alert('Que le combat commence !');
+        $('#btn-attaquer').show();
+        combatDemare = true
+      }
+    });
+
+    return combatDemare;
+  }
+
+
   /**
    * Getters
    */
@@ -187,6 +239,22 @@ class Plateau {
     return result;
   }
 
+  caseDroiteLibre(cellule) {
+    let result = true;
+    const celluleDroite = Plateau.majId(cellule, 1, 0);
+    const nPosition = Plateau.conversionIdEnCoord(celluleDroite);
+
+    if(nPosition.x >= this.colonnes) {
+      return false;
+    }
+
+    if(this.casesPleines.includes(celluleDroite)) {
+      result = false;
+    }
+
+    return result;
+  }
+
   caseBasLibre(cellule) {
     let result = true;
     const celluleBasse = Plateau.majId(cellule, 0, 1);
@@ -219,20 +287,19 @@ class Plateau {
     return result;
   }
 
-  caseDroiteLibre(cellule) {
-    let result = true;
-    const celluleDroite = Plateau.majId(cellule, 1, 0);
-    const nPosition = Plateau.conversionIdEnCoord(celluleDroite);
+  deplacerHaut(personnage) {
+    //Le joueur à le droit de se déplacer de 3 cases max
+    let position = personnage.position;
+    const celluleHaute = Plateau.majId(position, 0, -1);
+    const nPosition = Plateau.conversionIdEnCoord(celluleHaute);
 
-    if(nPosition.x >= this.colonnes) {
+    if(nPosition.y < 0) {
       return false;
     }
 
-    if(this.casesPleines.includes(celluleDroite)) {
-      result = false;
+    if (this.estCeQueLaCaseEstLibre(celluleHaute)) {
+      personnage.mouvement = personnage.deplacer(position, celluleHaute);
     }
-
-    return result;
   }
 
   deplacerDroite(personnage) {
@@ -243,6 +310,21 @@ class Plateau {
 
     if(nPosition.x < this.colonnes && this.estCeQueLaCaseEstLibre(celluleDroite)) {
       personnage.mouvement = personnage.deplacer(position, celluleDroite);
+    }
+  }
+
+  deplacerBas(personnage) {
+    //Le joueur à le droit de se déplacer de 3 cases max
+    let position = personnage.position;
+    const celluleBasse = Plateau.majId(position, 0, 1);
+    const nPosition = Plateau.conversionIdEnCoord(celluleBasse);
+
+    if(nPosition.y >= this.rangees) {
+      return false;
+    }
+
+    if(this.estCeQueLaCaseEstLibre(celluleBasse)) {
+      personnage.mouvement = personnage.deplacer(position, celluleBasse);
     }
   }
 
@@ -262,81 +344,11 @@ class Plateau {
     }
   }
 
-  deplacerHaut(personnage) {
-    //Le joueur à le droit de se déplacer de 3 cases max
-    let position = personnage.position;
-    const celluleHaute = Plateau.majId(position, 0, -1);
-    const nPosition = Plateau.conversionIdEnCoord(celluleHaute);
-
-    if(nPosition.y < 0) {
-      return false;
-    }
-
-    if (this.estCeQueLaCaseEstLibre(celluleHaute)) {
-      personnage.mouvement = personnage.deplacer(position, celluleHaute);
-    }
-  }
-
-  deplacerBas(personnage) {
-    //Le joueur à le droit de se déplacer de 3 cases max
-    let position = personnage.position;
-    const celluleBasse = Plateau.majId(position, 0, 1);
-    const nPosition = Plateau.conversionIdEnCoord(celluleBasse);
-    let idBas = [];
-
-    if(nPosition.y >= this.rangees) {
-      return false;
-    }
-
-    if(this.estCeQueLaCaseEstLibre(celluleBasse)) {
-      personnage.mouvement = personnage.deplacer(position, celluleBasse);
-      let tabId = this.recupererCellules(position);
-
-      tabId.forEach((id, index) => {
-        idBas.push(id);
-        console.log('index des cellule : ' + index + ' = à ' + id);
-      });
-
-      console.log('id bas ' + idBas);
-
-      if(document.getElementById(idBas).contains('cellule-perso')) {
-        console.log('Vous pouvez attaquer');
-      }
-
-      /*if(idPerso.classList.contains("cellule-perso")) {
-        alert("Vous pouvez attaquer le personnage");
-        $('#btn-attaquer').show();
-      }*/
-
-      /*
-       TO DO : fonction(id) {
-         return array[id : bas, haut, gauche et droite]
-
-         deuxieme fonction(array[id]) qui verifie que si un de ces elements si la class cellule-perso est presente
-       }
-
-      */
-    }
-  }
-
-  recupererCellules(id) {
-    let tabId = [];
-    const celluleHaute = Plateau.majId(id, 0, 0);
-    const celluleDroite = Plateau.majId(id, 1, 1);
-    const celluleBasse = Plateau.majId(id, 0, 2);
-    const celluleGauche = Plateau.majId(id, -1, 1);
-    tabId.push(celluleHaute, celluleGauche, celluleBasse, celluleDroite);
-
-    return tabId;
-  }
-
   estCeQueLaCaseEstLibre(cellule) {
     let cell = String(cellule);
     let idPerso = document.getElementById(cellule);
 
     if(this.casesObstacles.includes(cell) || idPerso.classList.contains("cellule-perso")) {
-      alert("La case n'est pas libre !");
-
       return false;
     }
 

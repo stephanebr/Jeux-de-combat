@@ -43,7 +43,7 @@ class Jeu {
 
     set msgAlert(message) { this._msgAlert = message; }
 
-
+    
     ajouterJoueur(joueur) {
         this.joueurs = joueur; // On ajoute au tableau
         this.plateau.placerPersonnage(joueur) // On trouve un Id libre pour placer un personnage sur le plateau
@@ -54,7 +54,7 @@ class Jeu {
     
         this.jaeden.score = {
             idJaeden: $('#jaeden').html(noms[0]),
-            scoreJaeden: $('#score-jaeden').html(` : ${this.jaeden.sante}`)           
+            scoreJaeden: $('#score-jaeden').html(` : ${this.jaeden.santes}`)           
         }
 
         this.lich.score = {
@@ -123,10 +123,11 @@ class Jeu {
     }
 
     combat() {
-             console.log(`sante jaeden : ${this.jaeden.sante}`);
+            console.log(`sante jaeden : ${this.jaeden.sante}`);
             if(this.peutJouer === this.jaeden) {
                 
                 this.jaeden.attaquer(this.lich);
+                console.log('l 130 : ' + this.jaeden.sante);
                 this.changerJoueur(this.lich);
             } else {
                 this.lich.attaquer(this.jaeden);
