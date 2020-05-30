@@ -11,7 +11,7 @@ class Plateau {
   }
 
   static conversionIdEnCoord(id) {
-    const [x, y] = id.split("/");
+    const [x, y] = id.split("_");
     return { x: Number(x), y: Number(y) };
   }
 
@@ -23,7 +23,7 @@ class Plateau {
       y: originePosition.y + translationY,
     };
 
-    return `${nPosition.x}/${nPosition.y}`;
+    return `${nPosition.x}_${nPosition.y}`;
   }
 
   static recupererCellules(id) {
@@ -46,7 +46,7 @@ class Plateau {
     let combatDemare = false;
 
     tableauId.forEach((id) => {
-      if(document.getElementById(id).classList.contains('cellule-perso')) {
+      if($("#" + id).hasClass('cellule-perso')) {
         alert('Vous pouvez attaquer votre adversaire !');
         alert('Que le combat commence !');
         $('#btn-attaquer').show();
@@ -56,7 +56,6 @@ class Plateau {
 
     return combatDemare;
   }
-
 
   /**
    * Getters
@@ -105,7 +104,7 @@ class Plateau {
         /* Création des id dynamiquements aux cellules en récupérant la concaténation de i + j et
          *  stock le resultat dans une propriété resultat
          */
-        cellules.setAttribute("id", "" + j + "/" + i);
+        cellules.setAttribute("id", "" + j + "_" + i);
         cellules.classList.add("cellule-plateau");
         lignes.appendChild(cellules);
       }
@@ -145,10 +144,7 @@ class Plateau {
     this.casesPleines.push(id);
     console.log(`cases persos : ${this.casesPersos}`);
     let cellulePersonnage = document.getElementById(id);
-    cellulePersonnage.classList.add(
-      `cellule-${personnage.classe}`,
-      "cellule-perso"
-    );
+    cellulePersonnage.classList.add(`cellule-${personnage.classe}`, "cellule-perso");
     cellulePersonnage.setAttribute("data-perso", "" + personnage.classe);
     personnage.position = cellulePersonnage.id;
   }
@@ -172,7 +168,7 @@ class Plateau {
   trouverCaseVide() {
     let x = this.nombreAleatoire(this.rangees);
     let y = this.nombreAleatoire(this.colonnes);
-    const cellule = String(y) + "/" + String(x);
+    const cellule = String(y) + "_" + String(x);
 
     if(this.casesPleines.includes(cellule)) {
       return this.trouverCaseVide();
@@ -183,22 +179,22 @@ class Plateau {
 
   trouverCaseUtilisable() {
     let cellule = this.trouverCaseVide();
-
-    if (this.caseGaucheLibre(cellule)) {
-      return cellule;
-    }
-
+  
     if (this.caseHauteLibre(cellule)) {
-      return cellule;
-    }
-
-    if (this.caseBasLibre(cellule)) {
       return cellule;
     }
 
     if (this.caseDroiteLibre(cellule)) {
       return cellule;
+    }   
+
+    if (this.caseBasLibre(cellule)) {
+      return cellule;
     }
+
+    if (this.caseGaucheLibre(cellule)) {
+      return cellule;
+    }   
 
     return this.trouverCaseUtilisable();
   }
@@ -326,9 +322,9 @@ class Plateau {
 
   estCeQueLaCaseEstLibre(cellule) {
     let cell = String(cellule);
-    let idPerso = document.getElementById(cellule);
+    //let idPerso = document.getElementById(cellule);
 
-    if(this.casesObstacles.includes(cell) || idPerso.classList.contains("cellule-perso")) {
+    if(this.casesObstacles.includes(cell)) {
       return false;
     }
 

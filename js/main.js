@@ -2,6 +2,7 @@ import { Jeu } from './classes/Jeu.js';
 
 export const jeu = new Jeu();
 
+jeu.afficherJoueur();
 jeu.afficherScore();
 jeu.ajouterJoueur(jeu.jaeden);
 jeu.ajouterJoueur(jeu.lich);
@@ -89,7 +90,6 @@ $(document).ready(function() {
         e.preventDefault();
 
         if(e.key == 'ArrowRight') {
-            
             if(jeu.peutJouer === jeu.jaeden) {
                 console.log("Jeaden : peut jouer"+jeu.peutJouer.classe);
                 jeu.verifMouvement(jeu.jaeden, jeu.lich);

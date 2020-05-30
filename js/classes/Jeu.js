@@ -12,7 +12,7 @@ class Jeu {
         this.armes      = new Hache();
         this.armes      = new Glaive();
         this.armes      = new BaguetteMagique();
-        this._plateau   = new Plateau(12,8); // Objet contenant le plateau instancié
+        this._plateau   = new Plateau(5,5); // Objet contenant le plateau instancié
         this.plateau.genererObstacle(1);
         this.plateau.placerArme(this.armes);
         this.armes      = new Couteau();
@@ -49,16 +49,18 @@ class Jeu {
         this.plateau.placerPersonnage(joueur) // On trouve un Id libre pour placer un personnage sur le plateau
     }
 
+    afficherJoueur() {
+        const noms  = this.inscrireJoueur();    
+        $('#jaeden').html(noms[0]);
+        $('#lich').html(noms[1]);
+    }
+
     afficherScore() {
-        const noms  = this.inscrireJoueur();
-    
         this.jaeden.score = {
-            idJaeden: $('#jaeden').html(noms[0]),
             scoreJaeden: $('#score-jaeden').html(` : ${this.jaeden.sante}`)           
         }
 
         this.lich.score = {
-            idLich: $('#lich').html(noms[1]),
             scoreLich: $('#score-lich').html(` : ${this.lich.sante}`)
         }
     }
@@ -111,8 +113,6 @@ class Jeu {
     verifMouvement(personnage1, personnage2) {
         if (personnage1.mouvement >= 100) {
             this.changerJoueur(personnage2);
-            $('.nom-personnage').html(personnage2.classe).attr('id', `${personnage2.classe}-h2`);
-            $('#mon-arme').html(personnage2.arme.degats).attr('class', `${personnage2.classe} cellule-${personnage2.arme.type} img-thumbnail`);
             personnage1.mouvement = 0;
             personnage2.mouvement = 0;
             console.log(`perso 1 : ${personnage1.mouvement}`)
@@ -121,19 +121,21 @@ class Jeu {
     }
 
     combat() {
-            console.log(`sante jaeden : ${this.jaeden.sante}`);
-            if(this.peutJouer === this.jaeden) {
-                
-                this.jaeden.attaquer(this.lich);
-                console.log('l 130 : ' + this.jaeden.sante);
-                this.changerJoueur(this.lich);
-            } else {
-                this.lich.attaquer(this.jaeden);
-                this.changerJoueur(this.jaeden);
-            }
+        console.log(`sante jaeden : ${this.jaeden.sante}`);
+        if(this.peutJouer === this.jaeden) {
+            
+            this.jaeden.attaquer(this.lich);
+            console.log('l 130 : ' + this.jaeden.sante);
+            this.changerJoueur(this.lich);
+        } else {
+            this.lich.attaquer(this.jaeden);
+            this.changerJoueur(this.jaeden);
+        }
 
-            console.log('jaeden : ' + this.jaeden.sante);
-            console.log('Lich : ' + this.lich.sante);
+        console.log('jaeden : ' + this.jaeden.sante);
+        console.log('Lich : ' + this.lich.sante);
+
+        this.afficherScore();
 
         if(this.jaeden.sante <= 0 || this.lich.sante <= 0) {
             alert('Vous êtes mort !');
@@ -144,6 +146,8 @@ class Jeu {
         this.peutJouer = classePersonnage;
         alert(`${this.joueurs[0]} vous avez fini votre tour !`);
         alert(`Vous pouvez jouer ${this.joueurs[1]}`);
+        $('.nom-personnage').html(classePersonnage.classe).attr('id', `${classePersonnage.classe}-h2`);
+        $('#mon-arme').html(classePersonnage.arme.degats).attr('class', `${classePersonnage.classe} cellule-${classePersonnage.arme.type} img-thumbnail`);
     }
 }
 
