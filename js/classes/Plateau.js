@@ -36,26 +36,6 @@ class Plateau {
     const celluleD = Plateau.conversionIdEnCoord(celluleDroite);
     const celluleB = Plateau.conversionIdEnCoord(celluleBasse);
     const celluleG = Plateau.conversionIdEnCoord(celluleGauche);
-    
-    if(celluleH.y < 0) {
-      console.log(`Pas de cellule haute de dispo ${celluleH.y}`);
-      return false;
-    }
-
-    if(celluleD.x > this.colonnes) {
-      console.log(`Pas de cellule droite de dispo ${celluleD.x}`);
-      return false;
-    }
-    
-    if(celluleB.y > this.rangees) {
-      console.log(`Pas de cellule basse de dispo ${celluleB.y}`);
-      return false;
-    }
-  
-    if(celluleG.x < 0) {
-      console.log(`Pas de cellule gauche de dispo ${celluleG.x}`);
-      return false;
-    }    
 
     tabId.push(celluleHaute, celluleGauche, celluleBasse, celluleDroite);
  
