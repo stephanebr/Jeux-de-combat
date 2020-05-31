@@ -67,7 +67,7 @@ $(document).ready(function() {
 
     // Bouton pour terminer le tour
     $('#btn-terminer').on('click', function(e) {
-        if(jeu.persoActif == jeu.jaeden) {
+        if(jeu.persoActif === jeu.jaeden) {
             jeu.changerJoueur(jeu.lich);
             jeu.lich.mouvement = 0;
             alert(`${jeu.joueurs[0]} vous passer votre tour !`);
@@ -88,10 +88,18 @@ $(document).ready(function() {
 
     // Bouton parer
     $('#btn-defendre').on('click', function() {
-        jeu.defendre(jeu.persoActif);
+        if(jeu.persoActif) {
+            jeu.persoActif.defenseActive = true;
+        }
+
+        if(jeu.persoActif === jeu.jaeden) {
+            $('.nom-personnage').html(jeu.lich.classe).attr('id', `${jeu.lich.classe}-h2`);
+            $('#mon-arme').html(jeu.lich.arme.degats).attr('class', `${jeu.lich.classe} cellule-${jeu.lich.arme.type} img-thumbnail`);
+        } else {
+            $('.nom-personnage').html(jeu.jaeden.classe).attr('id', `${jeu.jaeden.classe}-h2`);
+            $('#mon-arme').html(jeu.jaeden.arme.degats).attr('class', `${jeu.jaeden.classe} cellule-${jeu.jaeden.arme.type} img-thumbnail`); 
+        }
     });
-
-
 
     // Déplacement par les flêches du clavier
     $('html').keydown(function(e){

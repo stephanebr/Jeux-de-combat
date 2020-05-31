@@ -123,9 +123,11 @@ class Jeu {
     combat() {
         if(this.persoActif === this.jaeden) {
             this.jaeden.attaquer(this.lich);
+            console.log('Jaeden se défend : ' + this.jaeden.defenseActive);
             this.changerJoueur(this.lich);
         } else {
             this.lich.attaquer(this.jaeden);
+            console.log('Lich se défend : ' + this.lich.defenseActive);
             this.changerJoueur(this.jaeden);
         }
 
@@ -136,10 +138,6 @@ class Jeu {
            alert('La partie est terminée !');
            $('#btn-attaquer, #btn-defendre').hide();           
         }
-    }
-
-    seDefendre() {
-        let capture = '';
     }
 
     changerJoueur(classePersonnage) {

@@ -5,13 +5,14 @@ import { Plateau } from './Plateau.js';
 class Personnage {
 
     constructor(pseudo, classe, position, arme) {
-        this._pseudo     = pseudo;
-        this._classe     = classe;
-        this._sante      = 20;
-        this._position   = position;
-        this._mouvement  = 0;
-        this._arme       = arme;
-        this._score      = {}; //Tableau json contenant le score des joueurs
+        this._pseudo       = pseudo;
+        this._classe       = classe;
+        this._sante        = 20;
+        this._position     = position;
+        this._mouvement    = 0;
+        this._arme         = arme;
+        this._score        = {}; //Tableau json contenant le score des joueurs
+        this.defenseActive = false;
     }
 
     /**
@@ -48,11 +49,15 @@ class Personnage {
     set score(score) { this._score = score; }
 
     attaquer(personnage) {
+        if(this.defenseActive === true) {
+            this.defendre();
+        }
+
         personnage.sante -= this.arme.degats;
     }
 
-    defendre(personnage) {
-        personnage.sante -= this.arme.degats / 2;
+    defendre() {
+        this.sante -= this.arme.degats / 2;
     }
 
     gagner() {
