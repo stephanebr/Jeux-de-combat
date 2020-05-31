@@ -19,7 +19,7 @@ class Jeu {
         this.jaeden     = new RoiJaeden(this.pseudo, this.armes[this.armes.length -1]);
         this.lich       = new RoiLich(this.pseudo, this.armes[this.armes.length -1]);
         this._joueurs   = []; // Tableau contenant le pseudo des joueurs inscrits
-        this._peutJouer = this.jaeden; // Le nom du personnage qui peut jouer
+        this._persoActif = this.jaeden; // Le nom du personnage qui peut jouer
         this._msgAlert  = ''; // Messages d'actions
     }
 
@@ -29,7 +29,7 @@ class Jeu {
 
     get armes() { return this._armes; }
 
-    get peutJouer() { return this._peutJouer; }
+    get persoActif() { return this._persoActif; }
     
     get msgAlert() { return this._msgAlert; }
 
@@ -39,7 +39,7 @@ class Jeu {
 
     set armes(armes) { this._armes.push(armes); }
 
-    set peutJouer(peutJouer) { this._peutJouer = peutJouer; }
+    set persoActif(persoActif) { this._persoActif = persoActif; }
 
     set msgAlert(message) { this._msgAlert = message; }
 
@@ -121,29 +121,29 @@ class Jeu {
     }
 
     combat() {
-        console.log(`sante jaeden : ${this.jaeden.sante}`);
-        if(this.peutJouer === this.jaeden) {
-            
+        if(this.persoActif === this.jaeden) {
             this.jaeden.attaquer(this.lich);
-            console.log('l 130 : ' + this.jaeden.sante);
             this.changerJoueur(this.lich);
         } else {
             this.lich.attaquer(this.jaeden);
             this.changerJoueur(this.jaeden);
         }
 
-        console.log('jaeden : ' + this.jaeden.sante);
-        console.log('Lich : ' + this.lich.sante);
-
         this.afficherScore();
 
-        if(this.jaeden.sante <= 0 || this.lich.sante <= 0) {
-            alert('Vous êtes mort !');
+        if(!this.persoActif.vie) {
+           this.persoActif.gagner();
+           alert('La partie est terminée !');
+           $('#btn-attaquer, #btn-defendre').hide();           
         }
     }
 
+    seDefendre() {
+        let capture = '';
+    }
+
     changerJoueur(classePersonnage) {
-        this.peutJouer = classePersonnage;
+        this.persoActif = classePersonnage;
         alert(`${this.joueurs[0]} vous avez fini votre tour !`);
         alert(`Vous pouvez jouer ${this.joueurs[1]}`);
         $('.nom-personnage').html(classePersonnage.classe).attr('id', `${classePersonnage.classe}-h2`);

@@ -1,5 +1,4 @@
 import { Couteau } from './Arme.js';
-import { html } from '../fonctions.js';
 import { jeu } from '../main.js';
 import { Plateau } from './Plateau.js';
 
@@ -8,7 +7,7 @@ class Personnage {
     constructor(pseudo, classe, position, arme) {
         this._pseudo     = pseudo;
         this._classe     = classe;
-        this._sante      = 100;
+        this._sante      = 20;
         this._position   = position;
         this._mouvement  = 0;
         this._arme       = arme;
@@ -49,44 +48,21 @@ class Personnage {
     set score(score) { this._score = score; }
 
     attaquer(personnage) {
-        if(personnage === this) {
-            html("Vous êtes fous, vous êtes en train de vous taper !<br>");
-        }
-
-        if(!personnage.vie) {
-            html("Vous ne pouvez pas attaquer un mort !<br>");
-            return;
-        }
-
-        html(`${this.pseudo} attaque ${personnage.pseudo} avec son ${this.arme.type} qui fait ${this.arme.degats} dégâts.<br> ${personnage.pseudo} vous perdez ${this.arme.degats} points de vie.<br>`);
-        //personnage.informer();
-
         personnage.sante -= this.arme.degats;
+    }
 
-        /*if(this.arme) {
-            html(`${this.pseudo} attaque ${personnage.pseudo} avec son ${this.arme.type} qui fait ${this.arme.degats} dégâts.<br> ${personnage.pseudo} vous perdez ${this.arme.degats} points de vie.<br>`);
-            personnage.informer();
-        }
-
-        if(!personnage.vie) {
-            personnage.mourir();
-            this.gagner();
-            return;
-        }*/
+    defendre(personnage) {
+        personnage.sante -= this.arme.degats / 2;
     }
 
     gagner() {
-        html(`${this.pseudo} Bravo, vous avez gagné !<br>`);
+        alert(`${this.pseudo} Bravo, vous avez gagné !`);
     }
 
     mourir() {
         alert(`${this.pseudo} Vous avez perdu, vous êtes mort !`);
+        return;
     } 
-
-
-    informer() {
-        html(`${this.pseudo} ${this.classe} a ${this.sante} points de vie.<br>`);
-    }
     
     deplacer(position, nPosition) {
         document.getElementById(this.position).classList.remove(`cellule-${this.classe}`, 'cellule-perso');

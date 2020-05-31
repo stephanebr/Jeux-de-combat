@@ -50,6 +50,9 @@ class Plateau {
         alert('Vous pouvez attaquer votre adversaire !');
         alert('Que le combat commence !');
         $('#btn-attaquer').show();
+        $('#btn-defendre').show();
+        $('#btn-haut, #btn-droite, #btn-bas, #btn-gauche, #btn-terminer').hide();
+        $('*').off('keydown');
         combatDemare = true
       }
     });
@@ -342,7 +345,7 @@ class Plateau {
       let dataIdArme = idArme.getAttribute("data-idArme");
       alert("Prendre l'arme !");
 
-      personnage = jeu.peutJouer;
+      personnage = jeu.persoActif;
 
       personnage.deposer(idArme);
 
