@@ -7,7 +7,7 @@ class Personnage {
     constructor(pseudo, classe, position, arme) {
         this._pseudo       = pseudo;
         this._classe       = classe;
-        this._sante        = 20;
+        this._sante        = 100;
         this._position     = position;
         this._mouvement    = 0;
         this._arme         = arme;
@@ -49,15 +49,11 @@ class Personnage {
     set score(score) { this._score = score; }
 
     attaquer(personnage) {
-        if(this.defenseActive === true) {
-            this.defendre();
+        if(personnage.defenseActive === true) {
+            personnage.sante = personnage.sante - (this.arme.degats / 2);
+        } else {
+            personnage.sante -= this.arme.degats;
         }
-
-        personnage.sante -= this.arme.degats;
-    }
-
-    defendre() {
-        this.sante -= this.arme.degats / 2;
     }
 
     gagner() {

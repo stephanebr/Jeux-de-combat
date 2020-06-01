@@ -88,16 +88,13 @@ $(document).ready(function() {
 
     // Bouton parer
     $('#btn-defendre').on('click', function() {
-        if(jeu.persoActif) {
-            jeu.persoActif.defenseActive = true;
-        }
+        jeu.persoActif.defenseActive = true;
+        console.log(`${jeu.persoActif.classe} se défend`);
 
         if(jeu.persoActif === jeu.jaeden) {
-            $('.nom-personnage').html(jeu.lich.classe).attr('id', `${jeu.lich.classe}-h2`);
-            $('#mon-arme').html(jeu.lich.arme.degats).attr('class', `${jeu.lich.classe} cellule-${jeu.lich.arme.type} img-thumbnail`);
+            jeu.changerJoueur(jeu.lich);
         } else {
-            $('.nom-personnage').html(jeu.jaeden.classe).attr('id', `${jeu.jaeden.classe}-h2`);
-            $('#mon-arme').html(jeu.jaeden.arme.degats).attr('class', `${jeu.jaeden.classe} cellule-${jeu.jaeden.arme.type} img-thumbnail`); 
+            jeu.changerJoueur(jeu.jaeden);
         }
     });
 

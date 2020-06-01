@@ -49,10 +49,9 @@ class Jeu {
         this.plateau.placerPersonnage(joueur) // On trouve un Id libre pour placer un personnage sur le plateau
     }
 
-    afficherJoueur() {
-        const noms  = this.inscrireJoueur();    
-        $('#jaeden').html(noms[0]);
-        $('#lich').html(noms[1]);
+    afficherJoueur() { 
+        $('#jaeden').html('Roi-Jaeden');
+        $('#lich').html('Roi-Lich');
     }
 
     afficherScore() {

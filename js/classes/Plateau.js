@@ -156,7 +156,7 @@ class Plateau {
     for (let i = 0; i < armes.length; i++) {
       let idArme = this.trouverCaseVide();
 
-      this.casesPleines.push(idArme);
+      //this.casesPleines.push(idArme);
       this.casesArmes.push(idArme);
 
       let celluleArme = document.getElementById(idArme);
@@ -173,7 +173,7 @@ class Plateau {
     let y = this.nombreAleatoire(this.colonnes);
     const cellule = String(y) + "_" + String(x);
 
-    if(this.casesPleines.includes(cellule)) {
+    if(this.casesPleines.includes(cellule) || this.casesArmes.includes(cellule)) {
       return this.trouverCaseVide();
     }
 
@@ -182,39 +182,43 @@ class Plateau {
 
   trouverCaseUtilisable() {
     let cellule = this.trouverCaseVide();
+    let dispo = true;
   
-    if (this.caseHauteLibre(cellule)) {
-      return cellule;
+    if (!this.caseHauteLibre(cellule)) {
+      dispo = false;
     }
 
-    if (this.caseDroiteLibre(cellule)) {
-      return cellule;
+    if (!this.caseDroiteLibre(cellule)) {
+      dispo = false;
     }   
 
-    if (this.caseBasLibre(cellule)) {
-      return cellule;
+    if (!this.caseBasLibre(cellule)) {
+      dispo = false;
     }
 
-    if (this.caseGaucheLibre(cellule)) {
-      return cellule;
+    if (!this.caseGaucheLibre(cellule)) {
+      dispo = false;
     }   
 
-    return this.trouverCaseUtilisable();
+    if(dispo === false) {
+      return this.trouverCaseUtilisable();
+    }    
+    
+    return cellule;
   }
 
   caseHauteLibre(cellule) {
     let result = true;
     const celluleHaute = Plateau.majId(cellule, 0, -1);
     const nPosition = Plateau.conversionIdEnCoord(celluleHaute);
-
+    
     if(nPosition.y < 0) {
       return false;
     }
-
+    
     if (this.casesPleines.includes(celluleHaute)) {
       result = false;
     }
-
     return result;
   }
 
@@ -331,12 +335,12 @@ class Plateau {
       return false;
     }
 
-    this.estCeQueLaCaseAUneArme(cell);
+    this.laCaseAUneArme(cell);
 
     return true;
   }
 
-  estCeQueLaCaseAUneArme(cellule) {
+  laCaseAUneArme(cellule) {
     let cell = String(cellule);
     let personnage;
     let idArme = document.getElementById(cell);
