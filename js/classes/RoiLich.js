@@ -1,8 +1,8 @@
 import { Personnage } from './Personnage.js';
 
 class RoiLich extends Personnage {
-    constructor(pseudo, arme) {
-        super(pseudo, "roi-lich", null, arme);
+    constructor(arme) {
+        super('Roi-Lich', "roi-lich", null, arme);
     }
 }
 

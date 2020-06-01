@@ -16,8 +16,8 @@ class Jeu {
         this.plateau.genererObstacle(1);
         this.plateau.placerArme(this.armes);
         this.armes      = new Couteau();
-        this.jaeden     = new RoiJaeden(this.pseudo, this.armes[this.armes.length -1]);
-        this.lich       = new RoiLich(this.pseudo, this.armes[this.armes.length -1]);
+        this.jaeden     = new RoiJaeden(this.armes[this.armes.length -1]);
+        this.lich       = new RoiLich(this.armes[this.armes.length -1]);
         this._joueurs   = []; // Tableau contenant le pseudo des joueurs inscrits
         this._persoActif = this.jaeden; // Le nom du personnage qui peut jouer
         this._msgAlert  = ''; // Messages d'actions
@@ -50,8 +50,8 @@ class Jeu {
     }
 
     afficherJoueur() { 
-        $('#jaeden').html('Roi-Jaeden');
-        $('#lich').html('Roi-Lich');
+        $('#jaeden').html(`${this.jaeden.pseudo} `);
+        $('#lich').html(`${this.lich.pseudo} `);
     }
 
     afficherScore() {
@@ -110,7 +110,7 @@ class Jeu {
     }
 
     verifMouvement(personnage1, personnage2) {
-        if (personnage1.mouvement >= 100) {
+        if (personnage1.mouvement >= 3) {
             this.changerJoueur(personnage2);
             personnage1.mouvement = 0;
             personnage2.mouvement = 0;

@@ -155,8 +155,6 @@ class Plateau {
   placerArme(armes) {
     for (let i = 0; i < armes.length; i++) {
       let idArme = this.trouverCaseVide();
-
-      //this.casesPleines.push(idArme);
       this.casesArmes.push(idArme);
 
       let celluleArme = document.getElementById(idArme);
