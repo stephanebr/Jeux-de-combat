@@ -104,8 +104,7 @@ class Plateau {
         // Création des éléments <td>
         let cellules = document.createElement("td");
 
-        /* Création des id dynamiquements aux cellules en récupérant la concaténation de i + j et
-         *  stock le resultat dans une propriété resultat
+        /* Création des id dynamiquements aux cellules en récupérant le nombre de la colonne et le nombre de la rangée (i_j)
          */
         cellules.setAttribute("id", "" + j + "_" + i);
         cellules.classList.add("cellule-plateau");
@@ -126,6 +125,10 @@ class Plateau {
     tbl.setAttribute("height", "500");
   }
 
+  /**
+   * La méthode genererObstacle(nbObstacles)
+   * Attend un parametre Number qui va déterminer le nombre d'obstacles générés sur le plateau
+   */
   genererObstacle(nbObstacles) {
     for (let i = 0; i < nbObstacles; i++) {
       let obstacle = this.trouverCaseVide();
@@ -138,14 +141,26 @@ class Plateau {
     }
   }
 
+  /**
+   * La méthode nombreAléatoire(max) attend un parametre Number qui détermine le nombre maximun
+   * Elle fait un tirage aléatoire de nombre de 0 à max de colonne et rangée 
+   * @param {Number} max
+   *  
+   */
   nombreAleatoire(max) {
     return Math.floor(Math.random() * max);
   }
 
+  /**
+   * La méthode placerPersonnage attend en parametre un objet Personnage, place les personnages selon la valeur retournée par le méthode trouverCaseUtilisable()
+   * qui est stockée dans un attribut id et stock l'id dans le tableau casePleines.
+   * Recupère la position des personnages qui est initialisée par le Setter position
+   *  
+   * @param {Objet} personnage 
+   */
   placerPersonnage(personnage) {
     let id = this.trouverCaseUtilisable();
     this.casesPleines.push(id);
-    console.log(`cases persos : ${this.casesPersos}`);
     let cellulePersonnage = document.getElementById(id);
     cellulePersonnage.classList.add(`cellule-${personnage.classe}`, "cellule-perso");
     cellulePersonnage.setAttribute("data-perso", "" + personnage.classe);
@@ -316,7 +331,6 @@ class Plateau {
     const nPosition = Plateau.conversionIdEnCoord(celluleGauche);
 
     if(nPosition.x < 0) {
-      console.log("la colonne est egale à 0");
       return false;
     }
 
@@ -348,10 +362,7 @@ class Plateau {
       alert("Prendre l'arme !");
 
       personnage = jeu.persoActif;
-
       personnage.deposer(idArme);
-
-      console.log("l 331 : dataIdArme : " + dataIdArme);
       personnage.prendre(dataIdArme);
 
       $("#mon-arme").html(personnage.arme.degats).attr("class", `cellule-${personnage.arme.type} img-thumbnail`);

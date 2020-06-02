@@ -48,6 +48,15 @@ pre {
      font: 400 13px/18.5714px MedievalSharp;
 }
 
+#jaeden, #lich {
+    max-width: 100%;
+    width: 11%;
+}
+
+#jaeden, #lich, #score-jaeden, #score-lich {
+    font-size: 1.4em;;
+}
+
 #armes p {
     position: relative;
 }
@@ -88,6 +97,10 @@ img#baguette-magique {
     background-color: darkgoldenrod;
     padding-left: 1.2em;
     padding-right: 1.4em;
+}
+
+img#couteau {
+    background-color:teal;
 }
 
 .nom-arme {

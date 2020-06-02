@@ -1,4 +1,3 @@
-import { Couteau } from './Arme.js';
 import { jeu } from '../main.js';
 import { Plateau } from './Plateau.js';
 
@@ -51,8 +50,11 @@ class Personnage {
     attaquer(personnage) {
         if(personnage.defenseActive === true) {
             personnage.sante = personnage.sante - (this.arme.degats / 2);
+            alert(`${personnage.pseudo} se défend, les dégats reçu sont divisés par 2 : Vous recevez ${this.arme.degats / 2} de dégats`);
+            personnage.defenseActive = false;
         } else {
             personnage.sante -= this.arme.degats;
+            alert(`${personnage.pseudo} reçoit : ${this.arme.degats} de dégats`);
         }
     }
 
@@ -80,17 +82,13 @@ class Personnage {
     }
 
     prendre(idArme) { 
-        console.log("L.102 - IDArme : "+idArme) 
         this.arme = jeu.armes[Number(idArme)];
-        console.log("L-106 : this.arme "+this.arme)
-        console.log(`${this.classe} vous avez : ${this.arme.type} qui fait ${this.arme.degats} de dégats`);
+        alert(`${this.pseudo} vous avez récupéré : ${this.arme.type} qui fait ${this.arme.degats} de dégats`);
     
     }
 
     deposer(surCelluleID) {
         surCelluleID.classList.add(`cellule-${this.arme.type}`);
-        console.log("Mon arme :" + this.arme)
-        console.log(jeu.armes); 
         surCelluleID.setAttribute('data-idArme', '' + jeu.armes.indexOf(this.arme));
     }
 }
