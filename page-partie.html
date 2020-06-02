@@ -11,27 +11,12 @@
     <title>The War Of Kings : Page partie</title>
   </head>
   <body>
-    <div class="container">
-      <header id="titre">
-        <h1>The War Of Kings</h1>
-      </header>
-      <div class="row justify-content-center">
-        <h2>Score</h2>
-      </div>
-      <div class="row justify-content-center">
-        <div id="jaeden"></div>
-        <div id="score-jaeden" class="ml-1"></div>
-      </div>
-      <div class="row justify-content-center">
-        <div id="lich"></div>
-        <div id="score-lich" class="ml-1"></div>
-      </div>
-
+    <div class="container mb-5">
       <h2 class="text-center">Liste des armes</h2>
       <div id="armes" class="row justify-content-center"></div>
       
       <div id="interface" class="row align-items-start">
-        <div class="boutons col-xl-3 col-lg-4 col-md-12">
+        <div class="boutons col-xl-3 col-lg-3 col-md-12">
           <h2 class="nom-personnage"></h2>
           <button id="btn-haut">Haut</button>
           <button id="btn-droite">Droite</button>
@@ -41,12 +26,17 @@
           <button id="btn-attaquer">Attaquer</button>
           <button id="btn-defendre">Parer</button>
           
-          <div id="mon-arme" class="img-thumbnail"></div>
+          <div id="mon-arme" class="img-thumbnail"></div><br>
+          <h2>Score</h2>
+          <div id="jaeden"></div>
+          <span id="score-jaeden" class="ml-1"></span>
+          
+          <div id="lich"></div>
+          <span id="score-lich" class="ml-1"></span>
+          
         </div>
                 
-        <div id="plateau-de-jeu" class="col-xl-6 col-lg-6 col-md-12"></div>
-
-      </div>
+        <div id="plateau-de-jeu" class="col-xl-9 col-lg-9 col-md-12"></div>
     </div>      
       <script src="js/jquery-3.4.1.slim.min.js"></script>
       <script type="module" src="js/main.bundle.js"></script>

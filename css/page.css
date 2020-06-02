@@ -49,8 +49,8 @@ pre {
 }
 
 #jaeden, #lich {
-    max-width: 100%;
-    width: 11%;
+    /*max-width: 100%;
+    width: 11%;*/
 }
 
 #jaeden, #lich, #score-jaeden, #score-lich {
