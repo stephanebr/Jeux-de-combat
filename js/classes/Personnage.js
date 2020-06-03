@@ -14,7 +14,6 @@ import { Plateau } from './Plateau.js';
  * @member {Boolean} defenseActive
  * @method attaquer(personnage)
  * @method gagner()
- * @method mourir()
  * @method deplacer()
  * @method prendre()
  * @method deposer()
@@ -24,7 +23,7 @@ class Personnage {
     constructor(pseudo, classe, position, arme) {
         this._pseudo       = pseudo;
         this._classe       = classe;
-        this._sante        = 100;
+        this._sante        = 20;
         this._position     = position;
         this._mouvement    = 0;
         this._arme         = arme;
@@ -74,7 +73,7 @@ class Personnage {
     attaquer(personnage) {
         if(personnage.defenseActive === true) {
             personnage.sante = personnage.sante - (this.arme.degats / 2);
-            alert(`${personnage.pseudo} se défend, les dégats reçu sont divisés par 2 : Vous recevez ${this.arme.degats / 2} de dégats`);
+            alert(`${personnage.pseudo} se défend, les dégats reçu sont divisés par 2 : ${personnage.pseudo} vous recevez ${this.arme.degats / 2} de dégats`);
             personnage.defenseActive = false;
         } else {
             personnage.sante -= this.arme.degats;
@@ -87,15 +86,9 @@ class Personnage {
      */
     gagner() {
         alert(`${this.pseudo} Bravo, vous avez gagné !`);
+        alert('La partie est terminée !');
+        $('#btn-attaquer, #btn-defendre').hide(); 
     }
-
-    /**
-     * Affiche le message d'alerte quand la vie d'un personnage est à 0
-     */
-    mourir() {
-        alert(`${this.pseudo} Vous avez perdu, vous êtes mort !`);
-        return;
-    } 
     
     /**
      * Elle récupère la nouvelle position du personnage et incrément le

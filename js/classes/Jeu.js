@@ -128,19 +128,23 @@ class Jeu {
     combat() {
         if(this.persoActif === this.jaeden) {
             this.jaeden.attaquer(this.lich);
+            if(!this.lich.vie) {
+                this.persoActif.gagner();
+                this.lich.sante = 0;          
+            }
+
             this.changerJoueur(this.lich);
         } else {
             this.lich.attaquer(this.jaeden);
+            if(!this.jaeden.vie) {
+                this.persoActif.gagner();
+                this.jaeden.sante = 0;          
+            }
+
             this.changerJoueur(this.jaeden);
         }
 
         this.afficherScore();
-
-        if(!this.persoActif.vie) {
-           this.persoActif.gagner();
-           alert('La partie est terminée !');
-           $('#btn-attaquer, #btn-defendre').hide();           
-        }
     }
 
     /**
