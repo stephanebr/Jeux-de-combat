@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="bootstrap-4.3.1/dist/css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=MedievalSharp"/>
+    <script src="https://kit.fontawesome.com/0d6574d44a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="css/page.css"/>
     <link rel="stylesheet" type="text/css" href="css/menu.css"/>
     <link rel="stylesheet" type="text/css" href="css/plateau.css"/>
@@ -13,34 +14,56 @@
   <body>
     <div class="container mb-5">
       <h2 class="text-center">Liste des armes</h2>
-      <div id="armes" class="row justify-content-center"></div>
+      <div class="row ml-0 pb-2">
+        <div class="col-xl-3 col-lg-3 col-md-6">
+          <h2 style="margin-left:-15px">Score</h2>
+          <div class="row align-items-start">
+            <div id="jaeden"></div>
+            <div id="score-jaeden" class="ml-1"></div>
+          </div>
+          <div class="row align-items-start">
+            <div id="lich"></div>
+            <div id="score-lich" class="ml-1"></div>
+          </div>
+        </div>
+
+        <div id="armes" class="row justify-content-center pl-3 pr-3"></div>
+      </div>          
+      
       
       <div id="interface" class="row align-items-start">
         <div class="boutons col-xl-3 col-lg-3 col-md-12">
-          <h2 class="nom-personnage"></h2>
-          <button id="btn-haut">Haut</button>
-          <button id="btn-droite">Droite</button>
-          <button id="btn-gauche">Gauche</button>
-          <button id="btn-bas">Bas</button>
-          <button id="btn-terminer">Terminer le tour</button>
+          <h2 class="nom-personnage text-center"></h2>
+          <div class="row">
+            <button id="btn-haut" class="offset-4"><i class="fas fa-arrow-alt-circle-up fa-2x"></i></button>
+          </div>
+
+          <div class="row align-items-start">
+            <button id="btn-gauche" class="offset-3"><i class="fas fa-arrow-alt-circle-left fa-2x"></i></button>
+            <button id="btn-droite"><i class="fas fa-arrow-alt-circle-right fa-2x"></i></button>
+          </div>
+            
+          <div class="row">
+            <button id="btn-bas" class="offset-4"><i class="fas fa-arrow-alt-circle-down fa-2x"></i></button>
+          </div>
+          
+          <div class="row">
+            <button id="btn-terminer" class="offset-2 mt-4">Terminer le tour</button>
+          </div>
+
           <button id="btn-attaquer">Attaquer</button>
           <button id="btn-defendre">Parer</button>
-          
-          <div id="mon-arme" class="img-thumbnail"></div><br>
-          <h2>Score</h2>
-          <div id="jaeden"></div>
-          <span id="score-jaeden" class="ml-1"></span>
-          
-          <div id="lich"></div>
-          <span id="score-lich" class="ml-1"></span>
-          
+
+          <div class="row">
+            <div id="mon-arme" class="img-thumbnail offset-3"></div>
+          </div>
         </div>
                 
         <div id="plateau-de-jeu" class="col-xl-9 col-lg-9 col-md-12"></div>
-    </div>      
-      <script src="js/jquery-3.4.1.slim.min.js"></script>
-      <script type="module" src="js/main.bundle.js"></script>
-      <script src="/polyfill.bundle.js"></script>
-      <script src="/app.bundle.js"></script>
+    </div>    
+    <script src="js/jquery-3.4.1.slim.min.js"></script>
+     <script type="module" src="js/main.bundle.js"></script>
+     <script src="/polyfill.bundle.js"></script>
+     <script src="/app.bundle.js"></script>
 </body>
 </html>

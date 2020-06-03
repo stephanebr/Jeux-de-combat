@@ -1,7 +1,14 @@
 import { Jeu } from './classes/Jeu.js';
 
+/**
+ * Export de la class Jeu
+ * Instance de la class Jeu
+ */
 export const jeu = new Jeu();
 
+/**
+ * Appelle des méthodes de la class Jeu
+ */
 jeu.afficherJoueur();
 jeu.afficherScore();
 jeu.ajouterJoueur(jeu.jaeden);
@@ -11,7 +18,7 @@ jeu.afficherArme();
 $(document).ready(function() {
     alert(`${jeu.jaeden.pseudo} vous commencez la partie !`);
     $('.nom-personnage').html(jeu.jaeden.classe).attr('id', `${jeu.jaeden.classe}-h2`);
-    $('#mon-arme').html(jeu.jaeden.arme.degats).attr('class', `${jeu.jaeden.classe} cellule-${jeu.jaeden.arme.type} img-thumbnail`);
+    $('#mon-arme').html(jeu.jaeden.arme.degats).attr('class', `${jeu.jaeden.classe} cellule-${jeu.jaeden.arme.type} img-thumbnail offset-3`);
     $('#btn-attaquer').hide();
     $('#btn-defendre').hide();
 

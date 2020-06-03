@@ -3,7 +3,18 @@ import { RoiJaeden } from './RoiJaeden.js';
 import { RoiLich } from './RoiLich.js';
 import { Hache, Glaive, BaguetteMagique, Epee, Couteau } from './Arme.js';
 
-
+/**
+ * La class Jeu est composée d'un constructeur, des GETTERS ET SETTERS
+ * d'attribut public et privées
+ * des méthodes :
+ * - ajouterJoueur(joueur)
+ * - afficherJoueur()
+ * - afficherScore()
+ * - afficherArme()
+ * - verifMouvement(personnage1, personnage2)
+ * - combat()
+ * - changerJoueur(classePersonnage)
+ */
 class Jeu {
 
     constructor() {
@@ -38,16 +49,26 @@ class Jeu {
 
     set msgAlert(message) { this._msgAlert = message; }
 
-    
+    /**
+     * Ajoute un joueur et le place sur le plateau selon l'id disponible
+     * @param {Object} joueur 
+     * @method placerPersonnage(joueur)
+     */
     ajouterJoueur(joueur) {
         this.plateau.placerPersonnage(joueur) // On trouve un Id libre pour placer un personnage sur le plateau
     }
 
+    /**
+     * Sélectionne l'id et affiche le nom des 2 personnages sur la page-partie.html
+     */
     afficherJoueur() { 
         $('#jaeden').html(`${this.jaeden.pseudo} `);
         $('#lich').html(`${this.lich.pseudo} `);
     }
 
+    /**
+     * Sélectionne l'id et affiche le score des 2 personnages sur la page-partie.html
+     */
     afficherScore() {
         this.jaeden.score = {
             scoreJaeden: $('#score-jaeden').html(` : ${this.jaeden.sante}`)           
@@ -58,6 +79,11 @@ class Jeu {
         }
     }
 
+    /**
+     * Crée les paragraphes avec une image qui est en rapport avec le type de 
+     * l'armes qui sont stockées dans le tableau this.armes et les affichent
+     * dans la page-partie.html  
+     */
     afficherArme() {
         const listArmes = [];
         const idArmes   = $('#armes');
@@ -77,6 +103,14 @@ class Jeu {
         });
     }
 
+    /**
+     * Elle fait la gestion des déplacements des personnages
+     * Si personnage est supérieur ou égale à 2 alors
+     * le personnage à fini son tour, changement de personnage
+     * réinitialisation des mouvements à 0
+     * @param {Object} personnage1 
+     * @param {Object} personnage2 
+     */
     verifMouvement(personnage1, personnage2) {
         if (personnage1.mouvement >= 2) {
             alert(`${personnage1.pseudo} vous avez fini votre tour !`);
@@ -86,6 +120,11 @@ class Jeu {
         }
     }
 
+    /**
+     * Gestion du combat
+     * Elle vérifie qui joue, qui attaque et fait un changement de personnage
+     * Des que la vie d'un personnage est à 0 alors la partie est terminée
+     */
     combat() {
         if(this.persoActif === this.jaeden) {
             this.jaeden.attaquer(this.lich);
@@ -104,10 +143,16 @@ class Jeu {
         }
     }
 
+    /**
+     * Gestion du changement de personnage
+     * Changement de l'interface dynamiquement
+     * - Nom du personnage, la couleur du bandeau et son arme
+     * @param {Object} classePersonnage 
+     */
     changerJoueur(classePersonnage) {
         this.persoActif = classePersonnage;
         $('.nom-personnage').html(classePersonnage.classe).attr('id', `${classePersonnage.classe}-h2`);
-        $('#mon-arme').html(classePersonnage.arme.degats).attr('class', `${classePersonnage.classe} cellule-${classePersonnage.arme.type} img-thumbnail`);
+        $('#mon-arme').html(classePersonnage.arme.degats).attr('class', `${classePersonnage.classe} cellule-${classePersonnage.arme.type} img-thumbnail offset-3`);
     }
 }
 

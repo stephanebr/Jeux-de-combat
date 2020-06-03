@@ -1,6 +1,24 @@
 import { jeu } from '../main.js';
 import { Plateau } from './Plateau.js';
 
+/**
+ * @class Personnage
+ * @constructor
+ * @param {String} pseudo
+ * @param {String} classe
+ * @param {String} position
+ * @param {Object} arme
+ * @private {Number} _sante
+ * @private {Number} _mouvement
+ * @private {Object} _score
+ * @member {Boolean} defenseActive
+ * @method attaquer(personnage)
+ * @method gagner()
+ * @method mourir()
+ * @method deplacer()
+ * @method prendre()
+ * @method deposer()
+ */
 class Personnage {
 
     constructor(pseudo, classe, position, arme) {
@@ -10,7 +28,7 @@ class Personnage {
         this._position     = position;
         this._mouvement    = 0;
         this._arme         = arme;
-        this._score        = {}; //Tableau json contenant le score des joueurs
+        this._score        = {};
         this.defenseActive = false;
     }
 
@@ -47,6 +65,12 @@ class Personnage {
 
     set score(score) { this._score = score; }
 
+    /**
+     * Vérifie si le personnage adverse a déclenché une défense
+     * Si oui, les dégats effectués sont de moitié
+     * sinon il reçoit les degats de l'arme
+     * @param {Object} personnage 
+     */
     attaquer(personnage) {
         if(personnage.defenseActive === true) {
             personnage.sante = personnage.sante - (this.arme.degats / 2);
@@ -58,15 +82,28 @@ class Personnage {
         }
     }
 
+    /**
+     * Affiche le message d'alerte quand la vie d'un personnage est à 0
+     */
     gagner() {
         alert(`${this.pseudo} Bravo, vous avez gagné !`);
     }
 
+    /**
+     * Affiche le message d'alerte quand la vie d'un personnage est à 0
+     */
     mourir() {
         alert(`${this.pseudo} Vous avez perdu, vous êtes mort !`);
         return;
     } 
     
+    /**
+     * Elle récupère la nouvelle position du personnage et incrément le
+     * nombre de mouvement
+     * @param {String} position 
+     * @param {String} nPosition 
+     * @returns {Number} this.mouvement
+     */
     deplacer(position, nPosition) {
         document.getElementById(this.position).classList.remove(`cellule-${this.classe}`, 'cellule-perso');
         document.getElementById(this.position).removeAttribute('data-perso');
@@ -81,12 +118,22 @@ class Personnage {
         return this.mouvement;        
     }
 
+    /**
+     * Elle permet de récupérer une arme sur la cellule où le personnage c'est
+     * déplacé
+     * Affiche un message
+     * @param {String} idArme 
+     */
     prendre(idArme) { 
         this.arme = jeu.armes[Number(idArme)];
-        alert(`${this.pseudo} vous avez récupéré : ${this.arme.type} qui fait ${this.arme.degats} de dégats`);
-    
+        alert(`${this.pseudo} vous avez récupéré : ${this.arme.type} qui fait ${this.arme.degats} de dégats`);    
     }
 
+    /**
+     * Elle permet de déposer l'arme sur la cellule de la nouvelle
+     * arme récupérée
+     * @param {String} surCelluleID 
+     */
     deposer(surCelluleID) {
         surCelluleID.classList.add(`cellule-${this.arme.type}`);
         surCelluleID.setAttribute('data-idArme', '' + jeu.armes.indexOf(this.arme));

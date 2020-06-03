@@ -1,5 +1,15 @@
 import { jeu } from "../main.js";
 
+/**
+ * @class Plateau crée la map du jeu
+ * @constructor 
+ * @param {Number} colonnes 
+ * @param {Number} rangees
+ * @private {Array} _casesPleines
+ * @private {Array} _casesObstacles
+ * @private {Array} _casesArmes
+ * @method creer()
+ */
 class Plateau {
   constructor(colonnes, rangees) {
     this._casesPleines = [];
@@ -10,11 +20,23 @@ class Plateau {
     this.creer();
   }
 
+  /**
+   * Convertie l'id en coordonnées
+   * @param {String} id 
+   * @returns {Object}
+   */
   static conversionIdEnCoord(id) {
     const [x, y] = id.split("_");
     return { x: Number(x), y: Number(y) };
   }
 
+  /**
+   * Retourne la nouvelle position du personnage
+   * @param {String} id 
+   * @param {Number} translationX 
+   * @param {Number} translationY 
+   * @returns {String} la colonne et la rangée
+   */
   static majId(id, translationX, translationY) {
     const originePosition = Plateau.conversionIdEnCoord(id);
 
@@ -26,6 +48,12 @@ class Plateau {
     return `${nPosition.x}_${nPosition.y}`;
   }
 
+  /**
+   * Récupère les cellules adjacentes selon la position du personnage
+   * et les stockes dans un tableau
+   * @param {String} id
+   * @returns {Array} tabId 
+   */
   static recupererCellules(id) {
     let tabId = [];
     const celluleHaute = Plateau.majId(id, 0, -1);
@@ -42,6 +70,14 @@ class Plateau {
     return tabId;
   }
 
+  /**
+   * Verifie si un personnage est présent sur une cellule adjacente
+   * Active les attaquer et parer
+   * masque les boutons de déplacement et terminer le tour
+   * désactive les touches du clavier
+   * @param {Array} tableauId 
+   * @returns {Boolean}
+   */
   static verifierClassPersonnage(tableauId) {
     let combatDemare = false;
 
@@ -86,6 +122,9 @@ class Plateau {
 
   set rangees(rangees) { this._rangees = rangees; }
 
+  /**
+   * Elle sert à créer la map du jeu
+   */
   creer() {
     let plateauDeJeu = document.getElementById("plateau-de-jeu");
 
@@ -126,8 +165,8 @@ class Plateau {
   }
 
   /**
-   * La méthode genererObstacle(nbObstacles)
-   * Attend un parametre Number qui va déterminer le nombre d'obstacles générés sur le plateau
+   * Permet de définir le nombre d'obstacle sur la map
+   * @param {Number} nbObstacles
    */
   genererObstacle(nbObstacles) {
     for (let i = 0; i < nbObstacles; i++) {
@@ -145,6 +184,7 @@ class Plateau {
    * La méthode nombreAléatoire(max) attend un parametre Number qui détermine le nombre maximun
    * Elle fait un tirage aléatoire de nombre de 0 à max de colonne et rangée 
    * @param {Number} max
+   * @returns {Number}
    *  
    */
   nombreAleatoire(max) {
@@ -156,7 +196,7 @@ class Plateau {
    * qui est stockée dans un attribut id et stock l'id dans le tableau casePleines.
    * Recupère la position des personnages qui est initialisée par le Setter position
    *  
-   * @param {Objet} personnage 
+   * @param {Object} personnage 
    */
   placerPersonnage(personnage) {
     let id = this.trouverCaseUtilisable();
@@ -167,6 +207,11 @@ class Plateau {
     personnage.position = cellulePersonnage.id;
   }
 
+  /**
+   * Place les armes sur la map stockés dans la tableau selon l'id disponible
+   * @param {Array} armes
+   * @returns {Array} armes
+   */
   placerArme(armes) {
     for (let i = 0; i < armes.length; i++) {
       let idArme = this.trouverCaseVide();
@@ -181,18 +226,29 @@ class Plateau {
     return armes;
   }
 
+  /**
+   * Permet de trouver une cellule vide
+   * @returns {String} cellule
+   */
   trouverCaseVide() {
     let x = this.nombreAleatoire(this.rangees);
     let y = this.nombreAleatoire(this.colonnes);
     const cellule = String(y) + "_" + String(x);
 
     if(this.casesPleines.includes(cellule) || this.casesArmes.includes(cellule)) {
-      return this.trouverCaseVide();
+      return this.trouverCaseVide(); // Récursivité
     }
 
     return cellule;
   }
 
+  /**
+   * Elle détermine lors du déplacement du personnage
+   * si la case est bien libre
+   * - Pas d'obstacle
+   * - Pas de personnage
+   * @returns {String} cellule
+   */
   trouverCaseUtilisable() {
     let cellule = this.trouverCaseVide();
     let dispo = true;
@@ -220,6 +276,11 @@ class Plateau {
     return cellule;
   }
 
+  /**
+   * Vérifie si la case haute est libre
+   * @param {String} cellule 
+   * @returns {Boolean} result
+   */
   caseHauteLibre(cellule) {
     let result = true;
     const celluleHaute = Plateau.majId(cellule, 0, -1);
@@ -235,6 +296,11 @@ class Plateau {
     return result;
   }
 
+  /**
+   * Vérifie si la case droite est libre
+   * @param {String} cellule 
+   * @returns {Boolean} result
+   */
   caseDroiteLibre(cellule) {
     let result = true;
     const celluleDroite = Plateau.majId(cellule, 1, 0);
@@ -251,6 +317,11 @@ class Plateau {
     return result;
   }
 
+  /**
+   * Vérifie si la case basse est libre
+   * @param {String} cellule 
+   * @returns {Boolean} result
+   */
   caseBasLibre(cellule) {
     let result = true;
     const celluleBasse = Plateau.majId(cellule, 0, 1);
@@ -267,6 +338,11 @@ class Plateau {
     return result;
   }
 
+  /**
+   * Vérifie si la case gauche est libre
+   * @param {String} cellule 
+   * @returns {Boolean} result
+   */
   caseGaucheLibre(cellule) {
     let result = true;
     const celluleGauche = Plateau.majId(cellule, -1, 0);
@@ -283,8 +359,12 @@ class Plateau {
     return result;
   }
 
+  /**
+   * Gestion du déplacement haut
+   * Récupère le nombre de mouvement
+   * @param {Object} personnage 
+   */
   deplacerHaut(personnage) {
-    //Le joueur à le droit de se déplacer de 3 cases max
     let position = personnage.position;
     const celluleHaute = Plateau.majId(position, 0, -1);
     const nPosition = Plateau.conversionIdEnCoord(celluleHaute);
@@ -298,8 +378,12 @@ class Plateau {
     }
   }
 
+  /**
+   * Gestion du déplacement droit
+   * Récupère le nombre de mouvement
+   * @param {Object} personnage 
+   */
   deplacerDroite(personnage) {
-    //Le joueur à le droit de se déplacer de 3 cases max
     let position = personnage.position;
     let celluleDroite = Plateau.majId(position, 1, 0);
     const nPosition = Plateau.conversionIdEnCoord(celluleDroite);
@@ -309,8 +393,12 @@ class Plateau {
     }
   }
 
+  /**
+   * Gestion du déplacement bas
+   * Récupère le nombre de mouvement
+   * @param {Object} personnage 
+   */
   deplacerBas(personnage) {
-    //Le joueur à le droit de se déplacer de 3 cases max
     let position = personnage.position;
     const celluleBasse = Plateau.majId(position, 0, 1);
     const nPosition = Plateau.conversionIdEnCoord(celluleBasse);
@@ -324,8 +412,12 @@ class Plateau {
     }
   }
 
+  /**
+   * Gestion du déplacement gauche
+   * Récupère le nombre de mouvement
+   * @param {Object} personnage 
+   */
   deplacerGauche(personnage) {
-    //Le joueur à le droit de se déplacer de 3 cases max
     let position = personnage.position;
     const celluleGauche = Plateau.majId(position, -1, 0);
     const nPosition = Plateau.conversionIdEnCoord(celluleGauche);
@@ -339,9 +431,13 @@ class Plateau {
     }
   }
 
+  /**
+   * Verifie si la cellule n'est pas un obstacle
+   * @param {Number} cellule 
+   * @return {Boolean}
+   */
   estCeQueLaCaseEstLibre(cellule) {
     let cell = String(cellule);
-    //let idPerso = document.getElementById(cellule);
 
     if(this.casesObstacles.includes(cell)) {
       return false;
@@ -352,6 +448,13 @@ class Plateau {
     return true;
   }
 
+  /**
+   * Vérifie si la case possède une arme
+   * Si une arme est présente, le personnage dépose l'arme actuelle sur la cellule
+   * et s'attribut la nouvelle 
+   * @param {Number} cellule 
+   * @returns {Boolean}
+   */
   laCaseAUneArme(cellule) {
     let cell = String(cellule);
     let personnage;
@@ -365,7 +468,7 @@ class Plateau {
       personnage.deposer(idArme);
       personnage.prendre(dataIdArme);
 
-      $("#mon-arme").html(personnage.arme.degats).attr("class", `cellule-${personnage.arme.type} img-thumbnail`);
+      $("#mon-arme").html(personnage.arme.degats).attr("class", `cellule-${personnage.arme.type} img-thumbnail offset-3`);
 
       idArme.classList.remove(`cellule-${personnage.arme.type}`);
       idArme.classList.remove("cellule-arme");
