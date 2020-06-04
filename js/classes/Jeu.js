@@ -105,7 +105,7 @@ class Jeu {
 
     /**
      * Elle fait la gestion des déplacements des personnages
-     * Si personnage est supérieur ou égale à 2 alors
+     * Si mouvement du personnage est supérieur ou égale à 2 alors
      * le personnage à fini son tour, changement de personnage
      * réinitialisation des mouvements à 0
      * @param {Object} personnage1 
@@ -156,7 +156,7 @@ class Jeu {
     changerJoueur(classePersonnage) {
         this.persoActif = classePersonnage;
         $('.nom-personnage').html(classePersonnage.classe).attr('id', `${classePersonnage.classe}-h2`);
-        $('#mon-arme').html(classePersonnage.arme.degats).attr('class', `${classePersonnage.classe} cellule-${classePersonnage.arme.type} img-thumbnail offset-3`);
+        $('#mon-arme').html(classePersonnage.arme.degats).attr('class', `${classePersonnage.classe} cellule-${classePersonnage.arme.type} img-thumbnail offset-4`);
     }
 }
 

@@ -87,6 +87,7 @@ class Plateau {
         alert('Que le combat commence !');
         $('#btn-attaquer').show();
         $('#btn-defendre').show();
+        $('#description').show();
         $('#btn-haut, #btn-droite, #btn-bas, #btn-gauche, #btn-terminer').hide();
         $('*').off('keydown');
         combatDemare = true
@@ -463,12 +464,11 @@ class Plateau {
     if(this.casesArmes.includes(cell)) {
       let dataIdArme = idArme.getAttribute("data-idArme");
       alert("Prendre l'arme !");
-
       personnage = jeu.persoActif;
+
       personnage.deposer(idArme);
       personnage.prendre(dataIdArme);
-
-      $("#mon-arme").html(personnage.arme.degats).attr("class", `cellule-${personnage.arme.type} img-thumbnail offset-3`);
+      $("#mon-arme").html(personnage.arme.degats).attr("class", `cellule-${personnage.arme.type} img-thumbnail offset-4`);
 
       idArme.classList.remove(`cellule-${personnage.arme.type}`);
       idArme.classList.remove("cellule-arme");
