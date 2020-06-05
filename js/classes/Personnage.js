@@ -23,7 +23,7 @@ class Personnage {
     constructor(pseudo, classe, position, arme) {
         this._pseudo       = pseudo;
         this._classe       = classe;
-        this._sante        = 20;
+        this._sante        = 100;
         this._position     = position;
         this._mouvement    = 0;
         this._arme         = arme;
