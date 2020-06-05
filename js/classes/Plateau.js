@@ -83,7 +83,7 @@ class Plateau {
 
     tableauId.forEach((id) => {
       if($("#" + id).hasClass('cellule-perso')) {
-        alert('Vous pouvez attaquer votre adversaire !');
+        alert(`${jeu.persoActif.pseudo} vous pouvez attaquer votre adversaire !`);
         alert('Que le combat commence !');
         $('#btn-attaquer').show();
         $('#btn-defendre').show();

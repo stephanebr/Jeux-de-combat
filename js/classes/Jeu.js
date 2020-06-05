@@ -2,6 +2,7 @@ import { Plateau } from './Plateau.js';
 import { RoiJaeden } from './RoiJaeden.js';
 import { RoiLich } from './RoiLich.js';
 import { Hache, Glaive, BaguetteMagique, Epee, Couteau } from './Arme.js';
+import { jeu } from '../main.js';
 
 /**
  * La class Jeu est composée d'un constructeur, des GETTERS ET SETTERS
@@ -11,9 +12,9 @@ import { Hache, Glaive, BaguetteMagique, Epee, Couteau } from './Arme.js';
  * - afficherJoueur()
  * - afficherScore()
  * - afficherArme()
- * - verifMouvement(personnage1, personnage2)
+ * - peutSeDeplacer(personnage)
  * - combat()
- * - changerJoueur(classePersonnage)
+ * - changerJoueur()
  */
 class Jeu {
 
@@ -30,24 +31,22 @@ class Jeu {
         this.jaeden     = new RoiJaeden(this.armes[this.armes.length -1]);
         this.lich       = new RoiLich(this.armes[this.armes.length -1]);
         this._persoActif = this.jaeden; // Le nom du personnage qui peut jouer
-        this._msgAlert  = ''; // Messages d'actions
     }
 
+    /**
+     * GETTERS ET SETTERS
+     */
     get plateau() { return this._plateau; }
 
     get armes() { return this._armes; }
 
     get persoActif() { return this._persoActif; }
-    
-    get msgAlert() { return this._msgAlert; }
 
     set plateau(plateau) { this._plateau = plateau; }
 
     set armes(armes) { this._armes.push(armes); }
 
     set persoActif(persoActif) { this._persoActif = persoActif; }
-
-    set msgAlert(message) { this._msgAlert = message; }
 
     /**
      * Ajoute un joueur et le place sur le plateau selon l'id disponible
@@ -104,20 +103,16 @@ class Jeu {
     }
 
     /**
-     * Elle fait la gestion des déplacements des personnages
-     * Si mouvement du personnage est supérieur ou égale à 2 alors
-     * le personnage à fini son tour, changement de personnage
-     * réinitialisation des mouvements à 0
-     * @param {Object} personnage1 
-     * @param {Object} personnage2 
+     * Si mouvement du personnage est supérieur ou égale à 3 alors
+     * retourne faux sinon vrai
+     * @param {Object} personnage
+     * @returns {Boolean} 
      */
-    verifMouvement(personnage1, personnage2) {
-        if (personnage1.mouvement >= 2) {
-            alert(`${personnage1.pseudo} vous avez fini votre tour !`);
-            this.changerJoueur(personnage2);
-            personnage1.mouvement = 0;
-            personnage2.mouvement = 0;
+    peutSeDeplacer(personnage) {
+        if(personnage.mouvement >= 3) {
+            return false;
         }
+        return true;
     }
 
     /**
@@ -127,21 +122,21 @@ class Jeu {
      */
     combat() {
         if(this.persoActif === this.jaeden) {
-            this.jaeden.attaquer(this.lich);
+            this.persoActif.attaquer(this.lich);
             if(!this.lich.vie) {
                 this.persoActif.gagner();
                 this.lich.sante = 0;          
             }
 
-            this.changerJoueur(this.lich);
+            this.changerJoueur();
         } else {
-            this.lich.attaquer(this.jaeden);
+            this.persoActif.attaquer(this.jaeden);
             if(!this.jaeden.vie) {
                 this.persoActif.gagner();
                 this.jaeden.sante = 0;          
             }
 
-            this.changerJoueur(this.jaeden);
+            this.changerJoueur();
         }
 
         this.afficherScore();
@@ -149,15 +144,23 @@ class Jeu {
 
     /**
      * Gestion du changement de personnage
+     * réinitialise le mouvement du personnage actif à 0
      * Changement de l'interface dynamiquement
-     * - Nom du personnage, la couleur du bandeau et son arme
-     * @param {Object} classePersonnage 
+     * - Nom du personnage, la couleur du bandeau et son arme 
      */
-    changerJoueur(classePersonnage) {
-        this.persoActif = classePersonnage;
-        $('.nom-personnage').html(classePersonnage.classe).attr('id', `${classePersonnage.classe}-h2`);
-        $('#mon-arme').html(classePersonnage.arme.degats).attr('class', `${classePersonnage.classe} cellule-${classePersonnage.arme.type} img-thumbnail offset-4`);
+    changerJoueur() {
+        this.persoActif = this.persoActif === this.jaeden ? this.lich : this.jaeden;
+        this.persoActif.mouvement = 0;
+        $('.nom-personnage').html(this.persoActif.classe).attr('id', `${this.persoActif.classe}-h2`);
+        $('#mon-arme').html(this.persoActif.arme.degats).attr('class', `${this.persoActif.classe} cellule-${this.persoActif.arme.type} img-thumbnail offset-4`);
     }
+
+    /**
+     * Affiche un message au personnage actif
+     */
+    msgFinTour() {
+        alert(`${this.persoActif.pseudo} vous avez fini votre tour !`);
+    }    
 }
 
 export { Jeu };

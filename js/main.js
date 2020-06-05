@@ -26,61 +26,66 @@ $(document).ready(function() {
     //Les boutons des mouvements
     $('#btn-droite').on('click', function(e) {
         if(jeu.persoActif === jeu.jaeden) {
-            jeu.verifMouvement(jeu.jaeden, jeu.lich);
-            jeu.plateau.deplacerDroite(jeu.jaeden);            
+            if(jeu.peutSeDeplacer(jeu.persoActif)) {
+                jeu.plateau.deplacerDroite(jeu.persoActif);
+            }
+
         } else {
-            jeu.verifMouvement(jeu.lich, jeu.jaeden);  
-            jeu.plateau.deplacerDroite(jeu.lich);         
-        }
+            if(jeu.peutSeDeplacer(jeu.persoActif)) {
+                jeu.plateau.deplacerDroite(jeu.persoActif);
+            }
+        }           
     });
 
     $('#btn-gauche').on('click', function(e) {
         if(jeu.persoActif === jeu.jaeden) {
-            jeu.verifMouvement(jeu.jaeden, jeu.lich);
-            jeu.plateau.deplacerGauche(jeu.jaeden);
+            if(jeu.peutSeDeplacer(jeu.persoActif)) {
+                jeu.plateau.deplacerGauche(jeu.persoActif);
+            }
            
         } else {
-            jeu.verifMouvement(jeu.lich, jeu.jaeden);   
-            jeu.plateau.deplacerGauche(jeu.lich);        
+            if(jeu.peutSeDeplacer(jeu.persoActif)) {
+                jeu.plateau.deplacerGauche(jeu.persoActif); 
+            }                    
         }
     });
 
     $('#btn-haut').on('click', function(e) {  
         if(jeu.persoActif === jeu.jaeden) {
-            jeu.verifMouvement(jeu.jaeden, jeu.lich);
-            jeu.plateau.deplacerHaut(jeu.jaeden);
-           
+            if(jeu.peutSeDeplacer(jeu.persoActif)) {
+                jeu.plateau.deplacerHaut(jeu.persoActif);
+            }           
         } else {
-            jeu.verifMouvement(jeu.lich, jeu.jaeden);
-            jeu.plateau.deplacerHaut(jeu.lich);           
+            if(jeu.peutSeDeplacer(jeu.persoActif)) {
+                jeu.plateau.deplacerHaut(jeu.persoActif);
+            }                       
         }
     });
 
     $('#btn-bas').on('click', function(e) {
         if(jeu.persoActif === jeu.jaeden) {
-            jeu.verifMouvement(jeu.jaeden, jeu.lich);
-            jeu.plateau.deplacerBas(jeu.jaeden);
-           
+            if(jeu.peutSeDeplacer(jeu.persoActif)) {
+                jeu.plateau.deplacerBas(jeu.persoActif);
+            }           
         } 
         else {
-            jeu.verifMouvement(jeu.lich, jeu.jaeden);
-            jeu.plateau.deplacerBas(jeu.lich);           
+            if(jeu.peutSeDeplacer(jeu.persoActif)) {
+                jeu.plateau.deplacerBas(jeu.persoActif); 
+            }                      
         }
     });
 
     // Bouton pour terminer le tour
     $('#btn-terminer').on('click', function(e) {
         if(jeu.persoActif === jeu.jaeden) {
-            jeu.changerJoueur(jeu.lich);
-            jeu.lich.mouvement = 0;
-            alert(`${jeu.jaeden.pseudo} vous passer votre tour !`);
-            alert(`Vous pouvez jouer ${jeu.lich.pseudo}, votre adversaire à passé son tour !`);          
+            alert(`${jeu.persoActif.pseudo} vous passer votre tour !`);
+            jeu.changerJoueur();
+            alert(`Vous pouvez jouer ${jeu.persoActif.pseudo}, votre adversaire à passé son tour !`);          
         } 
         else {
-            jeu.changerJoueur(jeu.jaeden);
-            jeu.jaeden.mouvement = 0;
-            alert(`${jeu.lich.pseudo} vous passer votre tour !`);
-            alert(`Vous pouvez jouer ${jeu.jaeden.pseudo}, votre adversaire à passé son tour !`);   
+            alert(`${jeu.persoActif.pseudo} vous passer votre tour !`);
+            jeu.changerJoueur();
+            alert(`Vous pouvez jouer ${jeu.persoActif.pseudo}, votre adversaire à passé son tour !`);   
         }
     });
 
@@ -95,9 +100,9 @@ $(document).ready(function() {
         alert(`${jeu.persoActif.pseudo} vous vous défendez contre la prochaine attaque !`);
 
         if(jeu.persoActif === jeu.jaeden) {
-            jeu.changerJoueur(jeu.lich);
+            jeu.changerJoueur();
         } else {
-            jeu.changerJoueur(jeu.jaeden);
+            jeu.changerJoueur();
         }
     });
 
@@ -107,45 +112,53 @@ $(document).ready(function() {
 
         if(e.key == 'ArrowRight') {
             if(jeu.persoActif === jeu.jaeden) {
-                jeu.verifMouvement(jeu.jaeden, jeu.lich);
-                jeu.plateau.deplacerDroite(jeu.jaeden);
+                if(jeu.peutSeDeplacer(jeu.persoActif)) {
+                    jeu.plateau.deplacerDroite(jeu.persoActif);
+                }
             }
             else {
-                jeu.verifMouvement(jeu.lich, jeu.jaeden);
-                jeu.plateau.deplacerDroite(jeu.lich);
+                if(jeu.peutSeDeplacer(jeu.persoActif)) {
+                    jeu.plateau.deplacerDroite(jeu.persoActif);
+                }
             }            
         }                
 
         if(e.key == 'ArrowLeft') {
             if(jeu.persoActif === jeu.jaeden) {
-                jeu.verifMouvement(jeu.jaeden, jeu.lich);
-                jeu.plateau.deplacerGauche(jeu.jaeden);
+                if(jeu.peutSeDeplacer(jeu.persoActif)) {
+                    jeu.plateau.deplacerGauche(jeu.persoActif);
+                }                
             }
             else {
-                jeu.verifMouvement(jeu.lich, jeu.jaeden);
-                jeu.plateau.deplacerGauche(jeu.lich);
+                if(jeu.peutSeDeplacer(jeu.persoActif)) {
+                    jeu.plateau.deplacerGauche(jeu.persoActif);
+                }                
             }            
         }
 
         if(e.key == 'ArrowUp') {
             if(jeu.persoActif === jeu.jaeden) {
-                jeu.verifMouvement(jeu.jaeden, jeu.lich);
-                jeu.plateau.deplacerHaut(jeu.jaeden);
-            }
-            else {
-                jeu.verifMouvement(jeu.lich, jeu.jaeden);
-                jeu.plateau.deplacerHaut(jeu.lich);
+                if(jeu.peutSeDeplacer(jeu.persoActif)) {
+                    jeu.plateau.deplacerHaut(jeu.persoActif);
+                }
+
+            } else {
+                if(jeu.peutSeDeplacer(jeu.persoActif)) {
+                    jeu.plateau.deplacerHaut(jeu.persoActif);
+                }                
             }            
         }
 
         if(e.key == 'ArrowDown') {
             if(jeu.persoActif === jeu.jaeden) {
-                jeu.verifMouvement(jeu.jaeden, jeu.lich);
-                jeu.plateau.deplacerBas(jeu.jaeden);
+                if(jeu.peutSeDeplacer(jeu.persoActif)) {
+                    jeu.plateau.deplacerBas(jeu.persoActif);
+                }                
             }
             else {
-                jeu.verifMouvement(jeu.lich, jeu.jaeden);
-                jeu.plateau.deplacerBas(jeu.lich)
+                if(jeu.peutSeDeplacer(jeu.persoActif)) {
+                    jeu.plateau.deplacerBas(jeu.persoActif);
+                }                
             }           
         }
     });

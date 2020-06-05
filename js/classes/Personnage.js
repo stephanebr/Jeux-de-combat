@@ -105,6 +105,12 @@ class Personnage {
         this.position = nPosition;
         this.mouvement++;
 
+        //si supèrieur ou égale à 3 alors changer de personnage
+        if(this.mouvement >= 3) {
+            jeu.msgFinTour();
+            jeu.changerJoueur()
+        }
+        
         let tabId = Plateau.recupererCellules(nPosition);
         Plateau.verifierClassPersonnage(tabId);
         
